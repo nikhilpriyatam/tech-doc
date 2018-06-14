@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Git &#8212; Technical Documentation  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -15,15 +15,24 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="LaTeX" href="Latex.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="Deep Learning" href="Deep-Learning.html" />
+    <link rel="prev" title="LaTeX" href="Latex.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Deep-Learning.html" title="Deep Learning"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Latex.html" title="LaTeX"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -33,14 +42,18 @@
   <div class="section" id="git">
 <h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>To do git pull while ignoring local changes, do the following:
-* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code>
-* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></li>
-<li>Usual commands that I use to push to a git repository
-* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> [If not done before]
-* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> [Add all the files, changes]
-* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Some</span> <span class="pre">commit</span> <span class="pre">message</span> <span class="pre">here&quot;</span></code>
-* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code></li>
+<li>To do git pull while ignoring local changes, do the following:<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></li>
+</ul>
+</li>
+<li>Usual commands that I use to push to a git repository<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> [If not done before]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> [Add all the files, changes]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Some</span> <span class="pre">commit</span> <span class="pre">message</span> <span class="pre">here&quot;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code></li>
+</ul>
+</li>
 <li>To access previous versions in git you can use git checkout command.</li>
 <li>To see git commit history - <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></li>
 <li>Usual command is git checkout commit_key</li>
@@ -51,11 +64,13 @@
 <li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> [To view information associated with remote repositories]</li>
 <li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">short_name</span> <span class="pre">url</span></code> [To add a new remote Git repository as a short name. Usually, we use origin as a short name.]</li>
 <li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">remove</span> <span class="pre">short_name</span></code> [To remove a remote repository]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">origin</span> <span class="pre">master</span></code> . Ignores everything on remote repository and forcefully pushes the local stuff on remote.
-* If you get error of the kind “You are not allowed to force push code to a protected branch on this project”.
-* Then go to the remote repository (gitlab / github).
-* Go to Project Settings –&gt; Protected Branches –&gt; Unprotect.
-* Re-execute the command and again protect the master branch by undoing the mentioned process”</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">origin</span> <span class="pre">master</span></code> . Ignores everything on remote repository and forcefully pushes the local stuff on remote.<ul>
+<li>If you get error of the kind “You are not allowed to force push code to a protected branch on this project”.</li>
+<li>Then go to the remote repository (gitlab / github).</li>
+<li>Go to Project Settings –&gt; Protected Branches –&gt; Unprotect.</li>
+<li>Re-execute the command and again protect the master branch by undoing the mentioned process”</li>
+</ul>
+</li>
 <li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">http.proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code> [To make git work behind proxy use the following (IIIT Proxy)]</li>
 <li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--unset</span> <span class="pre">http.proxy</span></code> [To unest proxy]</li>
 <li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--get</span> <span class="pre">http.proxy</span></code> [To check the proxy]</li>
@@ -68,14 +83,13 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="Latex.html" title="previous chapter">LaTeX</a></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Latex.html"
+                        title="previous chapter">LaTeX</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Deep-Learning.html"
+                        title="next chapter">Deep Learning</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -99,20 +113,24 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2018, Nikhil Pattisapu.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
-      
-      |
-      <a href="_sources/Git.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Deep-Learning.html" title="Deep Learning"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Latex.html" title="LaTeX"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Nikhil Pattisapu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
   </body>
 </html>

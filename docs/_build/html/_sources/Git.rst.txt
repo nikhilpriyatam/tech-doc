@@ -2,10 +2,12 @@ Git
 ===
 
 * To do git pull while ignoring local changes, do the following:
+
   * :code:`git reset --hard`
   * :code:`git pull`
 	
 * Usual commands that I use to push to a git repository
+
   * :code:`git init` [If not done before]
   * :code:`git add .` [Add all the files, changes]
   * :code:`git commit -m "Some commit message here"`
@@ -24,10 +26,12 @@ Git
 * :code:`git remote add short_name url` [To add a new remote Git repository as a short name. Usually, we use origin as a short name.]
 * :code:`git remote remove short_name` [To remove a remote repository]
 * :code:`git push --force origin master` . Ignores everything on remote repository and forcefully pushes the local stuff on remote. 
+
   * If you get error of the kind "You are not allowed to force push code to a protected branch on this project". 
   * Then go to the remote repository (gitlab / github). 
   * Go to Project Settings --> Protected Branches --> Unprotect. 
   * Re-execute the command and again protect the master branch by undoing the mentioned process"
+
 * :code:`git config --global http.proxy http://proxy.iiit.ac.in:8080` [To make git work behind proxy use the following (IIIT Proxy)]
 * :code:`git config --global --unset http.proxy` [To unest proxy]
 * :code:`git config --global --get http.proxy` [To check the proxy]
