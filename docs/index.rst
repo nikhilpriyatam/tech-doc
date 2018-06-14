@@ -16,7 +16,6 @@ Topics
    Latex.rst
    Git.rst
    Deep-Learning.rst
-   Brat.rst
    DB-and-SQL.rst
    MetaMap.rst
    Music-Processing.rst
