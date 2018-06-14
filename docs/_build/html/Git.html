@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Git &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="LaTeX" href="Latex.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="git">
+<h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>To do git pull while ignoring local changes, do the following:
+* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></li>
+<li>Usual commands that I use to push to a git repository
+* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> [If not done before]
+* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> [Add all the files, changes]
+* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Some</span> <span class="pre">commit</span> <span class="pre">message</span> <span class="pre">here&quot;</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code></li>
+<li>To access previous versions in git you can use git checkout command.</li>
+<li>To see git commit history - <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></li>
+<li>Usual command is git checkout commit_key</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">--work-tree=/Users/nikhilpattisapu/test</span> <span class="pre">checkout</span> <span class="pre">33652e3da1da6dc8de7b731edebd9e96ad5aafae</span> <span class="pre">--</span> <span class="pre">.</span></code> [To checkout the previous commit into a different folder]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">ls-files</span></code>  [Show information about files in the index and the working tree]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span> <span class="pre">sha_commit_id</span></code> [To rollback to a previous commit]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">folder_name</span></code> [To remove files that were earlier tracked by git]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> [To view information associated with remote repositories]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">short_name</span> <span class="pre">url</span></code> [To add a new remote Git repository as a short name. Usually, we use origin as a short name.]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">remove</span> <span class="pre">short_name</span></code> [To remove a remote repository]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">origin</span> <span class="pre">master</span></code> . Ignores everything on remote repository and forcefully pushes the local stuff on remote.
+* If you get error of the kind “You are not allowed to force push code to a protected branch on this project”.
+* Then go to the remote repository (gitlab / github).
+* Go to Project Settings –&gt; Protected Branches –&gt; Unprotect.
+* Re-execute the command and again protect the master branch by undoing the mentioned process”</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">http.proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code> [To make git work behind proxy use the following (IIIT Proxy)]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--unset</span> <span class="pre">http.proxy</span></code> [To unest proxy]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--get</span> <span class="pre">http.proxy</span></code> [To check the proxy]</li>
+<li>To include only “few specified files and directories” use the similar structure for <code class="code docutils literal notranslate"><span class="pre">.gitignore</span></code> as described below</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Latex.html" title="previous chapter">LaTeX</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Git.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Git.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

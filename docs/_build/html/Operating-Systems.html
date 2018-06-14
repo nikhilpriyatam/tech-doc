@@ -1,0 +1,399 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Operating Systems &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Nutch" href="Nutch.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="operating-systems">
+<h1>Operating Systems<a class="headerlink" href="#operating-systems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="osx">
+<h2>OSX<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>I don’t know what caused it, but I am getting this error everytime I restart the computer<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">Core</span> <span class="pre">Telephony</span> <span class="pre">Trace</span> <span class="pre">File</span> <span class="pre">Error</span> <span class="pre">A</span> <span class="pre">file</span> <span class="pre">operation</span> <span class="pre">for</span> <span class="pre">CoreTelephony</span> <span class="pre">tracing</span>
+<span class="pre">has</span> <span class="pre">failed,</span> <span class="pre">you</span> <span class="pre">may</span> <span class="pre">be</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space.</span> <span class="pre">Details</span> <span class="pre">'Error</span> <span class="pre">opening</span> <span class="pre">file</span>
+<span class="pre">/tmp/ct.shutdown,</span> <span class="pre">err</span> <span class="pre">=</span> <span class="pre">Operation</span> <span class="pre">not</span> <span class="pre">permitted</span></code></li>
+<li>I solved this bug using the following technique:<ul>
+<li>Boot mac in recovery mode.
+* Start / restart the machine
+* When you hear login sound press and hold the <code class="code docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">R</span> <span class="pre">keys</span></code> (simultaneously)
+* Release the keys when you see the recovery screen (Not the usual apple logo !!)
+* Login might take slightly more longer than usual.</li>
+<li>Select Utilities -&gt; terminal and execute the following command</li>
+<li><code class="code docutils literal notranslate"><span class="pre">csrutil</span> <span class="pre">disable</span></code></li>
+<li>Then restart the machine. The error was gone. Again go to recovery mode and execute</li>
+<li><code class="code docutils literal notranslate"><span class="pre">csrutil</span> <span class="pre">enable</span></code></li>
+<li>Again restart the machine.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>I also faced the following error while installing torch dependencies<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">hdiutil:</span> <span class="pre">mount</span> <span class="pre">failed</span> <span class="pre">-</span> <span class="pre">no</span> <span class="pre">mountable</span> <span class="pre">file</span> <span class="pre">systems</span></code></li>
+<li>I fixed the bug using the same procedure as above.<ul>
+<li>To boot mac in safe mode.</li>
+<li>Start / restart the machine</li>
+<li>When you hear login sound press and hold the shift key</li>
+<li>Release the shift key when you see the apple logo</li>
+<li>Login might take slightly more longer than usual.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When, I tried to run bin/nutch readseg, I got the error “Error: JAVA_HOME is not set”. However, it was set in ~/.bashrc. Then I executed the following command and things looked fine from then onwards.
+* <code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_122.jdk/Contents/Home</span></code></li>
+<li>When you ssh from your mac to a linux machine, you might see the following error/warning:
+* <code class="code docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">set</span> <span class="pre">LC_CTYPE</span> <span class="pre">to</span> <span class="pre">default</span> <span class="pre">locale:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory.</span></code>
+* To fix it, goto iTerm –&gt; Profiles –&gt; Open Profiles –&gt; Default Profile –&gt; Edit Profiles –&gt; Terminal –&gt; Uncheck set environment variables automatically.</li>
+</ul>
+</div>
+<div class="section" id="ubuntu">
+<h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>If you get the following error while running <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code><ul>
+<li><code class="code docutils literal notranslate"><span class="pre">W:</span> <span class="pre">GPG</span> <span class="pre">error:</span> <span class="pre">http://ppa.launchpad.net</span> <span class="pre">trusty</span> <span class="pre">Release:</span> <span class="pre">The</span> <span class="pre">following</span>
+<span class="pre">signatures</span> <span class="pre">couldn't</span> <span class="pre">be</span> <span class="pre">verified</span> <span class="pre">because</span> <span class="pre">the</span> <span class="pre">public</span> <span class="pre">key</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">available:</span>
+<span class="pre">NO_PUBKEY</span> <span class="pre">82EB5823F4FE239D</span></code></li>
+<li>Then, set <code class="code docutils literal notranslate"><span class="pre">$http_proxy</span></code> and execute the following command.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-key</span> <span class="pre">adv</span> <span class="pre">--keyserver-options</span> <span class="pre">http-proxy=$http_proxy</span> <span class="pre">--keyserver</span> <span class="pre">keyserver.ubuntu.com</span> <span class="pre">--recv</span> <span class="pre">82EB5823F4FE239D</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">You can upload data to <cite>google drive</cite> using <cite>ssh</cite> by using <cite>gdrive</cite> following</p>
+<ul class="simple">
+<li>the process mentioned <a class="reference external" href="http://olivermarshall.net/how-to-upload-a-file-to-google-drive-from-the-command-line/">here</a>.</li>
+</ul>
+</li>
+<li><p class="first">If you ssh into a server and then do <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">some-user-name</span> <span class="pre">-i</span></code> then you cannot use “screen command”.</p>
+<ul class="simple">
+<li>To use the screen command issue the following command while you are logged in as some-user-name
+<code class="code docutils literal notranslate"><span class="pre">script</span> <span class="pre">/dev/null</span></code></li>
+<li>The user who executes this command, basically owns the shell.</li>
+</ul>
+</li>
+<li><p class="first">To add a user in the linux environment and to give him sudo access
+* <code class="code docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/etc/passwd</span></code> gives the set of all users in the given machine
+* <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">adduser</span> <span class="pre">user_name</span></code> - Fill in the required details
+* <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">adduser</span> <span class="pre">user_name</span> <span class="pre">sudo</span></code> - Gives sudo permission to the user</p>
+</li>
+<li><p class="first">To increase the priority of a process use the following command:
+* <code class="code docutils literal notranslate"><span class="pre">renice</span> <span class="pre">-n</span> <span class="pre">nice_value</span> <span class="pre">-p</span> <span class="pre">process_id</span></code>
+* A nice_value of -20 means highest priority, default is 0</p>
+</li>
+<li><p class="first">While deleting or removing a large number of files. You might face the error:
+* <code class="code docutils literal notranslate"><span class="pre">gnubin/rm:</span> <span class="pre">Argument</span> <span class="pre">list</span> <span class="pre">too</span> <span class="pre">long.</span></code> In that case, use the</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">xargs</span></code></p>
+</div></blockquote>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-maxdepth</span> <span class="pre">2</span> <span class="pre">-name</span> <span class="pre">&quot;\*.txt&quot;</span> <span class="pre">-print0</span> <span class="pre">|</span> <span class="pre">xargs</span> <span class="pre">-0</span> <span class="pre">rm</span></code></li>
+</ul>
+</li>
+<li><p class="first">Command to delete empty files from a directory <code class="code docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-empty</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-delete</span></code></p>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">cp,</span> <span class="pre">scp</span> <span class="pre">or</span> <span class="pre">sftp</span> <span class="pre">error:</span> <span class="pre">&quot;File</span> <span class="pre">too</span> <span class="pre">large&quot;.</span></code> It might be a limit problem, which can be set from the command line.
+* check file transfer limit: <cite>ulimit -a</cite>
+* Or check if your disk [to which you are copying is formatted in FAT32 or ext3]. ext4 is good.</p>
+</li>
+<li><p class="first">To perform a multi-threaded download on a Linux based machine - use “axel”
+command. <code class="code docutils literal notranslate"><span class="pre">axel</span> <span class="pre">-n</span> <span class="pre">1000</span> <span class="pre">url</span></code>. Where 1000 is the number of threads.</p>
+</li>
+<li><p class="first">To use terminal as a browser [Extremely helpful for remote logins]
+<code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">w3m</span> <span class="pre">w3m-img</span></code>
+* To open a webpage simply type in a terminal window: <code class="code docutils literal notranslate"><span class="pre">w3m</span> <span class="pre">URL-of-the-webpage</span></code>
+* To go back one page: <code class="code docutils literal notranslate"><span class="pre">Shift-B</span></code>
+* To open a new tab: <code class="code docutils literal notranslate"><span class="pre">Shift-T</span></code></p>
+<ul class="simple">
+<li>To click a link: Navigate to the relevant portion using cursor / mouse and
+press <strong>Enter</strong></li>
+<li>To enter credentials like username and password, navigate to relevant
+portion and press <strong>Enter</strong></li>
+<li>Press <code class="code docutils literal notranslate"><span class="pre">Q</span></code> to quit</li>
+<li>More help is available <a class="reference external" href="http://w3m.sourceforge.net/MANUAL">here</a></li>
+<li><code class="code docutils literal notranslate"><span class="pre">w3m</span></code> can also be run using screen: <code class="code docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-L</span> <span class="pre">w3m</span> <span class="pre">URL-of-the-webpage</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ldconfig">
+<h2>ldconfig<a class="headerlink" href="#ldconfig" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">ldconfig</span></code> is a program that is used to maintain the shared library cache.</li>
+<li>This cache is typically stored in the file <code class="code docutils literal notranslate"><span class="pre">/etc/ld.so.cache</span></code> and is
+used by the system to map a shared library name to the location of the
+corresponding shared library file.</li>
+<li>This is used when a program is executed to find locations of shared libraries
+that need to be dynamically loaded and linked to the program.</li>
+<li>By default, the shared library files in <code class="code docutils literal notranslate"><span class="pre">/lib</span></code>, <code class="code docutils literal notranslate"><span class="pre">/usr/lib</span></code> and a few other
+* standard directories are maintained in the cache by <code class="code docutils literal notranslate"><span class="pre">ldconfig</span></code></li>
+<li>A new program or library might be installed in a non-standard directory, for
+* example in <code class="code docutils literal notranslate"><span class="pre">/opt/foobar/lib</span></code>. Programs that need the shared libraries from this library might fail with this error when executed.</li>
+<li>To fix this problem, we need to add the library directory to the list used by
+<code class="code docutils literal notranslate"><span class="pre">ldconfig</span></code>. There are two ways to do this:
+* Add to <code class="code docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>  (Example <code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/foobar/lib</span></code> in <cite>~/.bashrc</cite>)<ul>
+<li>Rebuild cache by executing wither of the following commands <code class="code docutils literal notranslate"><span class="pre">ldconfig</span></code> or
+<code class="code docutils literal notranslate"><span class="pre">ldconfig</span> <span class="pre">-v</span></code> (verbose).</li>
+<li>To check if the shared library cache now includes the shared libraries from the new directory use <cite>ldconfig -p</cite>
+A detailed description is <a class="reference external" href="https://codeyarns.com/2014/01/14/how-to-add-library-directory-to-ldconfig-cache/">here</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installing-apache2-on-ubuntu">
+<h2>Installing Apache2 on ubuntu<a class="headerlink" href="#installing-apache2-on-ubuntu" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Most basic usage: You can setup a simple file server which can serve files to users accessing your IP.</p>
+</li>
+<li><p class="first">Installation
+* <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">apache2</span></code>
+* <strong>Scenario 1</strong>: You want to setup multiple virtual hosts on the same machine.</p>
+<blockquote>
+<div><blockquote>
+<div><ul>
+<li><p class="first">Edit the <code class="code docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file and include the hosts in the following
+manner</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>127.0.0.1 localhost
+127.0.0.1 myhost1
+127.0.0.1 myhost2</p>
+</li>
+<li><p class="first">Although, there are other places where you can add configurations. I
+have made all configuration changes in the following file -
+<code class="code docutils literal notranslate"><span class="pre">/etc/apache2/sites-enabled/000-default.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
+ServerName myhost1
+ServerAdmin my@emailid.com
+# The place where the index.html exists
+DocumentRoot /home/i1392424/Tools/brat-v1.3_Crunchy_Frog
+
+# Directory specific permissions
+&lt;Directory /home/i1392424/Tools/brat-v1.3_Crunchy_Frog&gt;
+
+      AllowOverride Options Indexes FileInfo Limit
+      AddType application/xhtml+xml .xhtml
+      AddType font/ttf .ttf
+
+&lt;/Directory&gt;
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost \*:80&gt;
+# The server name should be defined in /etc/hosts
+ServerName myhost2
+ServerAdmin my@emailid.com
+# The place where the index.html exists
+DocumentRoot /this/is/another/folder
+# Directory specific permissions
+&lt;Directory /this/is/another/directory&gt;
+      AllowOverride Options Indexes FileInfo Limit
+      AddType application/xhtml+xml .xhtml
+      AddType font/ttf .ttf
+&lt;/Directory&gt;
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">After you change configuration execute the command <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span>
+<span class="pre">apache2</span> <span class="pre">restart</span></code> or <code class="code docutils literal notranslate"><span class="pre">apache2</span> <span class="pre">restart</span></code></p>
+</li>
+<li><p class="first">You can now access your stuff from your browser <code class="code docutils literal notranslate"><span class="pre">http://myhost1</span></code>
+or <code class="code docutils literal notranslate"><span class="pre">http://myhost2</span></code></p>
+</li>
+<li><p class="first"><strong>Disadvantage</strong>: The main disadvantage of this approach is that, while
+you can have multiple virtual hosts configured for multiple projects -
+Other people (within the same network) cannot access all these
+applications. They can only access the application hosted on the
+default port 80. For this reason, we might prefer hosting one
+application per host, which brings us to <strong>Scenario 2</strong>.</p>
+</li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p class="first"><strong>Scenario 2</strong>: You want to setup multiple applications on the <cite>localhost</cite>
+itself. Add the following to <code class="code docutils literal notranslate"><span class="pre">/etc/apache2/sites-available/000-default.conf</span></code></p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>&lt;VirtualHost *:9001&gt;
+# The server name should be defined in /etc/hosts
+ServerName localhost
+ServerAdmin <a class="reference external" href="mailto:my&#37;&#52;&#48;emailid&#46;com">my<span>&#64;</span>emailid<span>&#46;</span>com</a>
+# The place where the index.html exists
+DocumentRoot /home/i1392424/Tools/brat-v1.3_Crunchy_Frog
+# Directory specific permissions
+&lt;Directory /home/i1392424/Tools/brat-v1.3_Crunchy_Frog&gt;</p>
+<blockquote>
+<div><p>AllowOverride Options Indexes FileInfo Limit
+AddType application/xhtml+xml .xhtml
+AddType font/ttf .ttf</p>
+</div></blockquote>
+<p>&lt;/Directory&gt;
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;</p>
+<p>&lt;VirtualHost *:9002&gt;
+# The server name should be defined in /etc/hosts
+ServerName localhost
+ServerAdmin <a class="reference external" href="mailto:my&#37;&#52;&#48;emailid&#46;com">my<span>&#64;</span>emailid<span>&#46;</span>com</a>
+# The place where the index.html exists
+DocumentRoot /this/is/another/folder
+# Directory specific permissions
+&lt;Directory /this/is/another/directory&gt;</p>
+<blockquote>
+<div><p>AllowOverride Options Indexes FileInfo Limit
+AddType application/xhtml+xml .xhtml
+AddType font/ttf .ttf</p>
+</div></blockquote>
+<p>&lt;/Directory&gt;
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+# Opening the ports for listening, very improtant
+Listen 9001
+Listen 9002</p>
+</div></blockquote>
+<ul class="simple">
+<li>After modifying the conf file, execute one of the following commands <cite>sudo service apache2 restart</cite> or <cite>apache2 restart</cite>.</li>
+<li>Now others can connect to the respective applications from their browsers using <cite>http://your-local-ip:9001</cite> and <cite>http://your-local-ip:9002</cite></li>
+<li>General notes
+* Do not have <cite>Listen &lt;Port-ID&gt;</cite> command in 2 places - <cite>ports.conf</cite>, <cite>sites-available/something.conf</cite>
+* You can also create multiple files under <cite>sites-available</cite> like <cite>sites-available/something.conf</cite>. In that case you need to activate the site using the command <cite>sudo a2ensite something.conf</cite></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>uTorrent (read mu-torrent) is a good software to download large files from torrent. If you are using command line, then use <cite>deluge</cite>
+* <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">deluge</span> <span class="pre">deluged</span> <span class="pre">deluge-console</span></code>
+* Run <code class="code docutils literal notranslate"><span class="pre">deluged</span></code>
+* Run <code class="code docutils literal notranslate"><span class="pre">deluge-console</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ftp-server-related-instructions">
+<h2>FTP Server related instructions<a class="headerlink" href="#ftp-server-related-instructions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>You can use a tool called <code class="code docutils literal notranslate"><span class="pre">FileZilla</span></code> as a ftp client. It is useful for downloading as well as uploading files into an ftp server.</li>
+<li>To transfer directories to an FTP server from a command line, follow the below outlined instructions.
+* Install <code class="code docutils literal notranslate"><span class="pre">lftp</span></code> in ubuntu
+* <code class="code docutils literal notranslate"><span class="pre">lftp</span> <span class="pre">&lt;server-ip&gt;</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">user</span> <span class="pre">&lt;nikhil.pattisapu&gt;</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">set</span> <span class="pre">ssl:verify-certificate</span> <span class="pre">no</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">mirror</span> <span class="pre">-R</span> <span class="pre">&lt;path-to-local-dir&gt;</span> <span class="pre">&lt;path-to-server-dir&gt;</span></code></li>
+<li>To transfer individual file to an FTP server from a command line, follow the instructions outlined below.
+* <code class="code docutils literal notranslate"><span class="pre">lftp</span> <span class="pre">&lt;server-ip&gt;</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">user</span> <span class="pre">&lt;nikhil.pattisapu&gt;</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">set</span> <span class="pre">ssl:verify-certificate</span> <span class="pre">no</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">ls</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;server-target-directory&gt;</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">put</span> <span class="pre">&lt;host-source-directory&gt;</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Operating Systems</a><ul>
+<li><a class="reference internal" href="#osx">OSX</a></li>
+<li><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
+<li><a class="reference internal" href="#general">General</a></li>
+<li><a class="reference internal" href="#ldconfig">ldconfig</a></li>
+<li><a class="reference internal" href="#installing-apache2-on-ubuntu">Installing Apache2 on ubuntu</a></li>
+<li><a class="reference internal" href="#ftp-server-related-instructions">FTP Server related instructions</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Nutch.html" title="previous chapter">Nutch</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Operating-Systems.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Operating-Systems.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

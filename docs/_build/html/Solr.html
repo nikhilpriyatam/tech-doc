@@ -1,0 +1,273 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Solr &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Music Signal Processing" href="Music-Processing.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="solr">
+<h1>Solr<a class="headerlink" href="#solr" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">Zookeeper is very similar to hadoop in spirit and Solr in very similar to
+Nutch in spirit</p>
+</li>
+<li><p class="first"><strong>Note</strong>: Apache solr comes with a default zookeeper, never use it. Always,
+use an external zookeeper by following the below mentioned steps.</p>
+</li>
+<li><p class="first">Setting a zookeeper ensemble (On different machines) - Refer
+* <a class="reference external" href="https://cwiki.apache.org/confluence/display/solr/Setting+Up+an+External+ZooKeeper+Ensemble">here</a>
+* Assume that you have 3 servers: 10.2.4.120, 120.2.4.122, 10.2.4.126.</p>
+<ul>
+<li><p class="first">Modify the <code class="code docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file in all the 3 systems and include the lines</p>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">10.2.4.120</span> <span class="pre">solr1</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">10.2.4.122</span> <span class="pre">solr2</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">10.2.4.126</span> <span class="pre">solr3</span></code></li>
+</ul>
+</li>
+<li><p class="first">Install zookeeper in <code class="code docutils literal notranslate"><span class="pre">/opt/zookeeper/</span></code> on all 3 machines</p>
+</li>
+<li><p class="first">Create a folder called data in <cite>/opt/zookeeper/</cite> on all 3 machines</p>
+</li>
+<li><p class="first">In the folder <code class="code docutils literal notranslate"><span class="pre">/opt/zookeeper/data</span></code> create a file called myid on all 3
+machines. The content of myid on machine 1 (solr1) should be 1. The content
+of myid on machine 2 (solr2) should be 2. The content of myid on machine
+3 (solr3) should be 3.</p>
+</li>
+<li><p class="first">You will have a <code class="code docutils literal notranslate"><span class="pre">zoo.cfg</span></code> in <code class="code docutils literal notranslate"><span class="pre">/opt/zookeeper/conf/zoo.cfg</span></code>. For
+the first server, called solr1, It will look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataDir</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">data</span>
+<span class="n">clientPort</span><span class="o">=</span><span class="mi">2181</span>
+<span class="n">initLimit</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">syncLimit</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">server</span><span class="o">.</span><span class="mi">1</span><span class="o">=</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">2888</span><span class="p">:</span><span class="mi">3888</span>
+<span class="n">server</span><span class="o">.</span><span class="mi">2</span><span class="o">=</span><span class="n">solr2</span><span class="p">:</span><span class="mi">2888</span><span class="p">:</span><span class="mi">3888</span>
+<span class="n">server</span><span class="o">.</span><span class="mi">3</span><span class="o">=</span><span class="n">solr3</span><span class="p">:</span><span class="mi">2888</span><span class="p">:</span><span class="mi">3888</span>
+</pre></div>
+</div>
+<p>For other servers, it will be similar. The only difference would be: for
+server ‘x’, the <code class="code docutils literal notranslate"><span class="pre">server.x=0.0.0.0:2888:3888</span></code></p>
+</li>
+<li><p class="first">Go to <code class="code docutils literal notranslate"><span class="pre">/opt/zookeeper</span></code> folder and execute the following command on all 3 machines.</p>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./bin/zkServer.sh</span> <span class="pre">start</span></code> [OPTIONAL CONF FILE: Default is
+<code class="code docutils literal notranslate"><span class="pre">/opt/zookeeper/conf/zoo.cfg</span></code>]. This should start the zookeeper on all the 3 machines.</p>
+</li>
+<li><p class="first">You should check if the zookeeper has started properly on all the 3 machines by issuing the following commands:</p>
+<ul>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./bin/zkServer.sh</span> <span class="pre">status</span></code></p>
+</li>
+<li><p class="first">If your zookeeper was running properly, You should see some output like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JMX</span> <span class="n">enabled</span> <span class="n">by</span> <span class="n">default</span>
+<span class="n">Using</span> <span class="n">config</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="nb">bin</span><span class="o">/../</span><span class="n">conf</span><span class="o">/</span><span class="n">zoo</span><span class="o">.</span><span class="n">cfg</span>
+<span class="n">Mode</span><span class="p">:</span> <span class="n">follower</span>
+</pre></div>
+</div>
+<p>The last line might also be <code class="code docutils literal notranslate"><span class="pre">Mode:</span> <span class="pre">leader</span></code> . If there is an error
+then the last line would be something like “may be zookeeper is not even
+running”</p>
+</li>
+</ul>
+</li>
+<li><p class="first">You can stop the zookeeper by issuing the following command on all the 3
+systems: :code: <cite>sudo ./bin/zkServer.sh stop</cite></p>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">./bin/zkClient.sh</span></code> - This will take you to zookeeper mode where you
+have a set of limited choices available. Type help it will show what all
+choices you have.</p>
+</li>
+<li><p class="first">Note 1: It does not mean that, if you have 3 machine, you have to use
+exactly 3 zookeeper instances, you can have more or less.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">Setting up Solr cloud (On different machines) - Help is
+<a class="reference external" href="https://cwiki.apache.org/confluence/display/solr/Solr+Start+Script+Reference">here</a></p>
+<ul class="simple">
+<li>Assume that you have the same 3 servers: 10.2.4.120, 120.2.4.122, 10.2.4.126
+where zookeeper was also running</li>
+<li>Assume that, your <code class="code docutils literal notranslate"><span class="pre">/etc/hosts</span></code> is already modified as described in step 2 of
+zookeeper setup (above)</li>
+<li>Install solr in <code class="code docutils literal notranslate"><span class="pre">/opt/solr/</span></code> on all 3 machines.</li>
+<li>If you had already run solr before and created a collection (e.g. wikipedia)
+and core (like wikipedia_shard1_replica1 or wikipedia_shard2_replica1) and
+you want to run search on those cores, issue the following command on
+any system or all system [depends on individual case under consideration]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">bin/solr</span> <span class="pre">start</span> <span class="pre">-c</span> <span class="pre">-h</span> <span class="pre">solr3</span> <span class="pre">-p</span> <span class="pre">8983</span> <span class="pre">-s</span> <span class="pre">collections_Home/solr/</span> <span class="pre">-z</span>
+<span class="pre">solr1:2181,solr2:2181,solr3:2181</span> <span class="pre">-m</span> <span class="pre">2g</span></code><ul>
+<li><code class="code docutils literal notranslate"><span class="pre">-c</span></code> option denotes cloud mode</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-h</span></code> option denotes hostname of machine on which you are running this [e.g. solr1, localhost, etc]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-p</span> <span class="pre">port</span></code> where you want to run this solr instance</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-s</span> <span class="pre">solr_home_folder</span></code> or place where your collections/cores are
+located. Typically, this folder has one or more cores (which are also
+folders) like wikipedia_shard1_replica1 or wikipedia_shard2_replica1.
+It must contain a solr.xml file!! It might also contain a conf dir</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-z</span></code> this is the zookeeper ensemble which we have set up previously.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-m</span></code> Java Memory that solr might take</li>
+<li><strong>Note</strong> Collection and cores are one and the same, depending on whether
+we are running solr on cloud mode or standalone mode. We have
+Collections (in SolrCloud mode) or cores (in standalone mode)</li>
+</ul>
+</li>
+<li>Creating solr collections or cores<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">bin/solr</span> <span class="pre">-c</span> <span class="pre">collection_name</span> <span class="pre">-d</span> <span class="pre">conf_dir</span> <span class="pre">-n</span> <span class="pre">config_name</span> <span class="pre">-p</span> <span class="pre">port</span> <span class="pre">-s</span>
+<span class="pre">num_of_shards</span> <span class="pre">-rf</span> <span class="pre">num_of_replicas</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">-c</span></code> : Default is gettingstarted. The default final collection
+folders are stored in folders like <code class="code docutils literal notranslate"><span class="pre">example/cloud/node1/solr</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">-d</span></code> : Default it data_driven_schema_configs</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-n</span></code> : Configuration name. Default is same name as core or collection.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-p</span></code> : Port. By default the script tries to detect the port by
+looking for running Solr instances.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-s</span></code> : Number of shards. Default is 1.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-rf</span></code>: Number of replicas. Default is 1.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first">If you don’t provide the <code class="code docutils literal notranslate"><span class="pre">-d</span></code> or <code class="code docutils literal notranslate"><span class="pre">-n</span></code> options, then the default
+* configuration</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">$SOLR_HOME/server/solr/configsets/data_driven_schema_configs/conf</span></code> is
+uploaded to ZooKeeper using the same name as the collection (under
+<code class="code docutils literal notranslate"><span class="pre">/configs/collection_name</span></code> in Zookeeper).</p>
+</div></blockquote>
+</li>
+<li><p class="first">Note: The <code class="code docutils literal notranslate"><span class="pre">data_driven_schema_configs</span></code> schema can mutate as data is
+indexed. Consequently, we recommend that you do not share data-driven
+configurations between collections unless you are certain that all
+collections should inherit the changes made when indexing data into one
+of the collections.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Deleting solr collections or cores</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">bin/solr</span> <span class="pre">delete</span> <span class="pre">-c</span> <span class="pre">core_or_collection_name</span> <span class="pre">-deleteConfig</span> <span class="pre">true|false</span>
+<span class="pre">-p</span> <span class="pre">port</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">-delteConfig</span></code> : Deletes the corresponding directory from ZooKeeper.
+Default is true. If the configuration directory is being used by another
+collection, then it will not be deleted even if you pass
+<code class="code docutils literal notranslate"><span class="pre">-deleteConfig</span> <span class="pre">true</span></code>.</li>
+<li><strong>Note</strong>: Several of the things mentioned here [and much much more] can
+also be done using API calls. Refer
+<a class="reference external" href="https://cwiki.apache.org/confluence/display/solr/Collections+API">here</a></li>
+<li>Useful scripts that integrate solr with zookeeper
+<a class="reference external" href="https://cwiki.apache.org/confluence/display/solr/Command+Line+Utilities">reference</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">We have a very useful script shipped with solr which is present in the
+directory <code class="code docutils literal notranslate"><span class="pre">/opt/solr/server/scripts/cloud-scripts/zkcli.sh</span></code>. It can be
+used to upload a new configuration onto the zookeeper (which would
+eventually go under <code class="code docutils literal notranslate"><span class="pre">/configs/dir_name</span></code> in zookeeper)</p>
+</li>
+<li><p class="first"><strong>Note</strong>: This script is also present in the <code class="code docutils literal notranslate"><span class="pre">zookeeper_home/bin</span></code>
+directory. Use this one in case you are using a zookeeper ensemble.</p>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">./server/scripts/cloud-scripts/zkcli.sh</span> <span class="pre">-cmd</span> <span class="pre">upconfig</span> <span class="pre">-confdir</span>
+<span class="pre">config_dir_to_upload</span> <span class="pre">-confname</span> <span class="pre">configuration_name_you_wish_to_give</span> <span class="pre">-z</span>
+<span class="pre">solr1:2181,solr2:2181,solr3:2181</span></code></p>
+</li>
+<li><p class="first">It can also be used to link a collection [present in zookeeper] with a
+configuration [also present in a zookeeper]</p>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">./server/scripts/cloud-scripts/zkcli.sh</span> <span class="pre">-cmd</span> <span class="pre">linkconfig</span> <span class="pre">-collection</span>
+<span class="pre">collection_name</span> <span class="pre">-confname</span> <span class="pre">configuration_name_in_zookeeper</span> <span class="pre">-z</span>
+<span class="pre">solr1:2181,solr2:2181,solr3:2181</span></code></p>
+</li>
+<li><p class="first">Status update in solr
+* <code class="code docutils literal notranslate"><span class="pre">bin/solr</span> <span class="pre">status</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">bin/solr</span> <span class="pre">healthcheck</span> <span class="pre">-c</span> <span class="pre">collection_name</span> <span class="pre">-z</span> <span class="pre">zookeeper_host</span></code>
+* Use <code class="code docutils literal notranslate"><span class="pre">bin/solr</span> <span class="pre">stop</span> <span class="pre">-p</span> <span class="pre">[port_number</span> <span class="pre">or</span> <span class="pre">all]</span></code></p>
+</li>
+<li><p class="first">To delete all the documents index in the core issue the following command in the browser:
+* <cite>http://host_name:port_name/solr/core_name_with_shardId_and_replica_id/update?stream.body=&lt;delete&gt;&lt;query&gt;*:*&lt;/query&gt;&lt;/delete&gt;&amp;commit=true</cite></p>
+<ul class="simple">
+<li>E.g:
+<cite>http://localhost:8984/solr/twitter_unprocessed_shard1_replica1/update?stream.body=%3Cdelete%3E%3Cquery%3E*:*%3C/query%3E%3C/delete%3E&amp;commit=true</cite></li>
+<li>There are other ways of deleting documents as well (currently, this seems to
+be the simplest). Note that, this deletes the indexed documents in a core
+and NOT the core itself.</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Music-Processing.html" title="previous chapter">Music Signal Processing</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Solr.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Solr.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

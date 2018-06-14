@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Deep Learning &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BRAT Annotation Framework" href="Brat.html" />
+    <link rel="prev" title="Git" href="Git.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="deep-learning">
+<h1>Deep Learning<a class="headerlink" href="#deep-learning" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gpu">
+<h2>GPU<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES=&lt;gpu_id&gt;</span> <span class="pre">python</span> <span class="pre">&lt;file&gt;</span></code> , where <code class="code docutils literal notranslate"><span class="pre">&lt;gpu_id&gt;</span></code>
+is the id of the free GPU (which you have to check manually using the command
+<code class="code docutils literal notranslate"><span class="pre">nvidia-smi</span></code>). This ensures that Tensorflow only uses the
+<code class="code docutils literal notranslate"><span class="pre">&lt;gpu_id&gt;</span></code> GPU.</p>
+</li>
+<li><p class="first">In the code, add the following lines before calling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">gpu_options</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GPUOptions</span><span class="p">(</span><span class="n">per_process_gpu_memory_fraction</span><span class="o">=</span><span class="mf">0.333</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Related link <a class="reference external" href="https://stackoverflow.com/questions/34199233/how-to-prevent-tensorflow-from-allocating-the-totality-of-a-gpu-memory">here</a></p>
+</div>
+<div class="section" id="tensorflow">
+<h2>Tensorflow<a class="headerlink" href="#tensorflow" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">I was able to use the GPU on my mac by following instructions provided
+<a class="reference external" href="https://github.com/hughperkins/tf-coriander">here</a>.</p>
+</li>
+<li><p class="first">Three types of variables <code class="code docutils literal notranslate"><span class="pre">Constants</span></code> (Once initialized, can never change, for
+e.g. learning rate eta), <code class="code docutils literal notranslate"><span class="pre">Variables</span></code> (e.g. neural network Weights -
+are not initialized until <code class="code docutils literal notranslate"><span class="pre">init</span> <span class="pre">=</span> <span class="pre">tf.global_variables_initializer()</span>
+<span class="pre">sess.run(init)</span></code> is run) and <code class="code docutils literal notranslate"><span class="pre">Placeholders</span></code> (can be substituted with any
+variable, like input x). Following are few examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">const</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1"># A placeholder is a promise to provide a</span>
+<span class="n">value</span> <span class="n">later</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">All the variables from <code class="code docutils literal notranslate"><span class="pre">numpy</span></code> must be converted to <code class="code docutils literal notranslate"><span class="pre">float32</span></code> as
+<code class="code docutils literal notranslate"><span class="pre">float64</span></code> is not supported by tensorflow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mat_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">One of the important things in <cite>tf</cite> is <cite>convolution layers</cite>. The following is
+a sample code on CNNs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># promise to provide value later</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+<span class="c1"># Initialize weight matrix randomly with small values.</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="n">conv_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">conv2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;SAME&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For CNNs, we use convolution and max pool layers. For both, we use sliding
+windows, which in turn requires a parameter of the type <code class="code docutils literal notranslate"><span class="pre">strides=[1,</span> <span class="pre">1,</span> <span class="pre">1,</span>
+<span class="pre">1]</span></code>, the four integers represent the following <code class="code docutils literal notranslate"><span class="pre">[batch,</span> <span class="pre">height,</span> <span class="pre">width,</span> <span class="pre">channels]</span></code>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="server-for-word2vec-embeddings">
+<h2>Server for Word2Vec Embeddings<a class="headerlink" href="#server-for-word2vec-embeddings" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Loading w2v embeddings in python/keras programs takes a very long time. The
+following is a nice work-around : Setup the word embeddings through API call
+* Clone <a class="reference external" href="https://github.com/3Top/word2vec-api">word2vec-api</a> repository.
+* Follow the instructions to <em>serve</em> the embeddings</p>
+<ul>
+<li><p class="first">There are many things that you can do with the loaded embeddings like
+finding most similar word to a word etc. But here I cover the most crucial
+application - Given a word (in this case <strong>the</strong>) find its embedding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+
+<span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:1234/word2vec/model?word=the&#39;</span><span class="p">)</span>
+<span class="n">bb</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="n">emb</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">struct</span><span class="o">.</span><span class="n">iter_unpack</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">bb</span><span class="p">)]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pytorch">
+<h2>PyTorch<a class="headerlink" href="#pytorch" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="gensim">
+<h2>Gensim<a class="headerlink" href="#gensim" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">To get <strong>word embeddings</strong> from gensim (version 2.3.0) use the following code
+snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="k">import</span> <span class="n">word2vec</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;dbpedia.w2v&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s1">&#39;india&#39;</span><span class="p">]</span> <span class="c1"># model.wv[&#39;DBPEDIA_ID/India&#39;]</span>
+
+<span class="k">def</span> <span class="nf">getVector</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">model</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To get <strong>document or paragraph embeddings</strong> from gensim (version 2.3.0) use
+the following code snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="k">import</span> <span class="n">Doc2Vec</span><span class="p">,</span> <span class="n">LabeledSentence</span>
+
+<span class="k">def</span> <span class="nf">get_paragraph_vectors</span><span class="p">(</span><span class="n">phrase_list</span><span class="p">):</span>
+  <span class="n">sentences</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">id_phrase</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phrase_list</span><span class="p">):</span>
+    <span class="n">sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LabeledSentence</span><span class="p">(</span><span class="n">words</span><span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">id_phrase</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">u</span><span class="s1">&#39;PHRASE_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">id_phrase</span><span class="p">[</span><span class="mi">0</span><span class="p">])]))</span>
+
+  <span class="n">model</span> <span class="o">=</span> <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">min_alpha</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>  <span class="c1"># use fixed learning rate</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Deep Learning</a><ul>
+<li><a class="reference internal" href="#gpu">GPU</a></li>
+<li><a class="reference internal" href="#tensorflow">Tensorflow</a></li>
+<li><a class="reference internal" href="#server-for-word2vec-embeddings">Server for Word2Vec Embeddings</a></li>
+<li><a class="reference internal" href="#pytorch">PyTorch</a></li>
+<li><a class="reference internal" href="#gensim">Gensim</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Git.html" title="previous chapter">Git</a></li>
+      <li>Next: <a href="Brat.html" title="next chapter">BRAT Annotation Framework</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Deep-Learning.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Deep-Learning.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

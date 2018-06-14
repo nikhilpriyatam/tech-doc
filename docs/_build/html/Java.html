@@ -1,0 +1,130 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Java &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Maven" href="Maven.html" />
+    <link rel="prev" title="Solr" href="Solr.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="java">
+<h1>Java<a class="headerlink" href="#java" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">Compiling and executing JAVA programs from command line.</p>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">javac</span> <span class="pre">-classpath</span> <span class="pre">lib/\*</span> <span class="pre">src/*.java</span></code> [To compile class files with
+including some jar files]</li>
+<li><code class="code docutils literal notranslate"><span class="pre">java</span> <span class="pre">-classpath</span> <span class="pre">.:PATH_TO_LIB_FOLDER/\*</span>
+<span class="pre">NAME_OF_CLASS_FILE_WITHOUT_EXTENSION</span></code> [To execute a java class file
+including some jar files]</li>
+<li><strong>Note</strong>: In the above command, the dot (‘.’) was included so that all the
+class files present in the current directory could be used while executing
+the class.</li>
+</ul>
+</li>
+<li><p class="first">Avoid 3rd party Jars printing to your console.</p>
+<ul>
+<li><p class="first">If you want to avoid 3rd party jars printing log messages in your console,
+then you can print their output to a dummy console in the following way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PrintStream</span> <span class="n">originalStream</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="p">;</span>
+<span class="n">PrintStream</span> <span class="n">dummyStream</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PrintStream</span><span class="p">(</span><span class="n">new</span> <span class="n">OutputStream</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">public</span> <span class="n">void</span> <span class="n">write</span><span class="p">(</span><span class="nb">int</span> <span class="n">b</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="o">//</span><span class="n">NO</span><span class="o">-</span><span class="n">OP</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="n">System</span><span class="o">.</span><span class="n">setOut</span><span class="p">(</span><span class="n">dummyStream</span><span class="p">);</span>
+<span class="o">//</span><span class="n">You</span> <span class="n">want</span> <span class="n">to</span> <span class="n">stop</span> <span class="n">printing</span> <span class="kn">from</span> <span class="nn">here</span> <span class="n">onwards</span>
+        <span class="o">....</span>
+        <span class="o">....</span>
+<span class="n">System</span><span class="o">.</span><span class="n">setOut</span><span class="p">(</span><span class="n">originalStream</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">You</span> <span class="n">want</span> <span class="n">to</span> <span class="n">resume</span> <span class="n">printing</span> <span class="n">now</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference external" href="http://developers.redhat.com/blog/2014/08/14/find-fix-memory-leaks-java-application/">Help For Fixing Memory Leaks in Java</a></p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Solr.html" title="previous chapter">Solr</a></li>
+      <li>Next: <a href="Maven.html" title="next chapter">Maven</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Java.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Java.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

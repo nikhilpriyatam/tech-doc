@@ -1,0 +1,325 @@
+Python
+======
+
+Anaconda or Pip
+---------------
+* Always use python provided by Anaconda (Do not use the default python provided
+  by ubuntu). The difference between pip and :code:`conda` is given
+  `here
+  <https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/>`__
+
+* Always try to install packages using conda.
+
+  * In :code:`Anaconda`, you can create multiple environments. The python version and
+    package installations in those environments are mutually exclusive.
+
+  * Environment creation - :code:`conda create --name snakes python=3`
+
+    * Environment activation - :code:`source activate snakes`
+    * Environment deactivation - :code:`source deactivate snakes`
+  
+    * I have 3 environments on my Mac.
+      * One for default (Python2)
+      * One for python3
+      * One for Magenta
+  
+    * To install a specific python version in an environment use :code:`conda install python=2.6`
+    * You can also search for various versions of a package using :code:`conda search packageName`
+    * You can list the existing conda environments using :code:`conda env list`
+
+* To install packages through pip use :code:`pip install package_name`. To
+* To upgrade installed packages :code:`pip install package_name --upgrade`
+* Recently, I encountered the issue. Upon upgrading to python 3.6 in miniconda,
+  * I was getting the following errors with pip installs - :code:`pip install failing due to ssl module not available.`. I fixed it using the following commands.
+  * :code:`source activate snakes` (My python 3.6.2 virtual environment)
+  * :code:`conda update openssl`.
+
+
+Multiprocessing
+---------------
+* Multiprocessing is a highly convenient option for parallel processing in
+  python. The following is a sample script that takes a string list as input
+  and modifies the strings in a parallel fashion.
+
+* There are scenarios, where data needs to be shared between multiple threads
+  (e.g. increment or decrement global variables).
+  * If it is a counter, always try to pass counter values as additional inputs rather than sharing them between processes.
+
+  * **Note** - Global variables are not shared between processes. We need
+    special kinds of variables
+
+      .. code-block:: python
+
+        from multiprocessing import Pool, Value, Manager, Lock
+        counter = Value('i', 0) # Globally accessible, defined in __main__ function. 'i' represents integer
+
+        # Dictionary Initializations
+        manager = Manager()
+        word_dict = manager.dict()
+        lemma_dict = manager.dict()
+        pos_dict = manager.dict()
+
+        # Locks Initializations
+        l1 = Lock()
+        l2 = Lock()
+
+        # In the function which is going to be called by multiple processes
+        l1.acquire()
+        counter.value += 1
+        l1.release()
+
+        l2.acquire()
+        word_dict[word] = len(word_dict) + 1
+        lemma_dict[lemma] = len(lemma_dict) + 1
+        pos_dict[word] = len(pos_dict) + 1
+        l2.release()
+  
+  * **Note**: The :code:`manager.dict()` are dummy dictionaries. You cannot dump
+    them as simple pickle objects and expect to work like normal python
+    dictionaries when you pickle-load them again!! Therefore, write a
+    converter script to convert them into normal python dictionaries and
+    then pickle-dump them.
+
+* I have personally encountered **some issues** while using
+  :code:`multiprocessing` with :code:`nltk` on my mac. However, the same code
+  with the same :code:`nltk` version runs on ubuntu. There are many others who
+  have expressed similar concerns (incompatability of :code:`nltk` and
+  :code:`multiprocessing`)
+
+
+Numpy
+-----
+
+* You can check if a numpy array contains :code:`nan` or :code:`inf` values.
+  Usually, such arrays are problematic
+      
+    .. code-block:: python
+
+      import numpy as np
+      aa = np.array ([1,3,4])
+      bb = np.array ([1,0,0])
+      cc = aa / bb # Raises divide by zero encountered exception
+      np.isnan(cc).any() # Checks for Nan values in array.
+      np.isinf(cc).any() # Checks for Inf values in array.
+    
+
+Python HTTP requests
+--------------------
+
+* I have used HTTP Post request to run the DBpedia spotlight
+
+    .. code-block:: python
+
+      import urllib3
+      import json
+      import requests
+
+      headers = {'Accept': 'application/json'}
+      url = 'http://localhost:2222/rest/disambiguate'
+      data = {"text" : '<annotation text="Keep us posted, Carlleton. Similar
+      problem here. I managed to get my D up after 70 months of high dose
+      supplement, but after two years have now dropped Back into the land of
+      Osteomalacia"> <surfaceForm name="Back" offset="152">
+      </surfaceForm><surfaceForm name="Osteomalacia"
+      offset="174"></surfaceForm></annotation>'}
+      r = requests.post(url, data=data, headers=headers)
+      print (r.text)
+
+* Note: For calling :code:`GET` requests use :code:`requests.get` function.
+  While calling :code:`GET` function, make sure to change the header key to
+  :code:`Content-Type` instead of :code:`Accept`.
+
+
+Sacred
+------
+
+* :code:`Sacred` is a useful tool in python for parameter sweeping experiments.
+* :code:`pip install sacred`
+* It stores all the information about an experiment run in a MongoDB. For that
+  you need to setup MongoDB on your system and also have `pymongo` installed.
+  More help is available `here <http://sacred.readthedocs.io/en/latest/quickstart.html>`__
+
+
+Other Packages
+--------------
+
+* One of the useful aspects of python is :code:`pickle`. I had pickled huge word vectors file and loading it back took less than 10 seconds.
+* One useful package for printing python output in multiple colors is
+  :code:`termcolor`
+  :code:`conda install -c omnia termcolor`
+
+    .. code-block:: python
+
+      from termcolor import colored
+      print (colored('Hello','green'))
+
+* There is this cool plugin in ipython notebooks called `storemagic
+  <https://ipython.org/ipython-doc/3/config/extensions/storemagic.html>`_ to
+  persist python objects which are **picklable**.
+
+
+Calling Java function from Python - A MetaMap Experience
+--------------------------------------------------------
+
+I once had a necessity to call a java program with multiple inputs from a
+python program. I noticed few peculiar things that had to be done, which I
+am describing below 
+
+      .. code-block:: java
+
+	import java.util.ArrayList;
+	import java.util.List;
+	import java.util.Scanner;
+
+	import org.json.simple.JSONObject;
+
+	import gov.nih.nlm.nls.metamap.Ev;
+	import gov.nih.nlm.nls.metamap.Mapping;
+	import gov.nih.nlm.nls.metamap.MetaMapApi;
+	import gov.nih.nlm.nls.metamap.MetaMapApiImpl;
+	import gov.nih.nlm.nls.metamap.PCM;
+	import gov.nih.nlm.nls.metamap.Result;
+	import gov.nih.nlm.nls.metamap.Utterance;
+
+
+	public class CallMetaMapBatch
+	{
+		
+		@SuppressWarnings("unchecked")
+		public static void main(String[] metamapArgs)
+		{
+			
+			if (metamapArgs.length != 2)
+			{
+				
+				System.out.println(metamapArgs.length);
+				System.out.println("Insufficient Arguments");
+				System.exit(0);
+			
+			}
+
+			MetaMapApi api = new MetaMapApiImpl();
+			api.setHost(metamapArgs[0]);
+			api.setPort(Integer.parseInt(metamapArgs[1]));
+
+
+			List<String> theOptions = new ArrayList<String>();
+			api.setOptions("-y"); // Use WSD
+			theOptions.add("-A"); // Use strict model
+			theOptions.add("-K"); // Ignore stop phrases
+
+			theOptions.add("-J"); // Restrict to semantic types
+			theOptions.add("dsyn,sosy,topp,phsf,phsu,lbtr,lbpr,inpo,diap,clnd,bdsu,bdsy,blor,bpoc,bsoj,anst"); // No space between arguments
+
+			theOptions.add("-R"); // Restrict to Sources
+			theOptions.add("SNOMEDCT_US,MEDLINEPLUS,MSH,ICD10CM"); // No space between arguments
+
+			//theOptions.add("--cascade"); // If the concept "Logistic regression" is excluded for some reason then "regression" will also be excluded.
+
+			theOptions.add("--prune"); // Prune the candidates before
+			theOptions.add("15");
+
+			//theOptions.add("--cascade");
+			api.setOptions(theOptions);
+			Scanner sc=new Scanner(System.in);
+
+			while (sc.hasNextLine())
+			{
+				
+				String text = sc.nextLine();
+				List<Result> resultList = api.processCitationsFromString(text);
+				for (Result result : resultList)
+				{
+					
+					try
+					{
+						
+						for (Utterance utterance : result.getUtteranceList())
+						{
+							
+							for (PCM pcm: utterance.getPCMList())
+							{
+								
+								for (Mapping map : pcm.getMappingList())
+								{
+									
+									for (Ev ev : map.getEvList())
+									{
+										
+										JSONObject obj =  new JSONObject();
+										int begin = ev.getPositionalInfo().get(0).getX();
+										int end = begin + ev.getPositionalInfo().get(0).getY();
+
+										obj.put("ConceptBegin", begin);
+										obj.put("ConceptEnd", end);
+										obj.put("SemanticTypes", ev.getSemanticTypes());
+										obj.put("Sources", ev.getSources());
+										obj.put("ConceptName", ev.getConceptName());
+										obj.put("CUI", ev.getConceptId());
+										System.out.print(obj.toJSONString());
+
+									}
+
+								}
+
+							}
+
+						}
+
+					}
+
+					catch (Exception e)
+					{
+						
+						e.printStackTrace();
+					
+					}
+
+				}
+
+			}
+
+			sc.close();
+
+		}
+
+	}
+ 
+  * I exported the above as a **Runnable Jar file** in eclipse.
+  * I called the above program in python with various inputs. The code for the same is given below
+
+    .. code-block:: python
+
+      from subprocess import Popen, PIPE, STDOUT
+      from fcntl import fcntl, F_GETFL, F_SETFL
+      from os import O_NONBLOCK, read
+   
+      p = Popen(['java', '-jar', '/Users/nikhilpattisapu/git/ijcnlp-17/code/dependencies/CallMetaMapBatch.jar',
+                 '10.4.17.63','8066'], stdout=PIPE, stdin=PIPE, stderr=STDOUT, universal_newlines=True)
+   
+      flags = fcntl(p.stdout, F_GETFL)
+      fcntl(p.stdout, F_SETFL, flags | O_NONBLOCK)
+
+      p.stdin.write('He had a heart attack.\n')
+      while True:
+    	
+    	  try:
+    		  print (read(p.stdout.fileno(), 1024))
+    		  break
+    	  except:
+    		  continue
+
+      p.stdin.write('He had a liver failure too\n')
+      while True:
+    	
+    	  try:
+    		  print (read(p.stdout.fileno(), 1024))
+    		  break
+    	  except:
+    		  continue
+
+  * The advantages of this approach is that you load the jar file only once and
+    use it many times in a python program, thereby saving some computation!
+  * A more detailed explanation is available `here
+    <http://eyalarubas.com/python-subproc-nonblock.html>`__ and `here
+    <https://gist.github.com/EyalAr/7915597>`__.

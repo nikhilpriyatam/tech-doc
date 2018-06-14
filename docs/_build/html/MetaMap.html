@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MetaMap &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Music Signal Processing" href="Music-Processing.html" />
+    <link rel="prev" title="Databases" href="DB-and-SQL.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="metamap">
+<h1>MetaMap<a class="headerlink" href="#metamap" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first"><a class="reference external" href="https://metamap.nlm.nih.gov/Docs/README.html">MetaMap installation and Running</a></p>
+</li>
+<li><p class="first">All the below 3 things are required to be installed,in the same order, in case
+you want to use Metamap server from Java Program with UIMA.
+* Metamap main
+* Metamap Java API
+* Metamap UIMA</p>
+</li>
+<li><p class="first">Allowing external hosts to access Metamap server</p>
+<ul>
+<li><p class="first">Go the folder (in server) where MetaMap is installed and edit the file
+<code class="code docutils literal notranslate"><span class="pre">./public_mm/bin/mmserver</span></code>, search for the following text in this file
+and edit it accordingly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if [ -z $ACCEPTED_HOSTS] ; then
+ACCEPTED_HOSTS=&quot;[&#39;127.0.0.1&#39;,&#39;10.2.4.235&#39;,&#39;10.4.17.149&#39;]&quot;
+fi
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Change the -Xmx options in <code class="code docutils literal notranslate"><span class="pre">public_mm/bin/skrmedpostctl</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">public_mm/bin/wsdserverctl</span></code> [For Increasing the memory of MetaMap server]</p>
+</li>
+<li><p class="first">Parsing Blogs or Clinical Texts</p>
+<ul class="simple">
+<li>If you are parsing blogs or clinical texts which contain “newline”
+characters then replace them with a space (” “) before sending the input
+to MetaMap.</li>
+<li>Although, there is another (a clean and preferred method given <a class="reference external" href="https://metamap.nlm.nih.gov/Docs/FAQ/ClinicalText.pdf">here</a>, <a href="#id1"><span class="problematic" id="id2">`here
+https://metamap.nlm.nih.gov/Docs/FAQ/MM_FAQ.pdf&gt;`__</span></a> and <a href="#id1"><span class="problematic" id="id3">`here
+https://metamap.nlm.nih.gov/Docs/MM_2016_Usage.pdf&gt;`__</span></a> (use –blanklines N
+option), somehow, I did not find success with this approach)</li>
+</ul>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">ps</span> <span class="pre">ax</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">java</span></code> [To determine if MetaMap is running]</p>
+</li>
+<li><p class="first">There is a cool python wrapper for MetaMap available
+<a class="reference external" href="https://github.com/AnthonyMRios/pymetamap">here</a>.
+* This wrapper, in its current form works only for python 2.x
+* For making it work in python 3.x, I had to modify</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">/Users/nikhilpattisapu/miniconda2/envs/snakes/lib/python3.4/</span>
+<span class="pre">site-packages/pymetamap-0.1-py3.4.egg/</span>
+<span class="pre">pymetamap/__init__.py</span></code> file.</li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p class="first">I added the following statements in that file and everything worked fine:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/nikhilpattisapu/git/pymetamap/pymetamap/&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">Concept</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Metamap has some useful options which are of interest some of them are illustrated below.
+* <code class="code docutils literal notranslate"><span class="pre">-R</span> <span class="pre">SNOMEDCT_US,MEDLINE</span></code> (Restrict Sources)
+* <code class="code docutils literal notranslate"><span class="pre">-A</span></code> (Use strict model)
+* <code class="code docutils literal notranslate"><span class="pre">-J</span> <span class="pre">dsyn,sosy</span></code> (Restrict to semantic types)
+* <code class="code docutils literal notranslate"><span class="pre">-K</span></code> (ignore stop phrases).</p>
+</li>
+<li><p class="first">These options can be passed to MetaMap through command line
+* Worked for <code class="code docutils literal notranslate"><span class="pre">public_mm/bin/metamap16</span></code> but did not work for <code class="code docutils literal notranslate"><span class="pre">public_mm/bin/mmserver16</span></code>.</p>
+<ul>
+<li><p class="first">For using MetaMap as a server, I had run the
+<code class="code docutils literal notranslate"><span class="pre">public_mm/bin/mmserver16</span></code> on a different server and set the above
+useful options using MetaMap JavaAPI. An example snippet is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Include</span> <span class="n">prologbeans</span><span class="o">.</span><span class="n">jar</span> <span class="ow">and</span> <span class="n">MetaMapApi</span><span class="o">.</span><span class="n">jar</span>
+<span class="n">MetaMapApi</span> <span class="n">api</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MetaMapApiImpl</span><span class="p">();</span>
+
+<span class="n">api</span><span class="o">.</span><span class="n">setHost</span><span class="p">(</span><span class="s2">&quot;10.2.133.200&quot;</span><span class="p">);</span>
+<span class="n">api</span><span class="o">.</span><span class="n">setPort</span><span class="p">(</span><span class="mi">8066</span><span class="p">);</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">theOptions</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">api</span><span class="o">.</span><span class="n">setOptions</span><span class="p">(</span><span class="s2">&quot;-y&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">Use</span> <span class="n">WSD</span>
+<span class="n">theOptions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;-A&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">Use</span> <span class="n">strict</span> <span class="n">model</span>
+<span class="n">theOptions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;-K&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">Ignore</span> <span class="n">stop</span> <span class="n">phrases</span>
+
+<span class="n">theOptions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;-J&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">Restrict</span> <span class="n">to</span> <span class="n">semantic</span> <span class="n">types</span>
+<span class="n">theOptions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dsyn,sosy&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">No</span> <span class="n">space</span> <span class="n">between</span> <span class="n">arguments</span>
+
+<span class="n">theOptions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;-R&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">Restrict</span> <span class="n">to</span> <span class="n">Sources</span>
+<span class="n">theOptions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;SNOMEDCT_US,MEDLINEPLUS&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">No</span> <span class="n">space</span> <span class="n">between</span> <span class="n">arguments</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">theOptions</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">setOptions</span><span class="p">(</span><span class="n">theOptions</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">String</span> <span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;I do not want a heart attack.&quot;</span> <span class="o">//</span> <span class="n">Example</span> <span class="n">text</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Result</span><span class="o">&gt;</span> <span class="n">resultList</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">processCitationsFromString</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="DB-and-SQL.html" title="previous chapter">Databases</a></li>
+      <li>Next: <a href="Music-Processing.html" title="next chapter">Music Signal Processing</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/MetaMap.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/MetaMap.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

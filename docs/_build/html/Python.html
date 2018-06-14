@@ -1,0 +1,439 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Python &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UIMA" href="UIMA.html" />
+    <link rel="prev" title="Operating Systems" href="Operating-Systems.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python">
+<h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="anaconda-or-pip">
+<h2>Anaconda or Pip<a class="headerlink" href="#anaconda-or-pip" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Always use python provided by Anaconda (Do not use the default python provided
+by ubuntu). The difference between pip and <code class="code docutils literal notranslate"><span class="pre">conda</span></code> is given
+<a class="reference external" href="https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">here</a></li>
+<li>Always try to install packages using conda.<ul>
+<li>In <code class="code docutils literal notranslate"><span class="pre">Anaconda</span></code>, you can create multiple environments. The python version and
+package installations in those environments are mutually exclusive.</li>
+<li>Environment creation - <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">snakes</span> <span class="pre">python=3</span></code><ul>
+<li>Environment activation - <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">snakes</span></code></li>
+<li>Environment deactivation - <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">deactivate</span> <span class="pre">snakes</span></code></li>
+<li>I have 3 environments on my Mac.
+* One for default (Python2)
+* One for python3
+* One for Magenta</li>
+<li>To install a specific python version in an environment use <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">python=2.6</span></code></li>
+<li>You can also search for various versions of a package using <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">packageName</span></code></li>
+<li>You can list the existing conda environments using <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To install packages through pip use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_name</span></code>. To</li>
+<li>To upgrade installed packages <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_name</span> <span class="pre">--upgrade</span></code></li>
+<li>Recently, I encountered the issue. Upon upgrading to python 3.6 in miniconda,
+* I was getting the following errors with pip installs - <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">failing</span> <span class="pre">due</span> <span class="pre">to</span> <span class="pre">ssl</span> <span class="pre">module</span> <span class="pre">not</span> <span class="pre">available.</span></code>. I fixed it using the following commands.
+* <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">snakes</span></code> (My python 3.6.2 virtual environment)
+* <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">openssl</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="multiprocessing">
+<h2>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Multiprocessing is a highly convenient option for parallel processing in
+python. The following is a sample script that takes a string list as input
+and modifies the strings in a parallel fashion.</p>
+</li>
+<li><p class="first">There are scenarios, where data needs to be shared between multiple threads
+(e.g. increment or decrement global variables).
+* If it is a counter, always try to pass counter values as additional inputs rather than sharing them between processes.</p>
+<ul>
+<li><p class="first"><strong>Note</strong> - Global variables are not shared between processes. We need
+special kinds of variables</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span><span class="p">,</span> <span class="n">Value</span><span class="p">,</span> <span class="n">Manager</span><span class="p">,</span> <span class="n">Lock</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Globally accessible, defined in __main__ function. &#39;i&#39; represents integer</span>
+
+<span class="c1"># Dictionary Initializations</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
+<span class="n">word_dict</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<span class="n">lemma_dict</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<span class="n">pos_dict</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+
+<span class="c1"># Locks Initializations</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+
+<span class="c1"># In the function which is going to be called by multiple processes</span>
+<span class="n">l1</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">counter</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">l1</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+<span class="n">l2</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">word_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_dict</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">lemma_dict</span><span class="p">[</span><span class="n">lemma</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lemma_dict</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">pos_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_dict</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">l2</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Note</strong>: The <code class="code docutils literal notranslate"><span class="pre">manager.dict()</span></code> are dummy dictionaries. You cannot dump
+them as simple pickle objects and expect to work like normal python
+dictionaries when you pickle-load them again!! Therefore, write a
+converter script to convert them into normal python dictionaries and
+then pickle-dump them.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">I have personally encountered <strong>some issues</strong> while using
+<code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> with <code class="code docutils literal notranslate"><span class="pre">nltk</span></code> on my mac. However, the same code
+with the same <code class="code docutils literal notranslate"><span class="pre">nltk</span></code> version runs on ubuntu. There are many others who
+have expressed similar concerns (incompatability of <code class="code docutils literal notranslate"><span class="pre">nltk</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code>)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="numpy">
+<h2>Numpy<a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">You can check if a numpy array contains <code class="code docutils literal notranslate"><span class="pre">nan</span></code> or <code class="code docutils literal notranslate"><span class="pre">inf</span></code> values.
+Usually, such arrays are problematic</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">aa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">bb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="n">aa</span> <span class="o">/</span> <span class="n">bb</span> <span class="c1"># Raises divide by zero encountered exception</span>
+<span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="c1"># Checks for Nan values in array.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="c1"># Checks for Inf values in array.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="python-http-requests">
+<h2>Python HTTP requests<a class="headerlink" href="#python-http-requests" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">I have used HTTP Post request to run the DBpedia spotlight</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib3</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:2222/rest/disambiguate&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span> <span class="p">:</span> <span class="s1">&#39;&lt;annotation text=&quot;Keep us posted, Carlleton. Similar</span>
+<span class="n">problem</span> <span class="n">here</span><span class="o">.</span> <span class="n">I</span> <span class="n">managed</span> <span class="n">to</span> <span class="n">get</span> <span class="n">my</span> <span class="n">D</span> <span class="n">up</span> <span class="n">after</span> <span class="mi">70</span> <span class="n">months</span> <span class="n">of</span> <span class="n">high</span> <span class="n">dose</span>
+<span class="n">supplement</span><span class="p">,</span> <span class="n">but</span> <span class="n">after</span> <span class="n">two</span> <span class="n">years</span> <span class="n">have</span> <span class="n">now</span> <span class="n">dropped</span> <span class="n">Back</span> <span class="n">into</span> <span class="n">the</span> <span class="n">land</span> <span class="n">of</span>
+<span class="n">Osteomalacia</span><span class="s2">&quot;&gt; &lt;surfaceForm name=&quot;</span><span class="n">Back</span><span class="s2">&quot; offset=&quot;</span><span class="mi">152</span><span class="s2">&quot;&gt;</span>
+<span class="o">&lt;/</span><span class="n">surfaceForm</span><span class="o">&gt;&lt;</span><span class="n">surfaceForm</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Osteomalacia&quot;</span>
+<span class="n">offset</span><span class="o">=</span><span class="s2">&quot;174&quot;</span><span class="o">&gt;&lt;/</span><span class="n">surfaceForm</span><span class="o">&gt;&lt;/</span><span class="n">annotation</span><span class="o">&gt;</span><span class="s1">&#39;}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Note: For calling <code class="code docutils literal notranslate"><span class="pre">GET</span></code> requests use <code class="code docutils literal notranslate"><span class="pre">requests.get</span></code> function.
+While calling <code class="code docutils literal notranslate"><span class="pre">GET</span></code> function, make sure to change the header key to
+<code class="code docutils literal notranslate"><span class="pre">Content-Type</span></code> instead of <code class="code docutils literal notranslate"><span class="pre">Accept</span></code>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="sacred">
+<h2>Sacred<a class="headerlink" href="#sacred" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">Sacred</span></code> is a useful tool in python for parameter sweeping experiments.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sacred</span></code></li>
+<li>It stores all the information about an experiment run in a MongoDB. For that
+you need to setup MongoDB on your system and also have <cite>pymongo</cite> installed.
+More help is available <a class="reference external" href="http://sacred.readthedocs.io/en/latest/quickstart.html">here</a></li>
+</ul>
+</div>
+<div class="section" id="other-packages">
+<h2>Other Packages<a class="headerlink" href="#other-packages" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">One of the useful aspects of python is <code class="code docutils literal notranslate"><span class="pre">pickle</span></code>. I had pickled huge word vectors file and loading it back took less than 10 seconds.</p>
+</li>
+<li><p class="first">One useful package for printing python output in multiple colors is
+<code class="code docutils literal notranslate"><span class="pre">termcolor</span></code>
+<code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">omnia</span> <span class="pre">termcolor</span></code></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">There is this cool plugin in ipython notebooks called <a class="reference external" href="https://ipython.org/ipython-doc/3/config/extensions/storemagic.html">storemagic</a> to
+persist python objects which are <strong>picklable</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="calling-java-function-from-python-a-metamap-experience">
+<h2>Calling Java function from Python - A MetaMap Experience<a class="headerlink" href="#calling-java-function-from-python-a-metamap-experience" title="Permalink to this headline">¶</a></h2>
+<p>I once had a necessity to call a java program with multiple inputs from a
+python program. I noticed few peculiar things that had to be done, which I
+am describing below</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.json.simple.JSONObject</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Ev</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Mapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.MetaMapApi</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.MetaMapApiImpl</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.PCM</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Result</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Utterance</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CallMetaMapBatch</span>
+<span class="o">{</span>
+
+        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;unchecked&quot;</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">metamapArgs</span><span class="o">)</span>
+        <span class="o">{</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">metamapArgs</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">2</span><span class="o">)</span>
+                <span class="o">{</span>
+
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">metamapArgs</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Insufficient Arguments&quot;</span><span class="o">);</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+                <span class="o">}</span>
+
+                <span class="n">MetaMapApi</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MetaMapApiImpl</span><span class="o">();</span>
+                <span class="n">api</span><span class="o">.</span><span class="na">setHost</span><span class="o">(</span><span class="n">metamapArgs</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+                <span class="n">api</span><span class="o">.</span><span class="na">setPort</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">metamapArgs</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+
+
+                <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">theOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+                <span class="n">api</span><span class="o">.</span><span class="na">setOptions</span><span class="o">(</span><span class="s">&quot;-y&quot;</span><span class="o">);</span> <span class="c1">// Use WSD</span>
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-A&quot;</span><span class="o">);</span> <span class="c1">// Use strict model</span>
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-K&quot;</span><span class="o">);</span> <span class="c1">// Ignore stop phrases</span>
+
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-J&quot;</span><span class="o">);</span> <span class="c1">// Restrict to semantic types</span>
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;dsyn,sosy,topp,phsf,phsu,lbtr,lbpr,inpo,diap,clnd,bdsu,bdsy,blor,bpoc,bsoj,anst&quot;</span><span class="o">);</span> <span class="c1">// No space between arguments</span>
+
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-R&quot;</span><span class="o">);</span> <span class="c1">// Restrict to Sources</span>
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;SNOMEDCT_US,MEDLINEPLUS,MSH,ICD10CM&quot;</span><span class="o">);</span> <span class="c1">// No space between arguments</span>
+
+                <span class="c1">//theOptions.add(&quot;--cascade&quot;); // If the concept &quot;Logistic regression&quot; is excluded for some reason then &quot;regression&quot; will also be excluded.</span>
+
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;--prune&quot;</span><span class="o">);</span> <span class="c1">// Prune the candidates before</span>
+                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;15&quot;</span><span class="o">);</span>
+
+                <span class="c1">//theOptions.add(&quot;--cascade&quot;);</span>
+                <span class="n">api</span><span class="o">.</span><span class="na">setOptions</span><span class="o">(</span><span class="n">theOptions</span><span class="o">);</span>
+                <span class="n">Scanner</span> <span class="n">sc</span><span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+                <span class="k">while</span> <span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span>
+                <span class="o">{</span>
+
+                        <span class="n">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                        <span class="n">List</span><span class="o">&lt;</span><span class="n">Result</span><span class="o">&gt;</span> <span class="n">resultList</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">processCitationsFromString</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+                        <span class="k">for</span> <span class="o">(</span><span class="n">Result</span> <span class="n">result</span> <span class="o">:</span> <span class="n">resultList</span><span class="o">)</span>
+                        <span class="o">{</span>
+
+                                <span class="k">try</span>
+                                <span class="o">{</span>
+
+                                        <span class="k">for</span> <span class="o">(</span><span class="n">Utterance</span> <span class="n">utterance</span> <span class="o">:</span> <span class="n">result</span><span class="o">.</span><span class="na">getUtteranceList</span><span class="o">())</span>
+                                        <span class="o">{</span>
+
+                                                <span class="k">for</span> <span class="o">(</span><span class="n">PCM</span> <span class="n">pcm</span><span class="o">:</span> <span class="n">utterance</span><span class="o">.</span><span class="na">getPCMList</span><span class="o">())</span>
+                                                <span class="o">{</span>
+
+                                                        <span class="k">for</span> <span class="o">(</span><span class="n">Mapping</span> <span class="n">map</span> <span class="o">:</span> <span class="n">pcm</span><span class="o">.</span><span class="na">getMappingList</span><span class="o">())</span>
+                                                        <span class="o">{</span>
+
+                                                                <span class="k">for</span> <span class="o">(</span><span class="n">Ev</span> <span class="n">ev</span> <span class="o">:</span> <span class="n">map</span><span class="o">.</span><span class="na">getEvList</span><span class="o">())</span>
+                                                                <span class="o">{</span>
+
+                                                                        <span class="n">JSONObject</span> <span class="n">obj</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+                                                                        <span class="kt">int</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="na">getPositionalInfo</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getX</span><span class="o">();</span>
+                                                                        <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">+</span> <span class="n">ev</span><span class="o">.</span><span class="na">getPositionalInfo</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getY</span><span class="o">();</span>
+
+                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ConceptBegin&quot;</span><span class="o">,</span> <span class="n">begin</span><span class="o">);</span>
+                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ConceptEnd&quot;</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;SemanticTypes&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getSemanticTypes</span><span class="o">());</span>
+                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Sources&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getSources</span><span class="o">());</span>
+                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ConceptName&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getConceptName</span><span class="o">());</span>
+                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;CUI&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getConceptId</span><span class="o">());</span>
+                                                                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">());</span>
+
+                                                                <span class="o">}</span>
+
+                                                        <span class="o">}</span>
+
+                                                <span class="o">}</span>
+
+                                        <span class="o">}</span>
+
+                                <span class="o">}</span>
+
+                                <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+                                <span class="o">{</span>
+
+                                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+
+                                <span class="o">}</span>
+
+                        <span class="o">}</span>
+
+                <span class="o">}</span>
+
+                <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+        <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p class="first">I exported the above as a <strong>Runnable Jar file</strong> in eclipse.</p>
+</li>
+<li><p class="first">I called the above program in python with various inputs. The code for the same is given below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span> <span class="n">PIPE</span><span class="p">,</span> <span class="n">STDOUT</span>
+<span class="kn">from</span> <span class="nn">fcntl</span> <span class="kn">import</span> <span class="n">fcntl</span><span class="p">,</span> <span class="n">F_GETFL</span><span class="p">,</span> <span class="n">F_SETFL</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">O_NONBLOCK</span><span class="p">,</span> <span class="n">read</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;java&#39;</span><span class="p">,</span> <span class="s1">&#39;-jar&#39;</span><span class="p">,</span> <span class="s1">&#39;/Users/nikhilpattisapu/git/ijcnlp-17/code/dependencies/CallMetaMapBatch.jar&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;10.4.17.63&#39;</span><span class="p">,</span><span class="s1">&#39;8066&#39;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">flags</span> <span class="o">=</span> <span class="n">fcntl</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">F_GETFL</span><span class="p">)</span>
+<span class="n">fcntl</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">F_SETFL</span><span class="p">,</span> <span class="n">flags</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;He had a heart attack.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+
+    <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">1024</span><span class="p">))</span>
+            <span class="k">break</span>
+    <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;He had a liver failure too</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+
+    <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">1024</span><span class="p">))</span>
+            <span class="k">break</span>
+    <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The advantages of this approach is that you load the jar file only once and
+use it many times in a python program, thereby saving some computation!</p>
+</li>
+<li><p class="first">A more detailed explanation is available <a class="reference external" href="http://eyalarubas.com/python-subproc-nonblock.html">here</a> and <a class="reference external" href="https://gist.github.com/EyalAr/7915597">here</a>.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python</a><ul>
+<li><a class="reference internal" href="#anaconda-or-pip">Anaconda or Pip</a></li>
+<li><a class="reference internal" href="#multiprocessing">Multiprocessing</a></li>
+<li><a class="reference internal" href="#numpy">Numpy</a></li>
+<li><a class="reference internal" href="#python-http-requests">Python HTTP requests</a></li>
+<li><a class="reference internal" href="#sacred">Sacred</a></li>
+<li><a class="reference internal" href="#other-packages">Other Packages</a></li>
+<li><a class="reference internal" href="#calling-java-function-from-python-a-metamap-experience">Calling Java function from Python - A MetaMap Experience</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Operating-Systems.html" title="previous chapter">Operating Systems</a></li>
+      <li>Next: <a href="UIMA.html" title="next chapter">UIMA</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Python.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Nikhil Pattisapu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Python.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
