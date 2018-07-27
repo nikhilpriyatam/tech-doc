@@ -44,14 +44,20 @@
 <ul class="simple">
 <li>To allow uploading PDFs and other kind of files in mediawiki, go to the folder
 and edit the following file <code class="code docutils literal notranslate"><span class="pre">/var/www/html/mediawiki/LocalSettings.php</span></code>
-Change [or write]  the following line.
-* <code class="code docutils literal notranslate"><span class="pre">$wgFileExtensions</span> <span class="pre">=</span> <span class="pre">array(</span> <span class="pre">'png',</span> <span class="pre">'gif',</span> <span class="pre">'jpg',</span> <span class="pre">'jpeg',</span> <span class="pre">'doc',</span> <span class="pre">'xls',</span> <span class="pre">'mpp',</span> <span class="pre">'pdf',</span> <span class="pre">'ppt',</span> <span class="pre">'tiff',</span> <span class="pre">'bmp',</span> <span class="pre">'docx',</span> <span class="pre">'xlsx',</span> <span class="pre">'pptx',</span> <span class="pre">'ps',</span> <span class="pre">'odt',</span> <span class="pre">'ods',</span> <span class="pre">'odp',</span> <span class="pre">'odg');</span></code>
-* <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/var/www/html/mediawiki/images/temp</span></code>
-* <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">777</span> <span class="pre">/var/www/html/mediawiki/images/</span></code></li>
+Change [or write]  the following line.<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">$wgFileExtensions</span> <span class="pre">=</span> <span class="pre">array(</span> <span class="pre">'png',</span> <span class="pre">'gif',</span> <span class="pre">'jpg',</span> <span class="pre">'jpeg',</span> <span class="pre">'doc',</span> <span class="pre">'xls',</span>
+<span class="pre">'mpp',</span> <span class="pre">'pdf',</span> <span class="pre">'ppt',</span> <span class="pre">'tiff',</span> <span class="pre">'bmp',</span> <span class="pre">'docx',</span> <span class="pre">'xlsx',</span> <span class="pre">'pptx',</span> <span class="pre">'ps',</span> <span class="pre">'odt',</span>
+<span class="pre">'ods',</span> <span class="pre">'odp',</span> <span class="pre">'odg');</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/var/www/html/mediawiki/images/temp</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">777</span> <span class="pre">/var/www/html/mediawiki/images/</span></code></li>
+</ul>
+</li>
 <li>To increase the permissible file upload in mediawiki, change the following
-file <code class="code docutils literal notranslate"><span class="pre">/etc/php.ini</span></code>
-* <code class="code docutils literal notranslate"><span class="pre">upload_max_filesize</span> <span class="pre">=</span> <span class="pre">20M</span></code>
-* <code class="code docutils literal notranslate"><span class="pre">post_max_size</span> <span class="pre">=</span> <span class="pre">80M</span></code></li>
+file <code class="code docutils literal notranslate"><span class="pre">/etc/php.ini</span></code><ul>
+<li><code class="code docutils literal notranslate"><span class="pre">upload_max_filesize</span> <span class="pre">=</span> <span class="pre">20M</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">post_max_size</span> <span class="pre">=</span> <span class="pre">80M</span></code></li>
+</ul>
+</li>
 <li>Use <code class="code docutils literal notranslate"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></code> for inserting newline characters</li>
 </ul>
 </div>
@@ -108,7 +114,7 @@ file <code class="code docutils literal notranslate"><span class="pre">/etc/php.
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
   </body>
 </html>

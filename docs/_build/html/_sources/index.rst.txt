@@ -8,6 +8,7 @@ Topics
 .. toctree::
    :maxdepth: 1
 
+   How-to-create-this-site.rst
    Android.rst
    Brat.rst
    IRE.rst
@@ -16,7 +17,6 @@ Topics
    Latex.rst
    Git.rst
    Deep-Learning.rst
-   Brat.rst
    DB-and-SQL.rst
    MetaMap.rst
    Music-Processing.rst

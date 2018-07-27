@@ -48,7 +48,7 @@
 <li>Install a 3rd Party Jar in Maven<ul>
 <li>Go to the main folder of the project containing th “pom.xml” file and
 execute the following command</li>
-<li><code class="code docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">install:install-file</span> <span class="pre">-Dfile=path-to-file</span> <span class="pre">-DgroupId=group-id</span>
+<li><code class="code docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">install:install-file</span> <span class="pre">-Dfile=path-to-file</span> <span class="pre">-DgroupId=group-id</span> <span class="pre">\</span>
 <span class="pre">-DartifactId=artifact-id</span> <span class="pre">-Dversion=version</span> <span class="pre">-Dpackaging=packaging</span></code></li>
 </ul>
 </li>
@@ -60,7 +60,7 @@ file above v2.5 of maven-install-plugin]</li>
 <li><code class="code docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">clean</span></code></li>
 <li><code class="code docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">compile</span></code></li>
 <li><code class="code docutils literal notranslate"><span class="pre">screen</span> <span class="pre">mvn</span> <span class="pre">exec:java</span>
-<span class="pre">-Dexec.mainClass=&quot;in.iiith.siel.data_processing.FilterTweetsSolrQueries&quot;</span>
+<span class="pre">-Dexec.mainClass=&quot;in.iiith.siel.data_processing.FilterTweetsSolrQueries&quot;</span> <span class="pre">\</span>
 <span class="pre">-Dexec.args=&quot;arg1</span> <span class="pre">arg2</span> <span class="pre">arg3&quot;</span></code></li>
 </ul>
 </li>
@@ -121,7 +121,7 @@ memory, in Maven]</li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
   </body>
 </html>

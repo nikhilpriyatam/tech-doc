@@ -10,7 +10,7 @@ Maven
   * Go to the main folder of the project containing th "pom.xml" file and
     execute the following command
 
-  * :code:`mvn install:install-file -Dfile=path-to-file -DgroupId=group-id
+  * :code:`mvn install:install-file -Dfile=path-to-file -DgroupId=group-id \
     -DartifactId=artifact-id -Dversion=version -Dpackaging=packaging`
 
 * :code:`mvn install:install-file -Dfile=path-to-file -DpomFile=path-to-pomfile`
@@ -24,7 +24,7 @@ Maven
   * :code:`mvn clean`
   * :code:`mvn compile`
   * :code:`screen mvn exec:java
-    -Dexec.mainClass="in.iiith.siel.data_processing.FilterTweetsSolrQueries"
+    -Dexec.mainClass="in.iiith.siel.data_processing.FilterTweetsSolrQueries" \
     -Dexec.args="arg1 arg2 arg3"`
 
 * :code:`export MAVEN_OPTS="-Xms1G -Xmx25G -XX:PermSize=1G"` [To set the JVM

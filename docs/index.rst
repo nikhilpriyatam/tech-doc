@@ -8,6 +8,7 @@ Topics
 .. toctree::
    :maxdepth: 1
 
+   How-to-create-this-site.rst
    Android.rst
    Brat.rst
    IRE.rst
