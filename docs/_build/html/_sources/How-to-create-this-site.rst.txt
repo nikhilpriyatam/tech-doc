@@ -49,3 +49,4 @@ Additional Information
 * If you want to run a local instance of Read the docs, please follow `this
   page <http://read-the-docs.readthedocs.io/en/latest/install.html>`_
 * Here is a good `starting point <https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#inline-markup-and-special-characters-e-g-bold-italic-verbatim>`_ to understand the syntax of reStructuredText and Sphinx. Here, you will also find how to write nice documentation for your python code.
+* Another `resource <https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/#id1>`_ which explains what to write in your technical documentation.

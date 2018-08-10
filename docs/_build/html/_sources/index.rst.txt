@@ -10,23 +10,24 @@ Topics
 
    How-to-create-this-site.rst
    Android.rst
+   Apache-Server.rst
    Brat.rst
+   DB-and-SQL.rst
+   Deep-Learning.rst
+   Git.rst
+   GNU_Screen.rst
    IRE.rst
    IDE.rst
-   Apache-Server.rst
-   Latex.rst
-   Git.rst
-   Deep-Learning.rst
-   DB-and-SQL.rst
-   MetaMap.rst
-   Music-Processing.rst
-   Solr.rst
    Java.rst
+   Latex.rst
    Maven.rst
    MediaWiki.rst
+   MetaMap.rst
+   Music-Processing.rst
    Nutch.rst
    Operating-Systems.rst
    Python.rst
+   Solr.rst
    UIMA.rst
    UMLS.rst
 
