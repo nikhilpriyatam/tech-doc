@@ -200,7 +200,12 @@ Git Commands
         you have merged in your current branch.
       * `git branch --no-merged [optional_branch_name]` - List all branches
         which are not yet merged into your current branch.
-      * `git branch -u <remote_name>/<branch_name>` - 
+      * `git branch -u <remote_name>/<branch_name>` - Make the current branch
+        track an upstream branch on remote server. 
+      * `git branch -u <remote_name>/<branch_name> <local_branch_name>` - This
+        command will cause the `<local_branch>` to track the upstream branch
+        `<remote_name>/<branch_name>`
+        track an upstream branch on remote server. 
       * `git branch -vv` - To list all tracking branches that you have setup.
 
 
