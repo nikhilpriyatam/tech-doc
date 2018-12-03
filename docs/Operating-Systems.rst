@@ -58,6 +58,14 @@ Ubuntu
   * :code:`sudo apt-key adv --keyserver-options http-proxy=$http_proxy
     * --keyserver keyserver.ubuntu.com --recv 82EB5823F4FE239D`
 
+* Fresh install of Ubuntu 18.04.1: Was facing a lot of trouble connecting to internet. "WiFi adapter not found"
+
+  * As per my understandin, the problem was WiFi drivers were missing.
+  * Went to BIOS and confirmed that my WiFi device is AP6212/6255
+  * Upon searching the web, I've understood that it has something to do with bcm 43455
+  * I followed the solution in this link https://askubuntu.com/questions/1003350/bcm43455-pcie-wireless-adapter-not-recognised
+  * Another popular solution was `sudo apt install --reinstall bcmwl-kernel-source` (It did not work in my case) 
+
 General
 -------
 

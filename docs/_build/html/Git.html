@@ -9,14 +9,16 @@
     <title>Git &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deep Learning" href="Deep-Learning.html" />
-    <link rel="prev" title="LaTeX" href="Latex.html" /> 
+    <link rel="next" title="GNU Screen" href="GNU_Screen.html" />
+    <link rel="prev" title="Deep Learning" href="Deep-Learning.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,10 +27,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Deep-Learning.html" title="Deep Learning"
+          <a href="GNU_Screen.html" title="GNU Screen"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="Latex.html" title="LaTeX"
+          <a href="Deep-Learning.html" title="Deep Learning"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
       </ul>
@@ -41,41 +43,313 @@
             
   <div class="section" id="git">
 <h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="git-introduction-and-other-vcs">
+<h2>Git Introduction and other VCS<a class="headerlink" href="#git-introduction-and-other-vcs" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>To do git pull while ignoring local changes, do the following:<ul>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></li>
+<li>Git is a powerful tool for distributed version control system.</li>
+<li>The major difference between git and other VCS systems is the way they think
+about “data”. Most VCS store information as a list of file-based changes
+which is commonly known as delta-based version control. Git thinks of data as
+a series of snapshots. Each time you commit, git<ul>
+<li>saves the state of your project - Basically, takes a picture of what all
+your files look like at that moment and stores a reference to that snaphot</li>
+<li>To be efficient, if files have not changed, Git doesn’t store that file
+again, just a link to previous identical file it has already stored.</li>
 </ul>
 </li>
-<li>Usual commands that I use to push to a git repository<ul>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> [If not done before]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> [Add all the files, changes]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Some</span> <span class="pre">commit</span> <span class="pre">message</span> <span class="pre">here&quot;</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code></li>
-</ul>
+<li>When you do actions in git, you only add data to the git database.</li>
+<li>For the files tracked by git, it has three states where your file can reside
+in<ol class="arabic">
+<li>Committed - i.e. Your data is safely stored in local DB</li>
+<li>Modified - i.e. you have changed the file but not yet committed it to DB.</li>
+<li>Staged - i.e. you have marked a modified file in its current version to go
+into your next commit.</li>
+</ol>
 </li>
-<li>To access previous versions in git you can use git checkout command.</li>
-<li>To see git commit history - <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></li>
-<li>Usual command is git checkout commit_key</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">--work-tree=/Users/nikhilpattisapu/test</span> <span class="pre">checkout</span> <span class="pre">33652e3da1da6dc8de7b731edebd9e96ad5aafae</span> <span class="pre">--</span> <span class="pre">.</span></code> [To checkout the previous commit into a different folder]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">ls-files</span></code>  [Show information about files in the index and the working tree]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span> <span class="pre">sha_commit_id</span></code> [To rollback to a previous commit]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">folder_name</span></code> [To remove files that were earlier tracked by git]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> [To view information associated with remote repositories]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">short_name</span> <span class="pre">url</span></code> [To add a new remote Git repository as a short name. Usually, we use origin as a short name.]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">remove</span> <span class="pre">short_name</span></code> [To remove a remote repository]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">origin</span> <span class="pre">master</span></code> . Ignores everything on remote repository and forcefully pushes the local stuff on remote.<ul>
-<li>If you get error of the kind “You are not allowed to force push code to a protected branch on this project”.</li>
-<li>Then go to the remote repository (gitlab / github).</li>
-<li>Go to Project Settings –&gt; Protected Branches –&gt; Unprotect.</li>
-<li>Re-execute the command and again protect the master branch by undoing the mentioned process”</li>
 </ul>
+</div>
+<div class="section" id="git-configuration">
+<h2>Git Configuration<a class="headerlink" href="#git-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Git configuration can be stored in three different places</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>/etc/gitconfig - Values applied to all users on the system (Use –system
+toption with <cite>git config</cite>)</li>
+<li>~/.gitconfig or ~/.config/git/config - Values specific to a user (Use
+–global option with <cite>git config</cite>)</li>
+<li>.git/config file of your repository - Repository specific configuration.
+(Use –local option with <cite>git config</cite>, it is the default)</li>
+</ol>
+</div></blockquote>
+<p>Each level overrides values in previous levels. Use <cite>git config –list</cite> to see
+the list of current configurations.</p>
+</div>
+<div class="section" id="git-commands">
+<h2>Git Commands<a class="headerlink" href="#git-commands" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first"><cite>git add &lt;something&gt;</cite> tracks files</p>
 </li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">http.proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code> [To make git work behind proxy use the following (IIIT Proxy)]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--unset</span> <span class="pre">http.proxy</span></code> [To unest proxy]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--get</span> <span class="pre">http.proxy</span></code> [To check the proxy]</li>
-<li>To include only “few specified files and directories” use the similar structure for <code class="code docutils literal notranslate"><span class="pre">.gitignore</span></code> as described below</li>
+<li><p class="first"><cite>git commit -m “&lt;some-message-here&gt;”</cite></p>
+</li>
+<li><p class="first"><cite>git clone &lt;url&gt;</cite> - Downloads a snashopt and does a checkout</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git clone &lt;url&gt; &lt;folder_name&gt;</cite> - Clone the repo into <cite>folder_name</cite></li>
+<li><cite>git clone /path/to/a/git/repo/project.git</cite> or <cite>git clone
+file:///path/to/git/repo/project.git</cite> Clone locally</li>
 </ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git status</cite> - Tool to find which files are in which state
+<cite>git status –short</cite> or <cite>git status -s</cite> for crisp output</p>
+</li>
+<li><p class="first"><cite>git diff</cite> - To see what have you changed but not yet staged? What have you
+staged that you are about to commit.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git diff</cite> - Compares what is in your working directory with what is
+there in your staging area. The result tells you the changes you have
+made that you haven’t yet staged.</li>
+<li><cite>git diff –staged</cite> or <cite>git diff –cached</cite> - What you have staged that
+will go into next commit.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git commit</cite> - Commit changes to local DB. The default commit message
+contains the latest output of <cite>git status</cite>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git commit -v</cite> - To see the diff of your change in the editor. These
+are just for viewing, finally, git strips the comments and the diff.</li>
+<li><cite>git commit -m &lt;custom-message&gt;</cite> Inline commit message.</li>
+<li><cite>git commit -a</cite> - Automatically stage every file tracked before and
+commit letting you skip the <cite>git add</cite> part. Be careful, sometimes this
+flag will cause you to include unwanted changes.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git rm &lt;file-name&gt;</cite> - Removes your file from working directory as well as
+staging area.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git rm &lt;dir_name&gt;/*.log</cite> - Remove directories.</li>
+<li><cite>git rm -f &lt;file-name&gt;</cite> - Forcefully removes the file from working
+directory as well as staging area. It is to be used when the file
+<cite>file-name</cite> is in modified state.</li>
+<li><cite>git rm –cached &lt;file-name&gt;</cite> - Keep the file on disk but remove it from
+tracked files. This is particularly useful if you forgot to add some
+unwanted file to .gitignore</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git mv &lt;file-from&gt; &lt;file-to&gt;</cite> - Rename a file</p>
+</li>
+<li><p class="first"><cite>git log</cite> - View commit history in reverse chronological order (most recent
+commit first)</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git log -p -2</cite> or <cite>git log –patch -2</cite> - Shows the difference
+introduced in each commit. You can also limit the number of log entries
+displayed.</li>
+<li><cite>git log –stat</cite> - To see some abbreviated statistics for each commit.</li>
+<li><cite>git log –pretty=online</cite> - To show outputs in different formats with
+varying levels of information. <cite>Oneline</cite> gives one line per commit.
+Other useful options are <cite>short</cite>, <cite>full</cite>, <cite>fuller</cite> and <cite>format</cite>.</li>
+<li><cite>git log –since=2.weeks</cite> or <cite>git log –since=”2018-08-15”</cite> or <cite>git log
+–since=”2 years 1 day 3 minutes ago”</cite></li>
+<li><cite>git log –author=&lt;author-name&gt;</cite> - Shows the commits of <cite>&lt;author-name&gt;</cite>
+only.</li>
+<li><cite>git log –grep=&lt;patterns&gt;</cite> - Shows commits containing these patterns.</li>
+<li><cite>git log -S &lt;some-string&gt;</cite> - Shows only those commits that changed the
+number of occurrences of that string (<cite>&lt;some-string&gt;</cite>)</li>
+<li><cite>git log –oneline  –decorate –graph –all</cite> - Shows various git
+branches and how they are connected through commits.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git commit –amend</cite> - Takes your staging area and uses it for the commit.
+This is to be used when you have committed “too early” and want to
+introduce few more changes to the exact same commit. You should use this
+option for small changes only (i.e. of the type “oops forgot to add this
+file” or “fixed a typo.”)</p>
+</li>
+<li><p class="first"><cite>git reset HEAD &lt;file&gt;</cite> - To unstage a staged file.</p>
+</li>
+<li><p class="first"><cite>git checkout – &lt;file&gt;</cite>- To unmodify a modified file, i.e. to revert the
+file back to what it looked like when you last committed. Note that this is
+a dangerous command as it changes your working directory. Any changes in
+the modified file are lost and cannot be recovered.</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><cite>git checkout -b &lt;branch_name&gt; &lt;tag_name&gt;</cite> - To checkout a particular
+tagged version into a new branch.</p>
+</li>
+<li><p class="first"><cite>git checkout -b &lt;branch_name&gt;</cite> - To create a new branch and switch to
+that branch.</p>
+</li>
+<li><p class="first"><cite>git checkout &lt;branch_name&gt;</cite> - Goes to that branch. Note: changes your
+working directory.</p>
+</li>
+<li><p class="first"><cite>git checkout –track &lt;remote_name&gt;/&lt;branch_name&gt;</cite> - Create and switch
+to a local branch <cite>&lt;branch_name&gt;</cite> which tracks
+<cite>&lt;remote_name&gt;/&lt;branch_name&gt;</cite>.</p>
+</li>
+<li><p class="first"><cite>git checkout &lt;branch_name&gt;</cite> - Does the same thing as <cite>git checkout
+–track &lt;remote_name&gt;/&lt;branch_name&gt;</cite> there are two conditions</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>&lt;branch_name&gt;</cite> does not exist locally.</li>
+<li>Exactly matches the name on only one remote.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git checkout -b &lt;local_branch_name&gt; &lt;remote_name&gt;/&lt;server_branch_name&gt;</cite>
+- The <cite>&lt;local_branch_name&gt;</cite> now tracks <cite>&lt;server_branch_name&gt;</cite></p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git remote</cite> - Shows the list of remotes.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git remote -v</cite> - Shows the list of remotes along with their URLs</li>
+<li><cite>git remote add &lt;remote_name&gt; &lt;remote_url&gt;</cite> - To add a new remote</li>
+<li><cite>git remote show &lt;remote_name&gt;</cite> - To see more information about a
+particular remote, including all the remote branches.</li>
+<li><cite>git remote rename &lt;remote_name_old&gt; &lt;remote_name_new&gt;</cite> to rename a
+remote. Therefore <cite>remote_name_old/master</cite> branch now becomes
+<cite>remote_name_new/master</cite></li>
+<li><cite>git remote add &lt;local_proj_name&gt; &lt;/path/to/local/repo/project.git&gt;</cite></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git fetch &lt;remote_name&gt; [branch_name]</cite> - Fetch all information that remote
+<cite>&lt;remote_name&gt;</cite> has but you don’t. <cite>&lt;remote_name&gt;</cite>’s <cite>branch_name</cite> branch
+is available locally at <cite>&lt;remote_name&gt;/&lt;branch_name&gt;</cite>, you can merge it
+into one of your local branches or you can checkout a local branch if you
+want to inspect it.</p>
+</li>
+<li><p class="first"><cite>git push &lt;remote_name&gt; &lt;branch_name&gt;</cite> Push your local branch to remote.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git push &lt;remote_name&gt; &lt;tag_name&gt;</cite> - To push tags to the shared
+servers</li>
+<li><cite>git push &lt;remote_name&gt; –tags</cite> - To push all the tags that are not yet
+there on the server.</li>
+<li><cite>git push &lt;remote_name&gt; &lt;branch_name&gt;</cite> - Push local branch
+<cite>branch_name</cite> to remote server’s <cite>remote_name:branch_name</cite>.</li>
+<li><cite>git push &lt;remote_name&gt; &lt;local_branch_name:server_branch_name&gt;</cite></li>
+<li><cite>git push &lt;remote_name&gt; –delete &lt;branch_name&gt;</cite> - To delete a remote
+branch.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git pull &lt;remote&gt;</cite> - Fetch from remote and merge it in current branch</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git pull –rebase</cite></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git tag</cite> - List all available tags.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git tag -l “v1.8.5”</cite> - List tags containing v1.8.5.</li>
+<li><cite>git tag -a &lt;tag_name&gt; -m “your message”</cite> - Creates an annotated tag.</li>
+<li><cite>git tag -a &lt;tag_name&gt; &lt;commit_checksum&gt;</cite> - Tag one of the previous
+commits.</li>
+<li><cite>git tag &lt;tag_name&gt;</cite> - Create a lightweight tag (just like a branch, its
+a pointer to latest commit)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git show &lt;tag_name&gt;</cite> - Show information about the particular tag.</p>
+</li>
+<li><p class="first"><cite>git branch</cite> - Shows the list of branches in the current repo, also the
+current branch</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git branch &lt;branch_name&gt;</cite> - Create a new branch</li>
+<li><cite>git branch -d &lt;branch_name&gt;</cite> - Deletes the particular branch. To be
+used for branches which are already merged with others.</li>
+<li><cite>git branch -D &lt;branch_name&gt;</cite> - Delete a branch even if the work in
+that branch isn’t merged anywhere.</li>
+<li><cite>git branch -r</cite> - To see the list of remote branches.</li>
+<li><cite>git branch -v</cite> - To see the last commit on each branch.</li>
+<li><cite>git branch –merged [optional_branch_name]</cite> - List all branches that
+you have merged in your current branch.</li>
+<li><cite>git branch –no-merged [optional_branch_name]</cite> - List all branches
+which are not yet merged into your current branch.</li>
+<li><cite>git branch -u &lt;remote_name&gt;/&lt;branch_name&gt;</cite> - Make the current branch
+track an upstream branch on remote server.</li>
+<li><cite>git branch -u &lt;remote_name&gt;/&lt;branch_name&gt; &lt;local_branch_name&gt;</cite> - This
+command will cause the <cite>&lt;local_branch&gt;</cite> to track the upstream branch
+<cite>&lt;remote_name&gt;/&lt;branch_name&gt;</cite>
+track an upstream branch on remote server.</li>
+<li><cite>git branch -vv</cite> - To list all tracking branches that you have setup.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git merge &lt;branch_name&gt;</cite> - Merge the <cite>branch_name</cite> into the current
+branch. Manually resolve conflicts (if any)</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git merge &lt;remote_name&gt;/&lt;branch_name&gt;</cite> - Merge the remote branch into
+current working branch.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><cite>git rebase &lt;branch_name&gt;</cite> - Play the changes of <cite>&lt;branch_name&gt;</cite> to your
+current branch.</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>git rebase &lt;base_branch&gt; &lt;topic_branch&gt;</cite> - checks out <cite>topic_branch</cite>
+and replay it on <cite>base_branch</cite>. Note that the <cite>topic_branch</cite>’s pointer
+moves forward and NOT <cite>base_branch</cite>’s pointer.</li>
+<li><cite>git rebase –onto &lt;branch1&gt; &lt;branch2&gt; &lt;branch3&gt;</cite> - Take <cite>branch3</cite>,
+figure out the patches since it diverged from <cite>branch2</cite>, replay these
+patches in <cite>branch3</cite> as if it was based directly off <cite>branch1</cite></li>
+<li>TIP 1: Do not rebase commits that exist outside your repository.</li>
+<li>TIP 2: Rebase local changes you’ve made but haven’t shared yet before
+you push them in order to clean up your story. Rebase your stuff before
+it is shared.</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="git-ignore">
+<h2>Git Ignore<a class="headerlink" href="#git-ignore" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Ignore any files ending with “.o” or “.a”
+<cite>*.[oa]</cite></li>
+<li>Ignore files ending with “.a” except lib.a
+<cite>*.a</cite>
+<cite>!lib.a</cite></li>
+<li>Ignore TODO file in current directory (not subdirectories). Begin patterns
+with forward slash are used to avoid recursivity
+<cite>/TODO</cite></li>
+<li>Ignore all files in build directory. End patterns with backward slash to
+specify a directory
+<cite>build/</cite></li>
+<li>Ignore .txt files in doc folder
+<cite>doc/*.txt</cite></li>
+<li>Ignore all pdf files in <cite>doc/</cite> directory or any of its subdirectories.
+<cite>doc/**/*.pdf</cite></li>
+<li>More info &#64; <a class="reference external" href="https://github.com/github/gitignore">Sample .gitignore files</a></li>
+<li>Default behaviour is to have one .gitignore file per repo. But you can have
+one per folder.  The rules of nested .gitignore files apply only to the files
+under the directory where they are located. The linux kernel source
+repository has 206 .gitignore files!</li>
+</ul>
+</div>
+<div class="section" id="git-on-server">
+<h2>Git on Server<a class="headerlink" href="#git-on-server" title="Permalink to this headline">¶</a></h2>
+<p>A remote repository is a bare repo that has no working directory. It is only
+used as a collaboration point, there is no reason to have a snapshot checked
+out on disk. In short, a bare repository is the contents of .git directory and
+nothing else.</p>
+</div>
 </div>
 
 
@@ -84,12 +358,24 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Git</a><ul>
+<li><a class="reference internal" href="#git-introduction-and-other-vcs">Git Introduction and other VCS</a></li>
+<li><a class="reference internal" href="#git-configuration">Git Configuration</a></li>
+<li><a class="reference internal" href="#git-commands">Git Commands</a></li>
+<li><a class="reference internal" href="#git-ignore">Git Ignore</a></li>
+<li><a class="reference internal" href="#git-on-server">Git on Server</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="Latex.html"
-                        title="previous chapter">LaTeX</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="Deep-Learning.html"
-                        title="next chapter">Deep Learning</a></p>
+                        title="previous chapter">Deep Learning</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="GNU_Screen.html"
+                        title="next chapter">GNU Screen</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -120,17 +406,17 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Deep-Learning.html" title="Deep Learning"
+          <a href="GNU_Screen.html" title="GNU Screen"
              >next</a> |</li>
         <li class="right" >
-          <a href="Latex.html" title="LaTeX"
+          <a href="Deep-Learning.html" title="Deep Learning"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>
