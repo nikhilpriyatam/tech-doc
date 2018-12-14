@@ -9,12 +9,16 @@
     <title>GNU Screen &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Useful concepts from IRE" href="IRE.html" />
+    <link rel="prev" title="Git" href="Git.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -22,6 +26,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="IRE.html" title="Useful concepts from IRE"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Git.html" title="Git"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
       </ul>
     </div>  
@@ -86,6 +96,21 @@ useful commands and functionalities.</p>
 </tr>
 </tbody>
 </table>
+<ul class="simple">
+<li>Initially, I found some issues with background color of the shell and
+background color of vim, i.e they were looking different when opened inside
+GNU screen. Fix for that is very simple<ul>
+<li>Install the latest version (Version 4.99.0). More instructions are provided
+<a class="reference external" href="https://stackoverflow.com/questions/6787734/strange-behavior-of-vim-color-inside-screen-with-256-colors">here</a></li>
+<li>Ensure that $TERM points to xterm-256color (Include it in ~/.bashrc also in
+~/.screenrc or ~/.bash_profile)</li>
+<li>Remember that if your $TERM is not pointing to xterm-256color and you ssh
+into another machine and then run screen on that machine, you will still
+see the colors differently. Therefore remember to set the $TERM variable
+almost everywhere</li>
+</ul>
+</li>
+</ul>
 </div>
 
 
@@ -94,6 +119,12 @@ useful commands and functionalities.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Git.html"
+                        title="previous chapter">Git</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="IRE.html"
+                        title="next chapter">Useful concepts from IRE</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -123,12 +154,18 @@ useful commands and functionalities.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="IRE.html" title="Useful concepts from IRE"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Git.html" title="Git"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
     </div>
   </body>
 </html>

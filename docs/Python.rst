@@ -1,6 +1,14 @@
 Python
 ======
 
+Use Ipython inside a Python Program
+-----------------------------------
+
+To inspect variables in a python script (which takes long to run), you can insert the following lines in your code to start an ipython kernel.
+
+`from IPython import embed`
+`embed() # Place this line somewhere in your program`
+
 Anaconda or Pip
 ---------------
 * Always use python provided by Anaconda (Do not use the default python provided

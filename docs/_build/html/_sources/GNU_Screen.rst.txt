@@ -37,4 +37,16 @@ useful commands and functionalities.
 +----------------------------------------+----------------------------------------------------+
 
 
+* Initially, I found some issues with background color of the shell and
+  background color of vim, i.e they were looking different when opened inside
+  GNU screen. Fix for that is very simple
+
+  * Install the latest version (Version 4.99.0). More instructions are provided
+    `here <https://stackoverflow.com/questions/6787734/strange-behavior-of-vim-color-inside-screen-with-256-colors>`_
+  * Ensure that $TERM points to xterm-256color (Include it in ~/.bashrc also in
+    ~/.screenrc or ~/.bash_profile)
+  * Remember that if your $TERM is not pointing to xterm-256color and you ssh
+    into another machine and then run screen on that machine, you will still
+    see the colors differently. Therefore remember to set the $TERM variable
+    almost everywhere
 
