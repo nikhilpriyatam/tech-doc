@@ -73,7 +73,7 @@ Multiprocessing
         lemma_dict[lemma] = len(lemma_dict) + 1
         pos_dict[word] = len(pos_dict) + 1
         l2.release()
-  
+
   * **Note**: The :code:`manager.dict()` are dummy dictionaries. You cannot dump
     them as simple pickle objects and expect to work like normal python
     dictionaries when you pickle-load them again!! Therefore, write a
@@ -101,7 +101,7 @@ Numpy
       cc = aa / bb # Raises divide by zero encountered exception
       np.isnan(cc).any() # Checks for Nan values in array.
       np.isinf(cc).any() # Checks for Inf values in array.
-    
+
 
 Python HTTP requests
 --------------------
@@ -165,7 +165,7 @@ I once had a necessity to call a java program with multiple inputs from a
 python program. I noticed few peculiar things that had to be done, which I
 am describing below 
 
-      .. code-block:: java
+.. code-block:: java
 
 	import java.util.ArrayList;
 	import java.util.List;
@@ -323,3 +323,10 @@ am describing below
   * A more detailed explanation is available `here
     <http://eyalarubas.com/python-subproc-nonblock.html>`__ and `here
     <https://gist.github.com/EyalAr/7915597>`__.
+
+
+Pickling in Python
+------------------
+
+* A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won't work: they have no individual names.
+
