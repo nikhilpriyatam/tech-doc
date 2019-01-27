@@ -18,65 +18,17 @@ Related link `here
 <https://stackoverflow.com/questions/34199233/how-to-prevent-tensorflow-from-allocating-the-totality-of-a-gpu-memory>`__
 
 
-Tensorflow
-----------
+Pre-trained Word Embeddings
+---------------------------
 
-* I was able to use the GPU on my mac by following instructions provided
-  `here <https://github.com/hughperkins/tf-coriander>`__.
-* Three types of variables :code:`Constants` (Once initialized, can never change, for
-  e.g. learning rate eta), :code:`Variables` (e.g. neural network Weights -
-  are not initialized until :code:`init = tf.global_variables_initializer()
-  sess.run(init)` is run) and :code:`Placeholders` (can be substituted with any
-  variable, like input x). Following are few examples::
-
-    import tensorflow as tf
-    const = tf.constant(0.1, shape=shape)
-    W = tf.Variable(tf.truncated_normal(shape, stddev=0.1))
-    x = tf.placeholder(tf.float32) # A placeholder is a promise to provide a
-    value later.
-
-* All the variables from :code:`numpy` must be converted to :code:`float32` as
-  :code:`float64` is not supported by tensorflow::
-    
-    mat = np.random.rand(4,4)
-    mat_tf = tf.cast(mat, tf.float32)
-
-* One of the important things in `tf` is `convolution layers`. The following is
-  a sample code on CNNs::
-    
-    # promise to provide value later
-    x = tf.placeholder(tf.float32, shape=(1024, 1024))
-    # Initialize weight matrix randomly with small values.
-    W = tf.Variable(tf.truncated_normal(shape, stddev=0.1)) 
-    conv_op = tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
-
-* For CNNs, we use convolution and max pool layers. For both, we use sliding
-  windows, which in turn requires a parameter of the type :code:`strides=[1, 1, 1,
-  1]`, the four integers represent the following :code:`[batch, height, width, channels]`.
-
-Server for Word2Vec Embeddings
-------------------------------
-
-* Loading w2v embeddings in python/keras programs takes a very long time. The
-  following is a nice work-around : Setup the word embeddings through API call
-  * Clone `word2vec-api <https://github.com/3Top/word2vec-api>`_ repository.
-  * Follow the instructions to *serve* the embeddings
-
-  * There are many things that you can do with the loaded embeddings like
-    finding most similar word to a word etc. But here I cover the most crucial
-    application - Given a word (in this case **the**) find its embedding::
-
-      import requests
-      import base64
-      import struct
-
-      req = requests.get('http://127.0.0.1:1234/word2vec/model?word=the')
-      bb = base64.b64decode(req.json())
-      emb = [item[0] for item in struct.iter_unpack('f', bb)]
-
+* Use Magnitude to obtain pre-trained word embeddings. Loads super fast
+* 
 
 PyTorch
 -------
+
+* Instead of moving a tensor to a GPU, one can instead create a tensor on GPU
+* If you use `ReLU` activation functions in the last layers, you are more likely to see `NaN` values while computing loss. Instead prefer `tanh`
 
 Gensim
 ------
