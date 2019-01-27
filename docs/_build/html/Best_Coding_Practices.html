@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Loops &#8212; Technical Documentation  documentation</title>
+    <title>Best Coding Practices &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -14,6 +14,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -41,175 +42,159 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <p>Here we list the best python coding practices which are relatively less known</p>
+  <div class="section" id="best-coding-practices">
+<h1>Best Coding Practices<a class="headerlink" href="#best-coding-practices" title="Permalink to this headline">¶</a></h1>
+<p>Here we list the best python coding practices which are relatively less known</p>
 <div class="section" id="loops">
-<h1>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h1>
+<h2>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">When using a <cite>for loop</cite> use enumerate function instead of incrementing a counter:</p>
-<dl class="docutils">
-<dt>for ix, item in enumerate(my_list):</dt>
-<dd><p class="first last"># ix represents index. It acts as a counter
-# item contains the value.</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+    <span class="c1"># ix represents index. It acts as a counter</span>
+    <span class="c1"># item contains the value.</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">When traversing through multiple lists of same size use <cite>zip</cite> function</p>
-<dl class="docutils">
-<dt>for itm_a, itm_b in zip(list_a, list_b):</dt>
-<dd><p class="first last"># itm_a contains the value of list_a
-# itm_b contains the value of list_b</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">itm_a</span><span class="p">,</span> <span class="n">itm_b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list_a</span><span class="p">,</span> <span class="n">list_b</span><span class="p">):</span>
+    <span class="c1"># itm_a contains the value of list_a</span>
+    <span class="c1"># itm_b contains the value of list_b</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">If you want to loop backwards, use <cite>reversed</cite> function:</p>
-<dl class="docutils">
-<dt>for color in reversed(colors):</dt>
-<dd><p class="first last">print(color)</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">Suppose you want to use a <cite>for loop</cite> with <cite>break</cite> statement. You could check whether the loop ran completely by using an else statement:</p>
-<dl class="docutils">
-<dt>for item in my_list:</dt>
-<dd><dl class="first last docutils">
-<dt>if item == ‘something’:</dt>
-<dd><p class="first last">print(“Item found”)
-break</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p># This else acts like if no-break occured. No need to use extra variables.
-else:</p>
-<blockquote>
-<div><p>print(“The loop did not break”)</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="s1">&#39;something&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Item found&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+
+<span class="c1"># This else acts like if no-break occured. No need to use extra variables.</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The loop did not break&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </div>
 <div class="section" id="dictionaries">
-<h1>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h1>
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">Suppose you wanted to obtain the value corresponding to a key in a dictionary, use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># No error even if the key is not present in the dictionary.</span>
+<span class="n">my_val</span> <span class="o">=</span> <span class="n">my_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;my_key&#39;</span><span class="p">,</span> <span class="s1">&#39;my_default_val&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>my_val = my_dict.get(‘my_key’, ‘my_default_val’)</p>
 </li>
 <li><p class="first">You could contruct a dictionary from pairs using <cite>zip</cite> and <cite>dict</cite> constructor:</p>
-<p>names = [‘nikhil’, ‘aparnna’]
-ages = [‘29’, ‘24’]</p>
-<p>d = dict(zip(names, ages))</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nikhil&#39;</span><span class="p">,</span> <span class="s1">&#39;aparnna&#39;</span><span class="p">]</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;29&#39;</span><span class="p">,</span> <span class="s1">&#39;24&#39;</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">))</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">Counting with dictionary. Suppose you had a list with repeating items and you had to count the number of occurrences of each item. The simplest way is to use the following:</p>
-<p>colors = [‘red’, ‘green’, ‘red’, ‘blue’, ‘green’, ‘red’]
-d = {}
-for color in colors:</p>
-<blockquote>
-<div><p>d[color] = d.get(color, 0) + 1</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">We could use <cite>defaultdict</cite> instead of plain <cite>dict</cite> from python if we know the type of values being stored. Suppose I know that my values are integers, like the code above, I could write the following code:</p>
-<p>from collections import defaultdict
-colors = [‘red’, ‘green’, ‘red’, ‘blue’, ‘green’, ‘red’]
-d = defaultdict(int) # default value of int is 0
-for color in colors:</p>
-<blockquote>
-<div><p>d[color] += 1 # defaultdict never raises a KeyError</p>
-</div></blockquote>
-<p># ice_cream = defaultdict(lambda: ‘Vanilla’) &lt;– Assigning a function object to the defaultdict</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># default value of int is 0</span>
+<span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># defaultdict never raises a KeyError</span>
+
+<span class="c1"># ice_cream = defaultdict(lambda: &#39;Vanilla&#39;) &lt;-- Assigning a function object to the defaultdict</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">You can also group a set of items in a list using a defaultdict. For instance:</p>
-<p>from collections import defaultdict
-names = [‘nikhil’, ‘aparnna’, ‘kameswari’, ‘vamsi’, ‘prasad’, ‘p.p.rao’]
-d = defaultdict(list) # The default value is an empty list</p>
-<dl class="docutils">
-<dt>for name in names:</dt>
-<dd><p class="first last">key = len(name) # Grouping the names based on their length
-d[key].append(name)</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nikhil&#39;</span><span class="p">,</span> <span class="s1">&#39;aparnna&#39;</span><span class="p">,</span> <span class="s1">&#39;kameswari&#39;</span><span class="p">,</span> <span class="s1">&#39;vamsi&#39;</span><span class="p">,</span> <span class="s1">&#39;prasad&#39;</span><span class="p">,</span> <span class="s1">&#39;p.p.rao&#39;</span><span class="p">]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="c1"># The default value is an empty list</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1"># Grouping the names based on their length</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </div>
 <div class="section" id="miscellaneous">
-<h1>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h1>
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">To exchange the values of two variables, do not use a third temporary variable. Instead use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is clean and easy to understand</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>x, y = y, x</p>
 </li>
 <li><p class="first">You can use an <cite>else</cite> statement even with <cite>try</cite> and <cite>except</cite> to execute statements there were no exceptions. Similarly, you can use <cite>finally</cite> to execute statements regardless of whether an exception occurred or not:</p>
-<dl class="docutils">
-<dt>try:</dt>
-<dd><p class="first last">print(int(‘x’))</p>
-</dd>
-<dt>except:</dt>
-<dd><p class="first last">print(‘Conversion Failed’)</p>
-</dd>
-</dl>
-<p># If no-except
-else:</p>
-<blockquote>
-<div><p>print(‘Conversion successful’)</p>
-</div></blockquote>
-<p># Always execute this statement.
-finally:</p>
-<blockquote>
-<div><p>print(‘Done’)</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conversion Failed&#39;</span><span class="p">)</span>
+
+<span class="c1"># If no-except</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conversion successful&#39;</span><span class="p">)</span>
+<span class="c1"># Always execute this statement.</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">You can also use only <cite>try</cite> and <cite>finally</cite> as follows:</p>
-<dl class="docutils">
-<dt>try:</dt>
-<dd><p class="first last">f = open(‘my_file.txt’)</p>
-</dd>
-</dl>
-<p># Contains the clean up code which needs to be executed even if an exception occurred.
-finally:</p>
-<blockquote>
-<div><p>f.close()</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_file.txt&#39;</span><span class="p">)</span>
+<span class="c1"># Contains the clean up code which needs to be executed even if an exception occurred.</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">While reading a text file we can use <cite>with</cite> statement with context, without having to close it manually:</p>
-<dl class="docutils">
-<dt>with open(‘my_file.txt’) as f:</dt>
-<dd><dl class="first last docutils">
-<dt>for line in f:</dt>
-<dd><p class="first last">print(line)</p>
-</dd>
-</dl>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_file.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">Always clarify function calls with keyword arguments:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bad way</span>
+<span class="n">twitter_search</span><span class="p">(</span><span class="s1">&#39;@obama&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Good way</span>
+<span class="n">twitter_search</span><span class="p">(</span><span class="s1">&#39;@obama&#39;</span><span class="p">,</span> <span class="n">retweets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">numtweets</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">popular</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>twitter_search(<a class="reference external" href="mailto:'&#37;&#52;&#48;obama">‘<span>&#64;</span>obama</a>’, False, 20, True)</p>
-<p># Good way
-twitter_search(<a class="reference external" href="mailto:'&#37;&#52;&#48;obama">‘<span>&#64;</span>obama</a>’, retweets=False, numtweets=20, popular=True)</p>
 </li>
 <li><p class="first">Always, return <cite>NamedTuple</cite> instead of plain <cite>Tuple</cite> as it is more informative:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bad way</span>
+<span class="k">def</span> <span class="nf">get_body_stats</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Good way</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
+<span class="k">def</span> <span class="nf">get_body_stats</span><span class="p">():</span>
+    <span class="n">BodyStats</span> <span class="o">=</span> <span class="n">namedTuple</span><span class="p">(</span><span class="s1">&#39;BodyStats&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">BodyStats</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>def get_body_stats():</dt>
-<dd><p class="first last">return (70, 6)</p>
-</dd>
-</dl>
-<p># Good way
-from collections import namedtuple
-def get_body_stats():</p>
-<blockquote>
-<div><p>BodyStats = namedTuple(‘BodyStats’, [‘weight’, ‘height’])
-return BodyStats(70, 6)</p>
-</div></blockquote>
 </li>
 </ul>
+</div>
 </div>
 
 
@@ -220,9 +205,12 @@ return BodyStats(70, 6)</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Loops</a></li>
+<li><a class="reference internal" href="#">Best Coding Practices</a><ul>
+<li><a class="reference internal" href="#loops">Loops</a></li>
 <li><a class="reference internal" href="#dictionaries">Dictionaries</a></li>
 <li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -271,7 +259,7 @@ return BodyStats(70, 6)</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>
