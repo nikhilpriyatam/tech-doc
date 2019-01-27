@@ -60,75 +60,19 @@ is the id of the free GPU (which you have to check manually using the command
 </ul>
 <p>Related link <a class="reference external" href="https://stackoverflow.com/questions/34199233/how-to-prevent-tensorflow-from-allocating-the-totality-of-a-gpu-memory">here</a></p>
 </div>
-<div class="section" id="tensorflow">
-<h2>Tensorflow<a class="headerlink" href="#tensorflow" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">I was able to use the GPU on my mac by following instructions provided
-<a class="reference external" href="https://github.com/hughperkins/tf-coriander">here</a>.</p>
-</li>
-<li><p class="first">Three types of variables <code class="code docutils literal notranslate"><span class="pre">Constants</span></code> (Once initialized, can never change, for
-e.g. learning rate eta), <code class="code docutils literal notranslate"><span class="pre">Variables</span></code> (e.g. neural network Weights -
-are not initialized until <code class="code docutils literal notranslate"><span class="pre">init</span> <span class="pre">=</span> <span class="pre">tf.global_variables_initializer()</span>
-<span class="pre">sess.run(init)</span></code> is run) and <code class="code docutils literal notranslate"><span class="pre">Placeholders</span></code> (can be substituted with any
-variable, like input x). Following are few examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="n">const</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1"># A placeholder is a promise to provide a</span>
-<span class="n">value</span> <span class="n">later</span><span class="o">.</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">All the variables from <code class="code docutils literal notranslate"><span class="pre">numpy</span></code> must be converted to <code class="code docutils literal notranslate"><span class="pre">float32</span></code> as
-<code class="code docutils literal notranslate"><span class="pre">float64</span></code> is not supported by tensorflow:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">mat_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">One of the important things in <cite>tf</cite> is <cite>convolution layers</cite>. The following is
-a sample code on CNNs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># promise to provide value later</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
-<span class="c1"># Initialize weight matrix randomly with small values.</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
-<span class="n">conv_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">conv2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;SAME&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">For CNNs, we use convolution and max pool layers. For both, we use sliding
-windows, which in turn requires a parameter of the type <code class="code docutils literal notranslate"><span class="pre">strides=[1,</span> <span class="pre">1,</span> <span class="pre">1,</span>
-<span class="pre">1]</span></code>, the four integers represent the following <code class="code docutils literal notranslate"><span class="pre">[batch,</span> <span class="pre">height,</span> <span class="pre">width,</span> <span class="pre">channels]</span></code>.</p>
-</li>
-</ul>
-</div>
-<div class="section" id="server-for-word2vec-embeddings">
-<h2>Server for Word2Vec Embeddings<a class="headerlink" href="#server-for-word2vec-embeddings" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">Loading w2v embeddings in python/keras programs takes a very long time. The
-following is a nice work-around : Setup the word embeddings through API call
-* Clone <a class="reference external" href="https://github.com/3Top/word2vec-api">word2vec-api</a> repository.
-* Follow the instructions to <em>serve</em> the embeddings</p>
-<ul>
-<li><p class="first">There are many things that you can do with the loaded embeddings like
-finding most similar word to a word etc. But here I cover the most crucial
-application - Given a word (in this case <strong>the</strong>) find its embedding:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">base64</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-
-<span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:1234/word2vec/model?word=the&#39;</span><span class="p">)</span>
-<span class="n">bb</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-<span class="n">emb</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">struct</span><span class="o">.</span><span class="n">iter_unpack</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">bb</span><span class="p">)]</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</li>
+<div class="section" id="pre-trained-word-embeddings">
+<h2>Pre-trained Word Embeddings<a class="headerlink" href="#pre-trained-word-embeddings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use Magnitude to obtain pre-trained word embeddings. Loads super fast</li>
+<li></li>
 </ul>
 </div>
 <div class="section" id="pytorch">
 <h2>PyTorch<a class="headerlink" href="#pytorch" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Instead of moving a tensor to a GPU, one can instead create a tensor on GPU</li>
+<li>If you use <cite>ReLU</cite> activation functions in the last layers, you are more likely to see <cite>NaN</cite> values while computing loss. Instead prefer <cite>tanh</cite></li>
+</ul>
 </div>
 <div class="section" id="gensim">
 <h2>Gensim<a class="headerlink" href="#gensim" title="Permalink to this headline">¶</a></h2>
@@ -180,8 +124,7 @@ the following code snippet:</p>
   <ul>
 <li><a class="reference internal" href="#">Deep Learning</a><ul>
 <li><a class="reference internal" href="#gpu">GPU</a></li>
-<li><a class="reference internal" href="#tensorflow">Tensorflow</a></li>
-<li><a class="reference internal" href="#server-for-word2vec-embeddings">Server for Word2Vec Embeddings</a></li>
+<li><a class="reference internal" href="#pre-trained-word-embeddings">Pre-trained Word Embeddings</a></li>
 <li><a class="reference internal" href="#pytorch">PyTorch</a></li>
 <li><a class="reference internal" href="#gensim">Gensim</a></li>
 </ul>

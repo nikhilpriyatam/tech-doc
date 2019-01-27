@@ -11,6 +11,7 @@ Topics
    How-to-create-this-site.rst
    Android.rst
    Apache-Server.rst
+   Best_Coding_Practices.rst
    Brat.rst
    DB-and-SQL.rst
    Deep-Learning.rst

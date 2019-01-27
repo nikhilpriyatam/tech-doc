@@ -219,169 +219,170 @@ persist python objects which are <strong>picklable</strong>.</p>
 <p>I once had a necessity to call a java program with multiple inputs from a
 python program. I noticed few peculiar things that had to be done, which I
 am describing below</p>
-<blockquote>
-<div><blockquote>
-<div><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>      import java.util.ArrayList;
+      import java.util.List;
+      import java.util.Scanner;
 
-<span class="kn">import</span> <span class="nn">org.json.simple.JSONObject</span><span class="o">;</span>
+      import org.json.simple.JSONObject;
 
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Ev</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Mapping</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.MetaMapApi</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.MetaMapApiImpl</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.PCM</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Result</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">gov.nih.nlm.nls.metamap.Utterance</span><span class="o">;</span>
+      import gov.nih.nlm.nls.metamap.Ev;
+      import gov.nih.nlm.nls.metamap.Mapping;
+      import gov.nih.nlm.nls.metamap.MetaMapApi;
+      import gov.nih.nlm.nls.metamap.MetaMapApiImpl;
+      import gov.nih.nlm.nls.metamap.PCM;
+      import gov.nih.nlm.nls.metamap.Result;
+      import gov.nih.nlm.nls.metamap.Utterance;
 
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CallMetaMapBatch</span>
-<span class="o">{</span>
+      public class CallMetaMapBatch
+      {
 
-        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;unchecked&quot;</span><span class="o">)</span>
-        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">metamapArgs</span><span class="o">)</span>
-        <span class="o">{</span>
+              @SuppressWarnings(&quot;unchecked&quot;)
+              public static void main(String[] metamapArgs)
+              {
 
-                <span class="k">if</span> <span class="o">(</span><span class="n">metamapArgs</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">2</span><span class="o">)</span>
-                <span class="o">{</span>
+                      if (metamapArgs.length != 2)
+                      {
 
-                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">metamapArgs</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
-                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Insufficient Arguments&quot;</span><span class="o">);</span>
-                        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+                              System.out.println(metamapArgs.length);
+                              System.out.println(&quot;Insufficient Arguments&quot;);
+                              System.exit(0);
 
-                <span class="o">}</span>
+                      }
 
-                <span class="n">MetaMapApi</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MetaMapApiImpl</span><span class="o">();</span>
-                <span class="n">api</span><span class="o">.</span><span class="na">setHost</span><span class="o">(</span><span class="n">metamapArgs</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
-                <span class="n">api</span><span class="o">.</span><span class="na">setPort</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">metamapArgs</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+                      MetaMapApi api = new MetaMapApiImpl();
+                      api.setHost(metamapArgs[0]);
+                      api.setPort(Integer.parseInt(metamapArgs[1]));
 
 
-                <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">theOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
-                <span class="n">api</span><span class="o">.</span><span class="na">setOptions</span><span class="o">(</span><span class="s">&quot;-y&quot;</span><span class="o">);</span> <span class="c1">// Use WSD</span>
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-A&quot;</span><span class="o">);</span> <span class="c1">// Use strict model</span>
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-K&quot;</span><span class="o">);</span> <span class="c1">// Ignore stop phrases</span>
+                      List&lt;String&gt; theOptions = new ArrayList&lt;String&gt;();
+                      api.setOptions(&quot;-y&quot;); // Use WSD
+                      theOptions.add(&quot;-A&quot;); // Use strict model
+                      theOptions.add(&quot;-K&quot;); // Ignore stop phrases
 
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-J&quot;</span><span class="o">);</span> <span class="c1">// Restrict to semantic types</span>
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;dsyn,sosy,topp,phsf,phsu,lbtr,lbpr,inpo,diap,clnd,bdsu,bdsy,blor,bpoc,bsoj,anst&quot;</span><span class="o">);</span> <span class="c1">// No space between arguments</span>
+                      theOptions.add(&quot;-J&quot;); // Restrict to semantic types
+                      theOptions.add(&quot;dsyn,sosy,topp,phsf,phsu,lbtr,lbpr,inpo,diap,clnd,bdsu,bdsy,blor,bpoc,bsoj,anst&quot;); // No space between arguments
 
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;-R&quot;</span><span class="o">);</span> <span class="c1">// Restrict to Sources</span>
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;SNOMEDCT_US,MEDLINEPLUS,MSH,ICD10CM&quot;</span><span class="o">);</span> <span class="c1">// No space between arguments</span>
+                      theOptions.add(&quot;-R&quot;); // Restrict to Sources
+                      theOptions.add(&quot;SNOMEDCT_US,MEDLINEPLUS,MSH,ICD10CM&quot;); // No space between arguments
 
-                <span class="c1">//theOptions.add(&quot;--cascade&quot;); // If the concept &quot;Logistic regression&quot; is excluded for some reason then &quot;regression&quot; will also be excluded.</span>
+                      //theOptions.add(&quot;--cascade&quot;); // If the concept &quot;Logistic regression&quot; is excluded for some reason then &quot;regression&quot; will also be excluded.
 
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;--prune&quot;</span><span class="o">);</span> <span class="c1">// Prune the candidates before</span>
-                <span class="n">theOptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;15&quot;</span><span class="o">);</span>
+                      theOptions.add(&quot;--prune&quot;); // Prune the candidates before
+                      theOptions.add(&quot;15&quot;);
 
-                <span class="c1">//theOptions.add(&quot;--cascade&quot;);</span>
-                <span class="n">api</span><span class="o">.</span><span class="na">setOptions</span><span class="o">(</span><span class="n">theOptions</span><span class="o">);</span>
-                <span class="n">Scanner</span> <span class="n">sc</span><span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+                      //theOptions.add(&quot;--cascade&quot;);
+                      api.setOptions(theOptions);
+                      Scanner sc=new Scanner(System.in);
 
-                <span class="k">while</span> <span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span>
-                <span class="o">{</span>
+                      while (sc.hasNextLine())
+                      {
 
-                        <span class="n">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
-                        <span class="n">List</span><span class="o">&lt;</span><span class="n">Result</span><span class="o">&gt;</span> <span class="n">resultList</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">processCitationsFromString</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
-                        <span class="k">for</span> <span class="o">(</span><span class="n">Result</span> <span class="n">result</span> <span class="o">:</span> <span class="n">resultList</span><span class="o">)</span>
-                        <span class="o">{</span>
+                              String text = sc.nextLine();
+                              List&lt;Result&gt; resultList = api.processCitationsFromString(text);
+                              for (Result result : resultList)
+                              {
 
-                                <span class="k">try</span>
-                                <span class="o">{</span>
+                                      try
+                                      {
 
-                                        <span class="k">for</span> <span class="o">(</span><span class="n">Utterance</span> <span class="n">utterance</span> <span class="o">:</span> <span class="n">result</span><span class="o">.</span><span class="na">getUtteranceList</span><span class="o">())</span>
-                                        <span class="o">{</span>
+                                              for (Utterance utterance : result.getUtteranceList())
+                                              {
 
-                                                <span class="k">for</span> <span class="o">(</span><span class="n">PCM</span> <span class="n">pcm</span><span class="o">:</span> <span class="n">utterance</span><span class="o">.</span><span class="na">getPCMList</span><span class="o">())</span>
-                                                <span class="o">{</span>
+                                                      for (PCM pcm: utterance.getPCMList())
+                                                      {
 
-                                                        <span class="k">for</span> <span class="o">(</span><span class="n">Mapping</span> <span class="n">map</span> <span class="o">:</span> <span class="n">pcm</span><span class="o">.</span><span class="na">getMappingList</span><span class="o">())</span>
-                                                        <span class="o">{</span>
+                                                              for (Mapping map : pcm.getMappingList())
+                                                              {
 
-                                                                <span class="k">for</span> <span class="o">(</span><span class="n">Ev</span> <span class="n">ev</span> <span class="o">:</span> <span class="n">map</span><span class="o">.</span><span class="na">getEvList</span><span class="o">())</span>
-                                                                <span class="o">{</span>
+                                                                      for (Ev ev : map.getEvList())
+                                                                      {
 
-                                                                        <span class="n">JSONObject</span> <span class="n">obj</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
-                                                                        <span class="kt">int</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="na">getPositionalInfo</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getX</span><span class="o">();</span>
-                                                                        <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">+</span> <span class="n">ev</span><span class="o">.</span><span class="na">getPositionalInfo</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getY</span><span class="o">();</span>
+                                                                              JSONObject obj =  new JSONObject();
+                                                                              int begin = ev.getPositionalInfo().get(0).getX();
+                                                                              int end = begin + ev.getPositionalInfo().get(0).getY();
 
-                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ConceptBegin&quot;</span><span class="o">,</span> <span class="n">begin</span><span class="o">);</span>
-                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ConceptEnd&quot;</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
-                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;SemanticTypes&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getSemanticTypes</span><span class="o">());</span>
-                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Sources&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getSources</span><span class="o">());</span>
-                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ConceptName&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getConceptName</span><span class="o">());</span>
-                                                                        <span class="n">obj</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;CUI&quot;</span><span class="o">,</span> <span class="n">ev</span><span class="o">.</span><span class="na">getConceptId</span><span class="o">());</span>
-                                                                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">());</span>
+                                                                              obj.put(&quot;ConceptBegin&quot;, begin);
+                                                                              obj.put(&quot;ConceptEnd&quot;, end);
+                                                                              obj.put(&quot;SemanticTypes&quot;, ev.getSemanticTypes());
+                                                                              obj.put(&quot;Sources&quot;, ev.getSources());
+                                                                              obj.put(&quot;ConceptName&quot;, ev.getConceptName());
+                                                                              obj.put(&quot;CUI&quot;, ev.getConceptId());
+                                                                              System.out.print(obj.toJSONString());
 
-                                                                <span class="o">}</span>
+                                                                      }
 
-                                                        <span class="o">}</span>
+                                                              }
 
-                                                <span class="o">}</span>
+                                                      }
 
-                                        <span class="o">}</span>
+                                              }
 
-                                <span class="o">}</span>
+                                      }
 
-                                <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
-                                <span class="o">{</span>
+                                      catch (Exception e)
+                                      {
 
-                                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                                              e.printStackTrace();
 
-                                <span class="o">}</span>
+                                      }
 
-                        <span class="o">}</span>
+                              }
 
-                <span class="o">}</span>
+                      }
 
-                <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                      sc.close();
 
-        <span class="o">}</span>
+              }
 
-<span class="o">}</span>
+      }
+
+* I exported the above as a **Runnable Jar file** in eclipse.
+* I called the above program in python with various inputs. The code for the same is given below
+
+  .. code-block:: python
+
+    from subprocess import Popen, PIPE, STDOUT
+    from fcntl import fcntl, F_GETFL, F_SETFL
+    from os import O_NONBLOCK, read
+
+    p = Popen([&#39;java&#39;, &#39;-jar&#39;, &#39;/Users/nikhilpattisapu/git/ijcnlp-17/code/dependencies/CallMetaMapBatch.jar&#39;,
+               &#39;10.4.17.63&#39;,&#39;8066&#39;], stdout=PIPE, stdin=PIPE, stderr=STDOUT, universal_newlines=True)
+
+    flags = fcntl(p.stdout, F_GETFL)
+    fcntl(p.stdout, F_SETFL, flags | O_NONBLOCK)
+
+    p.stdin.write(&#39;He had a heart attack.\n&#39;)
+    while True:
+
+        try:
+                print (read(p.stdout.fileno(), 1024))
+                break
+        except:
+                continue
+
+    p.stdin.write(&#39;He had a liver failure too\n&#39;)
+    while True:
+
+        try:
+                print (read(p.stdout.fileno(), 1024))
+                break
+        except:
+                continue
+
+* The advantages of this approach is that you load the jar file only once and
+  use it many times in a python program, thereby saving some computation!
+* A more detailed explanation is available `here
+  &lt;http://eyalarubas.com/python-subproc-nonblock.html&gt;`__ and `here
+  &lt;https://gist.github.com/EyalAr/7915597&gt;`__.
 </pre></div>
 </div>
-</div></blockquote>
-<ul>
-<li><p class="first">I exported the above as a <strong>Runnable Jar file</strong> in eclipse.</p>
-</li>
-<li><p class="first">I called the above program in python with various inputs. The code for the same is given below</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span> <span class="n">PIPE</span><span class="p">,</span> <span class="n">STDOUT</span>
-<span class="kn">from</span> <span class="nn">fcntl</span> <span class="kn">import</span> <span class="n">fcntl</span><span class="p">,</span> <span class="n">F_GETFL</span><span class="p">,</span> <span class="n">F_SETFL</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">O_NONBLOCK</span><span class="p">,</span> <span class="n">read</span>
-
-<span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;java&#39;</span><span class="p">,</span> <span class="s1">&#39;-jar&#39;</span><span class="p">,</span> <span class="s1">&#39;/Users/nikhilpattisapu/git/ijcnlp-17/code/dependencies/CallMetaMapBatch.jar&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;10.4.17.63&#39;</span><span class="p">,</span><span class="s1">&#39;8066&#39;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="n">flags</span> <span class="o">=</span> <span class="n">fcntl</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">F_GETFL</span><span class="p">)</span>
-<span class="n">fcntl</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">F_SETFL</span><span class="p">,</span> <span class="n">flags</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">)</span>
-
-<span class="n">p</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;He had a heart attack.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-
-    <span class="k">try</span><span class="p">:</span>
-            <span class="k">print</span> <span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">1024</span><span class="p">))</span>
-            <span class="k">break</span>
-    <span class="k">except</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-<span class="n">p</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;He had a liver failure too</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-
-    <span class="k">try</span><span class="p">:</span>
-            <span class="k">print</span> <span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">1024</span><span class="p">))</span>
-            <span class="k">break</span>
-    <span class="k">except</span><span class="p">:</span>
-            <span class="k">continue</span>
-</pre></div>
 </div>
-</li>
-<li><p class="first">The advantages of this approach is that you load the jar file only once and
-use it many times in a python program, thereby saving some computation!</p>
-</li>
-<li><p class="first">A more detailed explanation is available <a class="reference external" href="http://eyalarubas.com/python-subproc-nonblock.html">here</a> and <a class="reference external" href="https://gist.github.com/EyalAr/7915597">here</a>.</p>
-</li>
+<div class="section" id="pickling-in-python">
+<h2>Pickling in Python<a class="headerlink" href="#pickling-in-python" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won’t work: they have no individual names.</li>
 </ul>
-</div></blockquote>
 </div>
 </div>
 
@@ -402,6 +403,7 @@ use it many times in a python program, thereby saving some computation!</p>
 <li><a class="reference internal" href="#sacred">Sacred</a></li>
 <li><a class="reference internal" href="#other-packages">Other Packages</a></li>
 <li><a class="reference internal" href="#calling-java-function-from-python-a-metamap-experience">Calling Java function from Python - A MetaMap Experience</a></li>
+<li><a class="reference internal" href="#pickling-in-python">Pickling in Python</a></li>
 </ul>
 </li>
 </ul>
