@@ -1,6 +1,12 @@
 Deep Learning
 =============
 
+CUDA
+----
+
+* It is possible to install CUDA and CuDNN locally. Take a look at `this link<https://stackoverflow.com/questions/39379792/install-cuda-without-root>`__
+
+
 GPU
 ---
 

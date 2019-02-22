@@ -30,7 +30,8 @@ Topics
    Python.rst
    Solr.rst
    UIMA.rst
-   UMLS.rst
+   wishlist.rst
+
 
 Indices and tables
 ==================

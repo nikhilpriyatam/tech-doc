@@ -146,9 +146,10 @@
 <span class="k">except</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conversion Failed&#39;</span><span class="p">)</span>
 
-<span class="c1"># If no-except</span>
+<span class="c1"># If No-Except</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conversion successful&#39;</span><span class="p">)</span>
+
 <span class="c1"># Always execute this statement.</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done&#39;</span><span class="p">)</span>
@@ -158,7 +159,7 @@
 <li><p class="first">You can also use only <cite>try</cite> and <cite>finally</cite> as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_file.txt&#39;</span><span class="p">)</span>
-<span class="c1"># Contains the clean up code which needs to be executed even if an exception occurred.</span>
+    <span class="c1"># Contains the clean up code which needs to be executed even if an exception occurred.</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
