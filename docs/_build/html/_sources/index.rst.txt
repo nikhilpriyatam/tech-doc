@@ -14,7 +14,7 @@ Topics
    Best_Coding_Practices.rst
    Brat.rst
    DB-and-SQL.rst
-   Deep-Learning.rst
+   Deep_Learning.rst
    Git.rst
    GNU_Screen.rst
    IRE.rst
