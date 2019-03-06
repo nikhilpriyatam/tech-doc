@@ -31,6 +31,9 @@ Tensorflow and Tensorflow Hub
   * :code:`pip install tensorflow-gpu`
   * :code:`pip install tensorflow`
 
+* The default CPU only tensorflow binary (installed through pip) is not compiled to use AVX AVX2 (libraries for faster computation). You will see a warning of the following type :code:`Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2`. To avoid this you have to compile tensorflow from the source (which is a pain). An easier alternative is to use pre-compiled binaries with `AVX` and `AVX2` support. Check `this repo <https://github.com/lakshayg/tensorflow-build.git>`_
+  
+
 * Tensorflow uses lazy computation. In short it means that, it creates a computation graph and executes it when necessary. The ideal way to code is to ensure that you create a single graph and use it (or execute it) several times using :code:`tf.placeholder()`. You can even have :code:`tf.string` type placeholder. This is especially useful for obtaining text representations using pretrained models 
 
 * You can create and use a tensorflow graph manually in the program in the following way

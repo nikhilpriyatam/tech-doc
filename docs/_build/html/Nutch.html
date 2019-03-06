@@ -9,15 +9,13 @@
     <title>Nutch &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-<<<<<<< HEAD
-=======
     <script type="text/javascript" src="_static/language_data.js"></script>
     
->>>>>>> 971100572e708546793073bcf65b29beabdfabd3
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Operating Systems" href="Operating-Systems.html" />
@@ -48,21 +46,16 @@
 <h1>Nutch<a class="headerlink" href="#nutch" title="Permalink to this headline">¶</a></h1>
 <ul>
 <li><p class="first">By default Nutch crawls only http pages, to extend it to https, you have to
-set the following property in <code class="code docutils literal notranslate"><span class="pre">conf/nutch-site.xml</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="o">&lt;</span><span class="nb">property</span>\<span class="o">&gt;</span>
-\<span class="o">&lt;</span><span class="n">name</span>\<span class="o">&gt;</span><span class="n">plugin</span><span class="o">.</span><span class="n">includes</span>\<span class="o">&lt;/</span><span class="n">name</span>\<span class="o">&gt;</span>
-\<span class="o">&lt;</span><span class="n">value</span>\<span class="o">&gt;</span><span class="n">protocol</span><span class="o">-</span><span class="n">http</span><span class="o">|</span><span class="n">protocol</span><span class="o">-</span><span class="n">httpclient</span><span class="o">|</span><span class="n">urlfilter</span><span class="o">-</span><span class="n">regex</span><span class="o">|</span><span class="n">parse</span><span class="o">-</span><span class="p">(</span><span class="n">html</span><span class="o">|</span><span class="n">tika</span><span class="p">)</span><span class="o">|</span><span class="n">index</span><span class="o">-</span><span class="p">(</span><span class="n">basic</span><span class="o">|</span><span class="n">anchor</span><span class="p">)</span><span class="o">|</span><span class="n">indexer</span><span class="o">-</span><span class="n">solr</span><span class="o">|</span><span class="n">scoring</span><span class="o">-</span><span class="n">opic</span><span class="o">|</span><span class="n">urlnormalizer</span><span class="o">-</span><span class="p">(</span><span class="k">pass</span><span class="o">|</span><span class="n">regex</span><span class="o">|</span><span class="n">basic</span><span class="p">)</span>\<span class="o">&lt;/</span><span class="n">value</span>\<span class="o">&gt;</span>
-\<span class="o">&lt;</span><span class="n">description</span>\<span class="o">&gt;</span><span class="n">Regular</span> <span class="n">expression</span> <span class="n">naming</span> <span class="n">plugin</span> <span class="n">directory</span> <span class="n">names</span> <span class="n">to</span>
-</pre></div>
-</div>
-<p>include.  Any plugin not matching this expression is excluded.
-In any case you need at least include the nutch-extensionpoints plugin. By
-default Nutch includes crawling just HTML and plain text via HTTP,
-and basic indexing and search plugins. In order to use HTTPS please enable
-protocol-httpclient, but be aware of possible intermittent problems with the
-underlying commons-httpclient library. Set parsefilter-naivebayes for classification based focused crawler.
+set the following property in <code class="code docutils literal notranslate"><span class="pre">conf/nutch-site.xml</span></code>
+.. code-block:: xml</p>
+<blockquote>
+<div><p>&lt;property&gt;
+&lt;name&gt;plugin.includes&lt;/name&gt;
+&lt;value&gt;protocol-http|protocol-httpclient|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|indexer-solr|scoring-opic|urlnormalizer-(pass|regex|basic)&lt;/value&gt;
+&lt;description&gt;Regular expression naming plugin directory names to include.  Any plugin not matching this expression is excluded. In any case you need at least include the nutch-extensionpoints plugin. By default Nutch includes crawling just HTML and plain text via HTTP, and basic indexing and search plugins. In order to use HTTPS please enable protocol-httpclient, but be aware of possible intermittent problems with the underlying commons-httpclient library. Set parsefilter-naivebayes for classification based focused crawler.
 &lt;/description&gt;
 &lt;/property&gt;</p>
+</div></blockquote>
 </li>
 <li><p class="first">One must also set proxy in the <code class="code docutils literal notranslate"><span class="pre">nutch-site.xml</span></code></p>
 </li>
@@ -124,11 +117,7 @@ underlying commons-httpclient library. Set parsefilter-naivebayes for classifica
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-<<<<<<< HEAD
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
-=======
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
->>>>>>> 971100572e708546793073bcf65b29beabdfabd3
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
   </body>
 </html>

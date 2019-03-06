@@ -28,17 +28,13 @@ MetaMap
     characters then replace them with a space (" ") before sending the input
     to MetaMap.
 
-  * Although, there is another (a clean and preferred method given `here
-    <https://metamap.nlm.nih.gov/Docs/FAQ/ClinicalText.pdf>`__, `here
-    https://metamap.nlm.nih.gov/Docs/FAQ/MM_FAQ.pdf>`__ and `here
-    https://metamap.nlm.nih.gov/Docs/MM_2016_Usage.pdf>`__ (use --blanklines N
-    option), somehow, I did not find success with this approach)
+  * Although, there is another (a clean and preferred method given in `1 <https://metamap.nlm.nih.gov/Docs/FAQ/ClinicalText.pdf>`_, `2 <https://metamap.nlm.nih.gov/Docs/FAQ/MM_FAQ.pdf>`_ and `3 <https://metamap.nlm.nih.gov/Docs/MM_2016_Usage.pdf>`_ (use --blanklines N option), somehow, I did not find success with this approach)
 
 
 * :code:`ps ax | grep java` [To determine if MetaMap is running]
 
 * There is a cool python wrapper for MetaMap available
-  `here <https://github.com/AnthonyMRios/pymetamap>`_.
+  `in this repo <https://github.com/AnthonyMRios/pymetamap>`_.
   * This wrapper, in its current form works only for python 2.x
   * For making it work in python 3.x, I had to modify
 
@@ -50,7 +46,7 @@ MetaMap
        
         import sys
         sys.path.append('/Users/nikhilpattisapu/git/pymetamap/pymetamap/')
-	import Concept
+        import Concept
 
 * Metamap has some useful options which are of interest some of them are illustrated below.
   * :code:`-R SNOMEDCT_US,MEDLINE` (Restrict Sources)

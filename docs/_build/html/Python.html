@@ -9,15 +9,13 @@
     <title>Python &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-<<<<<<< HEAD
-=======
     <script type="text/javascript" src="_static/language_data.js"></script>
     
->>>>>>> 971100572e708546793073bcf65b29beabdfabd3
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Solr" href="Solr.html" />
@@ -217,170 +215,6 @@ persist python objects which are <strong>picklable</strong>.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="calling-java-function-from-python-a-metamap-experience">
-<h2>Calling Java function from Python - A MetaMap Experience<a class="headerlink" href="#calling-java-function-from-python-a-metamap-experience" title="Permalink to this headline">¶</a></h2>
-<p>I once had a necessity to call a java program with multiple inputs from a
-python program. I noticed few peculiar things that had to be done, which I
-am describing below</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>      import java.util.ArrayList;
-      import java.util.List;
-      import java.util.Scanner;
-
-      import org.json.simple.JSONObject;
-
-      import gov.nih.nlm.nls.metamap.Ev;
-      import gov.nih.nlm.nls.metamap.Mapping;
-      import gov.nih.nlm.nls.metamap.MetaMapApi;
-      import gov.nih.nlm.nls.metamap.MetaMapApiImpl;
-      import gov.nih.nlm.nls.metamap.PCM;
-      import gov.nih.nlm.nls.metamap.Result;
-      import gov.nih.nlm.nls.metamap.Utterance;
-
-
-      public class CallMetaMapBatch
-      {
-
-              @SuppressWarnings(&quot;unchecked&quot;)
-              public static void main(String[] metamapArgs)
-              {
-
-                      if (metamapArgs.length != 2)
-                      {
-
-                              System.out.println(metamapArgs.length);
-                              System.out.println(&quot;Insufficient Arguments&quot;);
-                              System.exit(0);
-
-                      }
-
-                      MetaMapApi api = new MetaMapApiImpl();
-                      api.setHost(metamapArgs[0]);
-                      api.setPort(Integer.parseInt(metamapArgs[1]));
-
-
-                      List&lt;String&gt; theOptions = new ArrayList&lt;String&gt;();
-                      api.setOptions(&quot;-y&quot;); // Use WSD
-                      theOptions.add(&quot;-A&quot;); // Use strict model
-                      theOptions.add(&quot;-K&quot;); // Ignore stop phrases
-
-                      theOptions.add(&quot;-J&quot;); // Restrict to semantic types
-                      theOptions.add(&quot;dsyn,sosy,topp,phsf,phsu,lbtr,lbpr,inpo,diap,clnd,bdsu,bdsy,blor,bpoc,bsoj,anst&quot;); // No space between arguments
-
-                      theOptions.add(&quot;-R&quot;); // Restrict to Sources
-                      theOptions.add(&quot;SNOMEDCT_US,MEDLINEPLUS,MSH,ICD10CM&quot;); // No space between arguments
-
-                      //theOptions.add(&quot;--cascade&quot;); // If the concept &quot;Logistic regression&quot; is excluded for some reason then &quot;regression&quot; will also be excluded.
-
-                      theOptions.add(&quot;--prune&quot;); // Prune the candidates before
-                      theOptions.add(&quot;15&quot;);
-
-                      //theOptions.add(&quot;--cascade&quot;);
-                      api.setOptions(theOptions);
-                      Scanner sc=new Scanner(System.in);
-
-                      while (sc.hasNextLine())
-                      {
-
-                              String text = sc.nextLine();
-                              List&lt;Result&gt; resultList = api.processCitationsFromString(text);
-                              for (Result result : resultList)
-                              {
-
-                                      try
-                                      {
-
-                                              for (Utterance utterance : result.getUtteranceList())
-                                              {
-
-                                                      for (PCM pcm: utterance.getPCMList())
-                                                      {
-
-                                                              for (Mapping map : pcm.getMappingList())
-                                                              {
-
-                                                                      for (Ev ev : map.getEvList())
-                                                                      {
-
-                                                                              JSONObject obj =  new JSONObject();
-                                                                              int begin = ev.getPositionalInfo().get(0).getX();
-                                                                              int end = begin + ev.getPositionalInfo().get(0).getY();
-
-                                                                              obj.put(&quot;ConceptBegin&quot;, begin);
-                                                                              obj.put(&quot;ConceptEnd&quot;, end);
-                                                                              obj.put(&quot;SemanticTypes&quot;, ev.getSemanticTypes());
-                                                                              obj.put(&quot;Sources&quot;, ev.getSources());
-                                                                              obj.put(&quot;ConceptName&quot;, ev.getConceptName());
-                                                                              obj.put(&quot;CUI&quot;, ev.getConceptId());
-                                                                              System.out.print(obj.toJSONString());
-
-                                                                      }
-
-                                                              }
-
-                                                      }
-
-                                              }
-
-                                      }
-
-                                      catch (Exception e)
-                                      {
-
-                                              e.printStackTrace();
-
-                                      }
-
-                              }
-
-                      }
-
-                      sc.close();
-
-              }
-
-      }
-
-* I exported the above as a **Runnable Jar file** in eclipse.
-* I called the above program in python with various inputs. The code for the same is given below
-
-  .. code-block:: python
-
-    from subprocess import Popen, PIPE, STDOUT
-    from fcntl import fcntl, F_GETFL, F_SETFL
-    from os import O_NONBLOCK, read
-
-    p = Popen([&#39;java&#39;, &#39;-jar&#39;, &#39;/Users/nikhilpattisapu/git/ijcnlp-17/code/dependencies/CallMetaMapBatch.jar&#39;,
-               &#39;10.4.17.63&#39;,&#39;8066&#39;], stdout=PIPE, stdin=PIPE, stderr=STDOUT, universal_newlines=True)
-
-    flags = fcntl(p.stdout, F_GETFL)
-    fcntl(p.stdout, F_SETFL, flags | O_NONBLOCK)
-
-    p.stdin.write(&#39;He had a heart attack.\n&#39;)
-    while True:
-
-        try:
-                print (read(p.stdout.fileno(), 1024))
-                break
-        except:
-                continue
-
-    p.stdin.write(&#39;He had a liver failure too\n&#39;)
-    while True:
-
-        try:
-                print (read(p.stdout.fileno(), 1024))
-                break
-        except:
-                continue
-
-* The advantages of this approach is that you load the jar file only once and
-  use it many times in a python program, thereby saving some computation!
-* A more detailed explanation is available `here
-  &lt;http://eyalarubas.com/python-subproc-nonblock.html&gt;`__ and `here
-  &lt;https://gist.github.com/EyalAr/7915597&gt;`__.
-</pre></div>
-</div>
-</div>
 <div class="section" id="pickling-in-python">
 <h2>Pickling in Python<a class="headerlink" href="#pickling-in-python" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -395,7 +229,7 @@ am describing below</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Python</a><ul>
 <li><a class="reference internal" href="#use-ipython-inside-a-python-program">Use Ipython inside a Python Program</a></li>
@@ -405,7 +239,6 @@ am describing below</p>
 <li><a class="reference internal" href="#python-http-requests">Python HTTP requests</a></li>
 <li><a class="reference internal" href="#sacred">Sacred</a></li>
 <li><a class="reference internal" href="#other-packages">Other Packages</a></li>
-<li><a class="reference internal" href="#calling-java-function-from-python-a-metamap-experience">Calling Java function from Python - A MetaMap Experience</a></li>
 <li><a class="reference internal" href="#pickling-in-python">Pickling in Python</a></li>
 </ul>
 </li>
@@ -457,11 +290,7 @@ am describing below</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-<<<<<<< HEAD
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
-=======
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
->>>>>>> 971100572e708546793073bcf65b29beabdfabd3
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
   </body>
 </html>

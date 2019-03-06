@@ -9,10 +9,13 @@
     <title>Deep Learning &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Git" href="Git.html" />
@@ -71,6 +74,8 @@
 <li><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow-gpu</span></code></li>
 <li><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow</span></code></li>
 </ul>
+</li>
+<li><p class="first">The default CPU only tensorflow binary (installed through pip) is not compiled to use AVX AVX2 (libraries for faster computation). You will see a warning of the following type <code class="code docutils literal notranslate"><span class="pre">Your</span> <span class="pre">CPU</span> <span class="pre">supports</span> <span class="pre">instructions</span> <span class="pre">that</span> <span class="pre">this</span> <span class="pre">TensorFlow</span> <span class="pre">binary</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">compiled</span> <span class="pre">to</span> <span class="pre">use:</span> <span class="pre">AVX</span> <span class="pre">AVX2</span></code>. To avoid this you have to compile tensorflow from the source (which is a pain). An easier alternative is to use pre-compiled binaries with <cite>AVX</cite> and <cite>AVX2</cite> support. Check <a class="reference external" href="https://github.com/lakshayg/tensorflow-build.git">this repo</a></p>
 </li>
 <li><p class="first">Tensorflow uses lazy computation. In short it means that, it creates a computation graph and executes it when necessary. The ideal way to code is to ensure that you create a single graph and use it (or execute it) several times using <code class="code docutils literal notranslate"><span class="pre">tf.placeholder()</span></code>. You can even have <code class="code docutils literal notranslate"><span class="pre">tf.string</span></code> type placeholder. This is especially useful for obtaining text representations using pretrained models</p>
 </li>
@@ -146,7 +151,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Deep Learning</a><ul>
 <li><a class="reference internal" href="#cuda-and-cudnn">CUDA and CuDNN</a></li>
@@ -202,7 +207,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
   </body>
 </html>
