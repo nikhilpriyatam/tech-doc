@@ -9,13 +9,10 @@
     <title>WishList &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="UIMA" href="UIMA.html" /> 
@@ -40,7 +37,33 @@
             
   <div class="section" id="wishlist">
 <h1>WishList<a class="headerlink" href="#wishlist" title="Permalink to this headline">¶</a></h1>
-<p>Contains the list of things which you know are possible, but you do not know exactly how to achieve them.</p>
+<p>Contains the list of things which I know are possible, but I do not know exactly how to achieve them.</p>
+<div class="section" id="tensorflow-not-releasing-gpu">
+<h2>Tensorflow not releasing GPU<a class="headerlink" href="#tensorflow-not-releasing-gpu" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">After a <cite>tensorflow</cite> session is closed it is still not releasing the GPU. Which means that the GPUs are available for another tensorflow model or Tensor, but not available for other modules such as <cite>PyTorch</cite>. This means <cite>nvidia-smi</cite> will show the GPUs are occupied. The GPU is freed when the process which uses tensorflow is terminated. This is a known issue, a partial solution is to write all tensorflow related code in a single function and call that function using a new process. A sample code snippet is given below</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Manager</span>
+<span class="k">def</span> <span class="nf">tf_func</span><span class="p">(</span><span class="n">sample_text</span><span class="p">,</span> <span class="n">my_dict</span><span class="p">):</span>
+    <span class="c1"># All tensorflow related computations here.</span>
+    <span class="n">Convert</span> <span class="n">the</span> <span class="n">result</span> <span class="n">into</span> <span class="n">a</span> <span class="n">numpy</span> <span class="n">array</span>
+    <span class="n">my_dict</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np_result_array</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span> <span class="c1"># Dummy dictionary to store the result of computation.</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">tf_func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">sample_text</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="c1"># Start the process</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1"># Wait for the process to finish.</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="c1"># Copy the result from dictionary to a variable</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">One caveat, is that <cite>multiprocessing</cite> uses <cite>pickle</cite> internally which relies on a default protocol which does’nt let you save data greater than 4GB. Therefore the above procedure did not work for me. I was unable to figure out a way through which I could change the default protocol to a higher number.</p>
+</li>
+<li><p class="first">Another way is to use global variables for sharing data between processes. However, it is tricky and needs <cite>Locks</cite>. More content at <cite>Python</cite> section.</p>
+</li>
+</ul>
+</div>
 <div class="section" id="unusually-long-screen-log-file">
 <h2>Unusually Long screen log file<a class="headerlink" href="#unusually-long-screen-log-file" title="Permalink to this headline">¶</a></h2>
 <p>You have been using screen log file to see the results of python programs. Consider a python modules which serves embeddings (on a server). After some time the file gets enormously long (and big) because of continous logging. At the same time, you do not want to completely do away with screen logging as it is super useful for debugging purposes.</p>
@@ -55,9 +78,10 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
+  <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">WishList</a><ul>
+<li><a class="reference internal" href="#tensorflow-not-releasing-gpu">Tensorflow not releasing GPU</a></li>
 <li><a class="reference internal" href="#unusually-long-screen-log-file">Unusually Long screen log file</a></li>
 </ul>
 </li>
@@ -103,7 +127,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
   </body>
 </html>
