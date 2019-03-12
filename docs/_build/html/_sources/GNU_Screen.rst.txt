@@ -1,6 +1,17 @@
-==========
+===================
+Tmux and GNU Screen
+===================
+
+TMUX
+----
+
+* tmux is a terminal multiplexer. It has similar functionalities as GNU screen. It's code base is considered better by many.
+* Use the :download:`tmux conf file <./config_files/sample_tmux.conf>` and place it in the home folder.
+* I am planning to use tmux instead of GNU screen for most of my work.
+
+
 GNU Screen
-==========
+----------
 
 GNU Screen is a super useful command to NOT lose your work. Save the output of
 your work in a file and split screens. The following are some of screen's

@@ -9,10 +9,13 @@
     <title>Various kinds of IDE &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Java" href="Java.html" />
@@ -43,33 +46,28 @@
 <h1>Various kinds of IDE<a class="headerlink" href="#various-kinds-of-ide" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vim-as-ide">
 <h2>Vim as IDE<a class="headerlink" href="#vim-as-ide" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">Code completion in Vim</p>
-</li>
-<li><p class="first">Code highlighting</p>
-</li>
-<li><p class="first">python linting</p>
-</li>
-<li><p class="first">Most important things while building vim from scratch</p>
-<ul>
-<li><p class="first">For ubuntu use <a class="reference external" href="https://github.com/vim/vim">Vim</a> available on Git.</p>
-</li>
-<li><p class="first">Use the following command to do the same:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./configure --with-features=huge --enable-python3interp --prefix=$HOME/opt/vim`
-</pre></div>
-</div>
-</li>
-<li><p class="first">Build Vim with Python3 <strong>or</strong> Python2 but <strong>not both</strong>.</p>
-</li>
-<li><p class="first">For python code completion use <a class="reference external" href="https://github.com/davidhalter/jedi-vim">vim-jedi</a> and not others like, YouCompleteMe.</p>
-</li>
-<li><p class="first">Install the plugin <a class="reference external" href="https://github.com/cjrh/vim-conda">vim-conda</a> to use python code completion in jedi.</p>
-</li>
-</ul>
-</li>
-<li><p class="first">Setting up Vim for Mac</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
+<li>Vim can easily be used as a full fledged IDE with code completion, code highlighting, linting and many more.</li>
+<li>This <a class="reference download internal" download="" href="_downloads/9949d297c19986b479a024e6a1f2340a/sample_vimrc"><code class="xref download docutils literal notranslate"><span class="pre">Vimrc</span> <span class="pre">file</span></code></a> contains all the instructions for compiling Vim from source, installing external plugins, etc.</li>
+<li>You can comment out a block of code in python using vim in the following way.
+* <code class="code docutils literal notranslate"><span class="pre">Esc</span></code> to leave editing mode
+* <code class="code docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">v</span></code> to go to <code class="code docutils literal notranslate"><span class="pre">visual</span> <span class="pre">mode</span></code>.
+* Select the lines that you want to comment (using up/down keys)
+* <code class="code docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">I</span></code> which will put editor in insert mode.
+* Insert the text that you want (in this case <code class="code docutils literal notranslate"><span class="pre">#</span></code>)
+* press <code class="code docutils literal notranslate"><span class="pre">Esc</span></code></li>
+<li>You can also <strong>uncomment</strong> out a a block of code
+* <code class="code docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">v</span></code> to go to <cite>visual mode</cite>
+* Put the cursor on the first <code class="code docutils literal notranslate"><span class="pre">#</span></code> and go down until the last comment line and press <cite>x</cite>
+* This will delete all <code class="code docutils literal notranslate"><span class="pre">#</span></code> vertically.</li>
+<li>You can <strong>indent</strong> as well as <strong>unindent</strong> your python code using the following
+* When indenting or unindenting, lines are shifted one <code class="code docutils literal notranslate"><span class="pre">shiftwidth</span></code> to the right or left.
+* In <cite>normal mode</cite> press <code class="code docutils literal notranslate"><span class="pre">5&gt;&gt;</span></code> to shift 5 lines to right and <code class="code docutils literal notranslate"><span class="pre">5&lt;&lt;</span></code> to shift 5 lines to left.
+* <code class="code docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">v</span></code> to goto <cite>visual mode</cite> which operates at line levels
+* Select the lines using cursor and use <code class="code docutils literal notranslate"><span class="pre">&gt;</span></code> to shift right or <code class="code docutils literal notranslate"><span class="pre">&lt;</span></code> to shift left.</li>
+<li><dl class="first docutils">
+<dt>Setting up Vim for Mac</dt>
+<dd><ul class="first last">
 <li>Use only MacVim not normal Vim. Clone from <a class="reference external" href="https://github.com/macvim-dev/macvim">MacVim</a> repository.</li>
 <li>As of now try to compile Mac with either Python 3 or Python 2, not both.</li>
 <li>I configured vim to use p3.5 (python 3.5) anaconda environment.</li>
@@ -77,57 +75,8 @@
 <li>Set environment variable <code class="code docutils literal notranslate"><span class="pre">CC='clang'</span></code> in .bashrc</li>
 <li>Set <code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">VIMRUNTIME=&quot;/Users/nikhilpattisapu/Tools/macvim/runtime/&quot;</span></code> in .bashrc</li>
 </ul>
-</div></blockquote>
-<ul>
-<li><p class="first">You can open multiple files in vim at once bu using <code class="code docutils literal notranslate"><span class="pre">vim</span> <span class="pre">*</span></code> - All files in current directory</p>
-<ul>
-<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">:tab</span> <span class="pre">all</span></code> will open all the files in Vim’s argument list in individual tabs</p>
-</li>
-<li><p class="first">To close a tab, close the file in it using <code class="code docutils literal notranslate"><span class="pre">:q</span></code> or <code class="code docutils literal notranslate"><span class="pre">:wq</span></code> if you need to save changes first.</p>
-</li>
-<li><p class="first">To close all tabs <code class="code docutils literal notranslate"><span class="pre">:qa</span></code> or <code class="code docutils literal notranslate"><span class="pre">:wqa</span></code> to save work in all tabs and quit.</p>
-</li>
-<li><p class="first">Set shortcut in <code class="code docutils literal notranslate"><span class="pre">.vimrc</span></code> file to navigate between tabs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">map</span> <span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">t</span><span class="o">&gt;&lt;</span><span class="n">up</span><span class="o">&gt;</span> <span class="p">:</span><span class="n">tabr</span><span class="o">&lt;</span><span class="n">cr</span><span class="o">&gt;</span>
-<span class="nb">map</span> <span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">t</span><span class="o">&gt;&lt;</span><span class="n">down</span><span class="o">&gt;</span> <span class="p">:</span><span class="n">tabl</span><span class="o">&lt;</span><span class="n">cr</span><span class="o">&gt;</span>
-<span class="nb">map</span> <span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">t</span><span class="o">&gt;&lt;</span><span class="n">left</span><span class="o">&gt;</span> <span class="p">:</span><span class="n">tabp</span><span class="o">&lt;</span><span class="n">cr</span><span class="o">&gt;</span>
-<span class="nb">map</span> <span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">t</span><span class="o">&gt;&lt;</span><span class="n">right</span><span class="o">&gt;</span> <span class="p">:</span><span class="n">tabn</span><span class="o">&lt;</span><span class="n">cr</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</li>
-<li><p class="first">All the relevant configurations are explained <a class="reference external" href="https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/">here</a>.
-<strong>Code Folding Using SimpylFold</strong>: <code class="code docutils literal notranslate"><span class="pre">zo</span></code> (to open a fold), <code class="code docutils literal notranslate"><span class="pre">zc</span></code>
-(to close a fold), <code class="code docutils literal notranslate"><span class="pre">zR</span></code> (to open all folds), <code class="code docutils literal notranslate"><span class="pre">zM</span></code> (to close
-all folds)</p>
-</li>
-<li><p class="first">You can comment out a block of code in python using vim in the following way.</p>
-<ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">Esc</span></code> to leave editing mode</li>
-<li><code class="code docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">v</span></code> to go to <code class="code docutils literal notranslate"><span class="pre">visual</span> <span class="pre">mode</span></code>.</li>
-<li>Select the lines that you want to comment (using up/down keys)</li>
-<li><code class="code docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">I</span></code> which will put editor in insert mode.</li>
-<li>Insert the text that you want (in this case <code class="code docutils literal notranslate"><span class="pre">#</span></code>)</li>
-<li>press <code class="code docutils literal notranslate"><span class="pre">Esc</span></code></li>
-</ul>
-</li>
-<li><p class="first">You can also <strong>uncomment</strong> out a a block of code</p>
-<ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">v</span></code> to go to <cite>visual mode</cite></li>
-<li>Put the cursor on the first <code class="code docutils literal notranslate"><span class="pre">#</span></code> and go down until the last comment line and press <cite>x</cite></li>
-<li>This will delete all <code class="code docutils literal notranslate"><span class="pre">#</span></code> vertically.</li>
-</ul>
-</li>
-<li><p class="first">You can <strong>indent</strong> as well as <strong>unindent</strong> your python code using the following</p>
-<ul class="simple">
-<li>When indenting or unindenting, lines are shifted one <code class="code docutils literal notranslate"><span class="pre">shiftwidth</span></code> to the right or left.</li>
-<li>In <cite>normal mode</cite> press <code class="code docutils literal notranslate"><span class="pre">5&gt;&gt;</span></code> to shift 5 lines to right and <code class="code docutils literal notranslate"><span class="pre">5&lt;&lt;</span></code> to shift 5 lines to left.</li>
-<li><code class="code docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">v</span></code> to goto <cite>visual mode</cite> which operates at line levels</li>
-<li>Select the lines using cursor and use <code class="code docutils literal notranslate"><span class="pre">&gt;</span></code> to shift right or <code class="code docutils literal notranslate"><span class="pre">&lt;</span></code> to shift left.</li>
-</ul>
-</li>
-</ul>
+</dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -136,33 +85,24 @@ all folds)</p>
 <ul>
 <li><p class="first">To install a package in Atom use <code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">install</span> <span class="pre">packageName</span></code></p>
 </li>
-<li><p class="first">To install behind proxy</p>
-<ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">https-proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code> (The URL <strong>should</strong> start from http <strong>not</strong> https)</li>
-<li><code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">http-proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code></li>
-</ul>
+<li><p class="first">To install behind proxy
+* <code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">https-proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code> (The URL <strong>should</strong> start from http <strong>not</strong> https)
+* <code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">http-proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">apm</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">proxy</span> <span class="pre">http://proxy.iiit.ac.in:8080</span></code></p>
 </li>
 <li><p class="first">To modify the settings of a particular package <cite>Atom -&gt; Preferences -&gt; Packages -&gt; Specific Package -&gt; Settings</cite></p>
 </li>
-<li><p class="first">To enter the command-line mode</p>
-<ul class="simple">
-<li>On Mac: <code class="code docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Command</span> <span class="pre">+</span> <span class="pre">P</span></code></li>
-<li>On Ubuntu:</li>
-</ul>
+<li><p class="first">To enter the command-line mode
+* On Mac: <code class="code docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Command</span> <span class="pre">+</span> <span class="pre">P</span></code>
+* On Ubuntu:</p>
 </li>
 <li><p class="first">To define a python cell use the comment in the following way <cite># %%</cite></p>
 </li>
-<li><p class="first">I had some problems with the default <cite>markdown-preview</cite> package.</p>
-<ul class="simple">
-<li>I fixed it by going to <cite>preferences -&gt; settings -&gt; packages -&gt; markdown-preview -&gt; disable</cite> then <cite>enable</cite> again.</li>
-<li>Somehow, there were also some bugs w.r.t the window panes. You can modify
-the options in a similar way as mentioned above.</li>
-</ul>
+<li><p class="first">I had some problems with the default <cite>markdown-preview</cite> package.
+* I fixed it by going to <cite>preferences -&gt; settings -&gt; packages -&gt; markdown-preview -&gt; disable</cite> then <cite>enable</cite> again.
+* Somehow, there were also some bugs w.r.t the window panes. You can modify the options in a similar way as mentioned above.</p>
 </li>
-<li><p class="first">I faced an issue with <cite>atom</cite> where, the python code for calling a
-<cite>StanfordCoreNLP</cite> server was working in terminal and <strong>not working in
-atom</strong>. The following is the code snippet</p>
+<li><p class="first">I faced an issue with <cite>atom</cite> where, the python code for calling a <cite>StanfordCoreNLP</cite> server was working in terminal and <strong>not working in atom</strong>. The following is the code snippet</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pycorenlp</span> <span class="kn">import</span> <span class="n">StanfordCoreNLP</span>
 <span class="n">nlp</span> <span class="o">=</span> <span class="n">StanfordCoreNLP</span><span class="p">(</span><span class="s1">&#39;http://10.4.17.63:9000&#39;</span><span class="p">)</span> <span class="c1"># The server http://10.4.17.63:9000 is accessible through browser.</span>
 <span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;He went to a dentist.&#39;</span><span class="p">)</span>
@@ -180,13 +120,11 @@ atom</strong>. The following is the code snippet</p>
 <li>Help available <a class="reference external" href="https://github.com/zyedidia/micro">here</a></li>
 <li>Installation on Mac - <cite>brew install micro</cite></li>
 <li>Installation on ubuntu - The instructions given in the <a class="reference external" href="https://github.com/zyedidia/micro">here</a> were <strong>NOT</strong> helpful for me. So, I
-used the following procedure<ul>
-<li>Download the required package from <a class="reference external" href="https://github.com/zyedidia/micro/releases">https://github.com/zyedidia/micro/releases</a></li>
-<li><cite>tar -xvf micro-1.2.1-60-linux64.tar.gz</cite></li>
-<li>copy the binary <cite>micro</cite> file inside the <cite>micro-1.x.x</cite> directory to <cite>/bin/</cite></li>
-<li>Execute <cite>micro</cite> command from terminal in a normal fashion.</li>
-</ul>
-</li>
+used the following procedure
+* Download the required package from <a class="reference external" href="https://github.com/zyedidia/micro/releases">https://github.com/zyedidia/micro/releases</a>
+* <cite>tar -xvf micro-1.2.1-60-linux64.tar.gz</cite>
+* copy the binary <cite>micro</cite> file inside the <cite>micro-1.x.x</cite> directory to <cite>/bin/</cite>
+* Execute <cite>micro</cite> command from terminal in a normal fashion.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -198,7 +136,7 @@ used the following procedure<ul>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Various kinds of IDE</a><ul>
 <li><a class="reference internal" href="#vim-as-ide">Vim as IDE</a></li>
@@ -254,7 +192,7 @@ used the following procedure<ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     </div>
   </body>
 </html>
