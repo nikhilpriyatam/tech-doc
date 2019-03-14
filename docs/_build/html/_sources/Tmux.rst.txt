@@ -1,11 +1,44 @@
-===================
-Tmux and GNU Screen
-===================
+============================
+Terminal Tmux and GNU Screen
+============================
+
+Setting up Terminal
+-------------------
+
+* On Mac, use Tanner (It is pleasing to the eyes).
+* Go to Terminal -> Preferences -> Settings -> Keyboard -> Select use option as meta keys
+* Go to Terminal -> Preferences -> Settings -> Keyboard -> Delete shortcuts having (Alt + left arrow) and (Alt + Right arrow)
+* On Ubuntu: Install special fonts designed for coding
+  ::
+
+      sudo apt-get update
+      sudo apt-get install fonts-inconsolata
+      sudo fc-cache -fv
+
+      # Check if the fonts are installed properly
+      sudo fc-list | grep inconsolata
+
+      # Restart the terminal
+      # Edit -> Preferences -> Text -> Custom Font -> Inconsolata Medium.
+      # Edit -> Preferences -> Colors -> Built In scheme -> Background: Gray, Foreground
+
 
 TMUX
 ----
 
 * tmux is a terminal multiplexer. It has similar functionalities as GNU screen. It's code base is considered better by many.
+* Installation on Mac: :code:`brew install tmux`
+* Installation on Ubuntu
+  ::
+
+      sudo apt-get install automake libevent-dev # Prerequisites
+      wget https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz # Version 2.8
+      tar -xvf tmux-2.8.tar.gz
+      ./configure --prefix=/home/nikhil/opt/tmux-2.8/ # Does NOT require root / sudo
+      make && make install
+      # Add TMUX_PATH and PATH environment variables
+      tmux -V # To check the TMUX version installed.
+
 * Use the :download:`tmux conf file <./config_files/sample_tmux.conf>` and place it in the home folder.
 * I am planning to use tmux instead of GNU screen for most of my work.
 

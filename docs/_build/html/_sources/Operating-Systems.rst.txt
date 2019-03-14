@@ -66,6 +66,7 @@ Ubuntu
   * I followed the solution in this link https://askubuntu.com/questions/1003350/bcm43455-pcie-wireless-adapter-not-recognised
   * Another popular solution was `sudo apt install --reinstall bcmwl-kernel-source` (It did not work in my case) 
 
+
 General
 -------
 

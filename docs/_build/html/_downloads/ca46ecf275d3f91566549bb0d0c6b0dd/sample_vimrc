@@ -66,6 +66,7 @@ call plug#end()					" All vim-plug entries must be enclosed within this line.
 " =================== General Settings =======================================================================================
 
 set nocompatible				" Use vim not vi
+set mouse=a					" Enable mouse in all modes (Needed while running inside tmux.)
 set t_Co=256					" show colors even when opened inside screen or tmux
 set termencoding=utf-8				" Set the default encoding to UTF-8.
 set backspace=indent,eol,start			" Allow backspace over everything. Otherwise backspace key won't work in vim.

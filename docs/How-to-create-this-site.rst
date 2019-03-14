@@ -41,6 +41,7 @@ Editing the website
 * See the changes in `readthedocs --> My projects --> Project --> View your
   documentation`. You can use the URL to share this doc with others or store it
   for future use.
+* There is a known bug (related to display) when you use nested lists with sphinx. Try to avoid them. Give appropriate space and indent wherever necessary.
 
 
 Additional Information

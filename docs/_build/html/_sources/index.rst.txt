@@ -16,7 +16,7 @@ Topics
    DB-and-SQL.rst
    Deep_Learning.rst
    Git.rst
-   GNU_Screen.rst
+   Tmux.rst
    IRE.rst
    IDE.rst
    Java.rst

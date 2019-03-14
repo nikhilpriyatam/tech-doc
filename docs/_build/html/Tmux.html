@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Tmux and GNU Screen &#8212; Technical Documentation  documentation</title>
+    <title>Terminal Tmux and GNU Screen &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -42,14 +42,55 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tmux-and-gnu-screen">
-<h1>Tmux and GNU Screen<a class="headerlink" href="#tmux-and-gnu-screen" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="terminal-tmux-and-gnu-screen">
+<h1>Terminal Tmux and GNU Screen<a class="headerlink" href="#terminal-tmux-and-gnu-screen" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-up-terminal">
+<h2>Setting up Terminal<a class="headerlink" href="#setting-up-terminal" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">On Mac, use Tanner (It is pleasing to the eyes).</p>
+</li>
+<li><p class="first">Go to Terminal -&gt; Preferences -&gt; Settings -&gt; Keyboard -&gt; Select use option as meta keys</p>
+</li>
+<li><p class="first">Go to Terminal -&gt; Preferences -&gt; Settings -&gt; Keyboard -&gt; Delete shortcuts having (Alt + left arrow) and (Alt + Right arrow)</p>
+</li>
+<li><p class="first">On Ubuntu: Install special fonts designed for coding</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">fonts</span><span class="o">-</span><span class="n">inconsolata</span>
+<span class="n">sudo</span> <span class="n">fc</span><span class="o">-</span><span class="n">cache</span> <span class="o">-</span><span class="n">fv</span>
+
+<span class="c1"># Check if the fonts are installed properly</span>
+<span class="n">sudo</span> <span class="n">fc</span><span class="o">-</span><span class="nb">list</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">inconsolata</span>
+
+<span class="c1"># Restart the terminal</span>
+<span class="c1"># Edit -&gt; Preferences -&gt; Text -&gt; Custom Font -&gt; Inconsolata Medium.</span>
+<span class="c1"># Edit -&gt; Preferences -&gt; Colors -&gt; Built In scheme -&gt; Background: Gray, Foreground</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 <div class="section" id="tmux">
 <h2>TMUX<a class="headerlink" href="#tmux" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>tmux is a terminal multiplexer. It has similar functionalities as GNU screen. It’s code base is considered better by many.</li>
-<li>Use the <a class="reference download internal" download="" href="_downloads/6d67d9b073c8361766265a7fd7983ef5/sample_tmux.conf"><code class="xref download docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">conf</span> <span class="pre">file</span></code></a> and place it in the home folder.</li>
-<li>I am planning to use tmux instead of GNU screen for most of my work.</li>
+<ul>
+<li><p class="first">tmux is a terminal multiplexer. It has similar functionalities as GNU screen. It’s code base is considered better by many.</p>
+</li>
+<li><p class="first">Installation on Mac: <code class="code docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">tmux</span></code></p>
+</li>
+<li><p class="first">Installation on Ubuntu</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">automake</span> <span class="n">libevent</span><span class="o">-</span><span class="n">dev</span> <span class="c1"># Prerequisites</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tmux</span><span class="o">/</span><span class="n">tmux</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="mf">2.8</span><span class="o">/</span><span class="n">tmux</span><span class="o">-</span><span class="mf">2.8</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="c1"># Version 2.8</span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="n">tmux</span><span class="o">-</span><span class="mf">2.8</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">nikhil</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">tmux</span><span class="o">-</span><span class="mf">2.8</span><span class="o">/</span> <span class="c1"># Does NOT require root / sudo</span>
+<span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span>
+<span class="c1"># Add TMUX_PATH and PATH environment variables</span>
+<span class="n">tmux</span> <span class="o">-</span><span class="n">V</span> <span class="c1"># To check the TMUX version installed.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use the <a class="reference download internal" download="" href="_downloads/d0e46cf5b86427dedc4e38f63cb28601/sample_tmux.conf"><code class="xref download docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">conf</span> <span class="pre">file</span></code></a> and place it in the home folder.</p>
+</li>
+<li><p class="first">I am planning to use tmux instead of GNU screen for most of my work.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="gnu-screen">
@@ -133,7 +174,8 @@ almost everywhere</li>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tmux and GNU Screen</a><ul>
+<li><a class="reference internal" href="#">Terminal Tmux and GNU Screen</a><ul>
+<li><a class="reference internal" href="#setting-up-terminal">Setting up Terminal</a></li>
 <li><a class="reference internal" href="#tmux">TMUX</a></li>
 <li><a class="reference internal" href="#gnu-screen">GNU Screen</a></li>
 </ul>
@@ -149,7 +191,7 @@ almost everywhere</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/GNU_Screen.rst.txt"
+      <li><a href="_sources/Tmux.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -186,7 +228,7 @@ almost everywhere</li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>
