@@ -95,6 +95,13 @@ Multiprocessing
   :code:`multiprocessing`)
 
 
+Documentation
+-------------
+
+* Always follow proper `documentation guidelines <https://realpython.com/documenting-python-code/>`_ mentioned here.
+* Although there are several Docstring formats. I prefer reStructuredText. It is short, simple and to the point.
+* The above link also mentions about how to maintain you python project - Folder structure, content, documentation, etc.
+
 Numpy
 -----
 
@@ -170,4 +177,3 @@ Pickling in Python
 ------------------
 
 * A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won't work: they have no individual names.
-
