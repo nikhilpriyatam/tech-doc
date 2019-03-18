@@ -98,7 +98,9 @@ Multiprocessing
 Documentation
 -------------
 
-* Always follow proper `documentation guidelines <https://realpython.com/documenting-python-code/>`_ mentioned here.
+* Always follow proper `documentation guidelines <https://realpython.com/documenting-python-code/>`_ .
+* Use this `reStructuredText based python documentation example<https://thomas-cokelaer.info/tutorials/sphinx/docstring_python.html>`_
+* Always follow `PEP 8M<https://pep8.org/>` guidelines while writing python code. It really helps in the long run.
 * Although there are several Docstring formats. I prefer reStructuredText. It is short, simple and to the point.
 * The above link also mentions about how to maintain you python project - Folder structure, content, documentation, etc.
 
