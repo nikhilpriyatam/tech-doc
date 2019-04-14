@@ -141,3 +141,5 @@ Miscellaneous
         BodyStats = namedTuple('BodyStats', ['weight', 'height'])
         return BodyStats(70, 6)
 
+* For generating documentation from your python code see the `sphinx for python documentation blog<https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html>`_.
+
