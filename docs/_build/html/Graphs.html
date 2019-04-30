@@ -1,0 +1,138 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Graphs &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Terminal Tmux and GNU Screen" href="Tmux.html" />
+    <link rel="prev" title="Git" href="Git.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Tmux.html" title="Terminal Tmux and GNU Screen"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Git.html" title="Git"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="graphs">
+<h1>Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h1>
+<p>There is a nice <a href="#id1"><span class="problematic" id="id2">`graph tool library&lt;https://graph-tool.skewed.de/&gt;`_</span></a> in python which allows you to do various kinds of computations on graphs. It is written in C++ (For efficiency), but the
+wrapper is available in python.</p>
+<div class="section" id="installation-on-ubuntu">
+<h2>Installation on Ubuntu<a class="headerlink" href="#installation-on-ubuntu" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">sudo apt-get install python3-cairo python3-dev libcairomm-1.0-dev libgitrepository-1.0-dev</p>
+</li>
+<li><p class="first">pip install pycairo</p>
+</li>
+<li><p class="first">ln -s /usr/lib/python3/dist-packages/gi/ &lt;PATH_TO_MINICONDA_PYTHON&gt;/lib/python3.5/site-packages/gi</p>
+</li>
+<li><p class="first">More instructions are given here: <a class="reference external" href="https://git.skewed.de/count0/graph-tool/wikis/installation-instructions">https://git.skewed.de/count0/graph-tool/wikis/installation-instructions</a></p>
+<dl class="docutils">
+<dt>Add folloing lines to <cite>/etc/apt/sources.list</cite> where DISTRIBUTION can be any of xenial, yakkety, zesty, artful, bionic, cosmic.</dt>
+<dd><p class="first">deb <a class="reference external" href="http://downloads.skewed.de/apt/DISTRIBUTION">http://downloads.skewed.de/apt/DISTRIBUTION</a> DISTRIBUTION universe
+deb-src <a class="reference external" href="http://downloads.skewed.de/apt/DISTRIBUTION">http://downloads.skewed.de/apt/DISTRIBUTION</a> DISTRIBUTION universe</p>
+<p class="last">sudo apt-get update
+apt-key adv –keyserver pgp.skewed.de –recv-key 612DEFB798507F25
+apt-get install python3-graph-tool</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">ln -s /usr/lib/python3/dist-packages/graph_tool/ &lt;PATH_TO_MINICONDA_PYTHON&gt;/lib/python3.5/site-packages/graph_tool</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Graphs</a><ul>
+<li><a class="reference internal" href="#installation-on-ubuntu">Installation on Ubuntu</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Git.html"
+                        title="previous chapter">Git</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Tmux.html"
+                        title="next chapter">Terminal Tmux and GNU Screen</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Graphs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Tmux.html" title="Terminal Tmux and GNU Screen"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Git.html" title="Git"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Nikhil Pattisapu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>

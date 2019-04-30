@@ -16,6 +16,7 @@ Topics
    DB-and-SQL.rst
    Deep_Learning.rst
    Git.rst
+   Graphs.rst
    Tmux.rst
    IRE.rst
    IDE.rst
