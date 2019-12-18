@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>How to setup your programming Environment on a new machine &#8212; Technical Documentation  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Useful concepts from IRE" href="IRE.html" />
+    <link rel="prev" title="Graphs" href="Graphs.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="IRE.html" title="Useful concepts from IRE"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Graphs.html" title="Graphs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-setup-your-programming-environment-on-a-new-machine">
+<h1>How to setup your programming Environment on a new machine<a class="headerlink" href="#how-to-setup-your-programming-environment-on-a-new-machine" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-up-terminal">
+<h2>Setting up Terminal<a class="headerlink" href="#setting-up-terminal" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Setting up colorscheme: Dark theme are cosidered to cause less eye strain.</li>
+<li>Use <a href="#id1"><span class="problematic" id="id2">`dracula&lt;https://draculatheme.com/iterm/&gt;`__</span></a> with iTERM on mac and <a href="#id1"><span class="problematic" id="id3">`Dracula colorscheme&lt;https://github.com/dracula/gnome-terminal&gt;`__</span></a> with GNOME Terminal on Linux.</li>
+<li>Go to Terminal -&gt; Preferences -&gt; Settings -&gt; Keyboard -&gt; Select use option as meta keys</li>
+<li>Go to Terminal -&gt; Preferences -&gt; Settings -&gt; Keyboard -&gt; Delete shortcuts having (Alt + left arrow) and (Alt + Right arrow)</li>
+<li>Install <a href="#id1"><span class="problematic" id="id4">`source code pro&lt;https://www.rogerpence.com/posts/install-source-code-pro-font-on-ubuntu&gt;`__</span></a> font on Ubuntu.</li>
+<li>Set the font in terminal profiles as well.</li>
+</ul>
+</div>
+<div class="section" id="setup-zshrc">
+<h2>Setup ZSHRC<a class="headerlink" href="#setup-zshrc" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Most linux installations come with <cite>bash</cite> as the default shell. Many (including me), opine that <code class="code docutils literal notranslate"><span class="pre">zsh</span></code> is better.</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://www.theverge.com/2019/6/4/18651872/apple-macos-catalina-zsh-bash-shell-replacement-features">Apple replaces bash with zsh</a></p>
+</li>
+<li><p class="first">Installation with sudo access <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">zsh</span></code></p>
+</li>
+<li><p class="first">Installation without sudo <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">zsh</span></code>
+* Go to <a class="reference external" href="https://www.zsh.org/pub">https://www.zsh.org/pub</a> and download <code class="code docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://www.zsh.org/pub/zsh-5.7.1.tar.xz</span></code>
+* :code: <cite>tar -xzf zsh-5.7.1.tar.xz &amp;&amp; rm zsh-5.7.1.tar.xz &amp;&amp; cd zsh-5.7.1</cite>
+* :code: <cite>mkdir ~/local &amp;&amp; ./configure –prefix=$HOME/local &amp;&amp; make &amp;&amp; make check &amp;&amp; make install</cite>
+* :code: <cite>echo “export PATH=$HOME/local/bin:$PATH” &gt;&gt; ~/.bashrc</cite>
+* :code: <cite>echo “exec zsh” &gt;&gt; ~/.bashrc</cite>
+* Then restart the shell.
+* Refer <a href="#id1"><span class="problematic" id="id5">`How to install zsh, oh-my-zsh without sudo&lt;https://franklingu.github.io/programming/2016/05/24/setup-oh-my-zsh-on-ubuntu-without-sudo/&gt;`__</span></a></p>
+</li>
+<li><p class="first">For plugin management install <a href="#id1"><span class="problematic" id="id6">`oh-my-zsh&lt;https://github.com/ohmyzsh/ohmyzsh.git&gt;`__</span></a>
+* With sudo: <code class="code docutils literal notranslate"><span class="pre">sh</span> <span class="pre">-c</span> <span class="pre">&quot;$(wget</span> <span class="pre">-O-</span> <span class="pre">https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</span></code>
+* Without sudo:</p>
+<blockquote>
+<div><ul class="simple">
+<li>First switch to zsh</li>
+<li>Execute <code class="code docutils literal notranslate"><span class="pre">curl</span> <span class="pre">https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh</span> <span class="pre">|</span> <span class="pre">sed</span> <span class="pre">-e</span> <span class="pre">'s/grep\</span> <span class="pre">\/zsh\$\</span> <span class="pre">\/etc\/shells/which</span> <span class="pre">zsh/g'</span> <span class="pre">|</span> <span class="pre">zsh</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Most useful plugins are git, fasd, zsh-autosuggestions, zsh-syntax-highlighting, zsh-completions, z</p>
+</li>
+<li><p class="first">Use <a href="#id1"><span class="problematic" id="id7">`spaceship theme&lt;https://github.com/denysdovhan/spaceship-prompt&gt;`__</span></a></p>
+</li>
+<li><p class="first">Download the <cite>zshrc file &lt;.config_files/sample.zshrc&gt;</cite> ans place it in $HOME.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="setup-editor">
+<h2>Setup Editor<a class="headerlink" href="#setup-editor" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Nvim is available at <a class="reference external" href="https://github.com/neovim/neovim.git">https://github.com/neovim/neovim.git</a></p>
+</li>
+<li><p class="first">Installation:
+* With sudo access: <code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">neovim</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-neovim</span></code> (since ubuntu 18.04)
+* Without sudo: Download a <a href="#id1"><span class="problematic" id="id8">`pre-built image&lt;https://github.com/neovim/neovim/releases/tag/v0.4.3&gt;`__</span></a> (currently, nvim-linux64.tar.gz)
+* Make sure that the path to desired nvim exists is $PATH
+* For Mac, <cite>brew install neovim</cite> also should work.</p>
+</li>
+<li><p class="first">Setup
+* Install vim-plug plugin manager from <a class="reference external" href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a>
+* Make sure that the following structure exists in your machine $HOME/.config/nvim/init.vim
+* Download <cite>Init Vim file &lt;./config_files/sample_init.vim&gt;</cite> and place it in the above described path.
+* <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pynvim</span> <span class="pre">jedi</span></code></p>
+</li>
+<li><p class="first">Plugins
+* All plugins can be installed by running <code class="code docutils literal notranslate"><span class="pre">:PlugInstall</span></code> in nvim
+* The Coc nvim plugin (available at <a class="reference external" href="https://github.com/neoclide/coc.nvim.git">https://github.com/neoclide/coc.nvim.git</a>) requires more setup.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Install nodejs on your machine by downloading the binary from <a class="reference external" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a></li>
+<li>Install coc-python using <code class="code docutils literal notranslate"><span class="pre">:CocInstall</span> <span class="pre">coc-python</span></code></li>
+<li>Set the desired python interpreter using <code class="code docutils literal notranslate"><span class="pre">:CocCommand</span> <span class="pre">python.setInterpreter</span></code>. Do checkout other options by using <code class="code docutils literal notranslate"><span class="pre">:CocCommand</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Additionally install a terminal based editor micro
+* <code class="code docutils literal notranslate"><span class="pre">breq</span> <span class="pre">install</span> <span class="pre">micro</span></code>
+* Download the required package from <a class="reference external" href="https://github.com/zyedidia/micro/releases">https://github.com/zyedidia/micro/releases</a>
+* <code class="code docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xvf</span> <span class="pre">micro-1.2.1-60-linux64.tar.gz</span></code>
+* Point the <cite>$PATH</cite> variable to include <cite>micro-1.x.x/micro</cite>
+* Execute <cite>micro</cite> command from terminal in a normal fashion.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="setup-tmux">
+<h2>Setup TMUX<a class="headerlink" href="#setup-tmux" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Install tmux locally by cloning the repo <a class="reference external" href="https://github.com/tmux/tmux.git">https://github.com/tmux/tmux.git</a>
+* :code: <cite>cd &lt;tmux_install_folder&gt; &amp;&amp; sh autogen.sh &amp;&amp; ./configure &amp;&amp; make</cite>
+* To install without sudo access, try <code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">DESTDIR=&lt;local_dir_path&gt;</span> <span class="pre">make</span> <span class="pre">install</span></code>
+* Other alternative is given here <a class="reference external" href="https://www.gnu.org/prep/standards/html_node/DESTDIR.html">https://www.gnu.org/prep/standards/html_node/DESTDIR.html</a></li>
+<li>Download <cite>Tmux config file &lt;./config_files/sample_tmux.conf&gt;</cite> and place it in <code class="code docutils literal notranslate"><span class="pre">$HOME</span></code>.</li>
+<li>Read the config file for explanations regarding multple options.</li>
+</ul>
+</div>
+<div class="section" id="setup-onedrive">
+<h2>Setup OneDrive<a class="headerlink" href="#setup-onedrive" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use Microsoft OneDrive storage to sync all your files across different machines</li>
+<li>Installation
+* In a local opt folder, <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/abraunegg/onedrive.git</span></code>
+* <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">&amp;&amp;</span> <span class="pre">export</span> <span class="pre">DESTDIR=$HOME/opt/onedrive/</span> <span class="pre">make</span> <span class="pre">install</span></code>
+* Make sure that $PATH points to this folder
+* Try <code class="code docutils literal notranslate"><span class="pre">onedrive</span> <span class="pre">-h</span></code> for exploring various options.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How to setup your programming Environment on a new machine</a><ul>
+<li><a class="reference internal" href="#setting-up-terminal">Setting up Terminal</a></li>
+<li><a class="reference internal" href="#setup-zshrc">Setup ZSHRC</a></li>
+<li><a class="reference internal" href="#setup-editor">Setup Editor</a></li>
+<li><a class="reference internal" href="#setup-tmux">Setup TMUX</a></li>
+<li><a class="reference internal" href="#setup-onedrive">Setup OneDrive</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Graphs.html"
+                        title="previous chapter">Graphs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="IRE.html"
+                        title="next chapter">Useful concepts from IRE</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Programming-environment.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="IRE.html" title="Useful concepts from IRE"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Graphs.html" title="Graphs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Nikhil Pattisapu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>

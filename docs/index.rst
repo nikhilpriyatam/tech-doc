@@ -12,14 +12,12 @@ Topics
    Android.rst
    Apache-Server.rst
    Best_Coding_Practices.rst
-   Brat.rst
    DB-and-SQL.rst
    Deep_Learning.rst
    Git.rst
    Graphs.rst
-   Tmux.rst
+   Programming-environment.rst
    IRE.rst
-   IDE.rst
    Java.rst
    Latex.rst
    Maven.rst
@@ -30,7 +28,6 @@ Topics
    Operating-Systems.rst
    Python.rst
    Solr.rst
-   UIMA.rst
    wishlist.rst
 
 
