@@ -1,25 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Java &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="LaTeX" href="Latex.html" />
-    <link rel="prev" title="Various kinds of IDE" href="IDE.html" /> 
+    <link rel="prev" title="Useful concepts from IRE" href="IRE.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,7 +29,7 @@
           <a href="Latex.html" title="LaTeX"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="IDE.html" title="Various kinds of IDE"
+          <a href="IRE.html" title="Useful concepts from IRE"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
       </ul>
@@ -45,21 +43,21 @@
   <div class="section" id="java">
 <h1>Java<a class="headerlink" href="#java" title="Permalink to this headline">¶</a></h1>
 <ul>
-<li><p class="first">Compiling and executing JAVA programs from command line.</p>
+<li><p>Compiling and executing JAVA programs from command line.</p>
 <ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">javac</span> <span class="pre">-classpath</span> <span class="pre">lib/\*</span> <span class="pre">src/*.java</span></code> [To compile class files with
-including some jar files]</li>
-<li><code class="code docutils literal notranslate"><span class="pre">java</span> <span class="pre">-classpath</span> <span class="pre">.:PATH_TO_LIB_FOLDER/\*</span>
+<li><p><code class="code docutils literal notranslate"><span class="pre">javac</span> <span class="pre">-classpath</span> <span class="pre">lib/\*</span> <span class="pre">src/*.java</span></code> [To compile class files with
+including some jar files]</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">java</span> <span class="pre">-classpath</span> <span class="pre">.:PATH_TO_LIB_FOLDER/\*</span>
 <span class="pre">NAME_OF_CLASS_FILE_WITHOUT_EXTENSION</span></code> [To execute a java class file
-including some jar files]</li>
-<li><strong>Note</strong>: In the above command, the dot (‘.’) was included so that all the
+including some jar files]</p></li>
+<li><p><strong>Note</strong>: In the above command, the dot (‘.’) was included so that all the
 class files present in the current directory could be used while executing
-the class.</li>
+the class.</p></li>
 </ul>
 </li>
-<li><p class="first">Avoid 3rd party Jars printing to your console.</p>
+<li><p>Avoid 3rd party Jars printing to your console.</p>
 <ul>
-<li><p class="first">If you want to avoid 3rd party jars printing log messages in your console,
+<li><p>If you want to avoid 3rd party jars printing log messages in your console,
 then you can print their output to a dummy console in the following way:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PrintStream</span> <span class="n">originalStream</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="p">;</span>
 <span class="n">PrintStream</span> <span class="n">dummyStream</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PrintStream</span><span class="p">(</span><span class="n">new</span> <span class="n">OutputStream</span><span class="p">()</span>
@@ -80,8 +78,7 @@ then you can print their output to a dummy console in the following way:</p>
 </li>
 </ul>
 </li>
-<li><p class="first"><a class="reference external" href="http://developers.redhat.com/blog/2014/08/14/find-fix-memory-leaks-java-application/">Help For Fixing Memory Leaks in Java</a></p>
-</li>
+<li><p><a class="reference external" href="http://developers.redhat.com/blog/2014/08/14/find-fix-memory-leaks-java-application/">Help For Fixing Memory Leaks in Java</a></p></li>
 </ul>
 </div>
 
@@ -92,8 +89,8 @@ then you can print their output to a dummy console in the following way:</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="IDE.html"
-                        title="previous chapter">Various kinds of IDE</a></p>
+  <p class="topless"><a href="IRE.html"
+                        title="previous chapter">Useful concepts from IRE</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="Latex.html"
                         title="next chapter">LaTeX</a></p>
@@ -105,17 +102,15 @@ then you can print their output to a dummy console in the following way:</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -130,14 +125,14 @@ then you can print their output to a dummy console in the following way:</p>
           <a href="Latex.html" title="LaTeX"
              >next</a> |</li>
         <li class="right" >
-          <a href="IDE.html" title="Various kinds of IDE"
+          <a href="IRE.html" title="Useful concepts from IRE"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Technical Documentation  documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>

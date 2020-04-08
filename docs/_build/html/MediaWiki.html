@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>MediaWiki &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -45,23 +43,25 @@
   <div class="section" id="mediawiki">
 <h1>MediaWiki<a class="headerlink" href="#mediawiki" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>To allow uploading PDFs and other kind of files in mediawiki, go to the folder
+<li><p>To allow uploading PDFs and other kind of files in mediawiki, go to the folder
 and edit the following file <code class="code docutils literal notranslate"><span class="pre">/var/www/html/mediawiki/LocalSettings.php</span></code>
-Change [or write]  the following line.<ul>
-<li><code class="code docutils literal notranslate"><span class="pre">$wgFileExtensions</span> <span class="pre">=</span> <span class="pre">array(</span> <span class="pre">'png',</span> <span class="pre">'gif',</span> <span class="pre">'jpg',</span> <span class="pre">'jpeg',</span> <span class="pre">'doc',</span> <span class="pre">'xls',</span>
+Change [or write]  the following line.</p>
+<ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">$wgFileExtensions</span> <span class="pre">=</span> <span class="pre">array(</span> <span class="pre">'png',</span> <span class="pre">'gif',</span> <span class="pre">'jpg',</span> <span class="pre">'jpeg',</span> <span class="pre">'doc',</span> <span class="pre">'xls',</span>
 <span class="pre">'mpp',</span> <span class="pre">'pdf',</span> <span class="pre">'ppt',</span> <span class="pre">'tiff',</span> <span class="pre">'bmp',</span> <span class="pre">'docx',</span> <span class="pre">'xlsx',</span> <span class="pre">'pptx',</span> <span class="pre">'ps',</span> <span class="pre">'odt',</span>
-<span class="pre">'ods',</span> <span class="pre">'odp',</span> <span class="pre">'odg');</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/var/www/html/mediawiki/images/temp</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">777</span> <span class="pre">/var/www/html/mediawiki/images/</span></code></li>
+<span class="pre">'ods',</span> <span class="pre">'odp',</span> <span class="pre">'odg');</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/var/www/html/mediawiki/images/temp</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">777</span> <span class="pre">/var/www/html/mediawiki/images/</span></code></p></li>
 </ul>
 </li>
-<li>To increase the permissible file upload in mediawiki, change the following
-file <code class="code docutils literal notranslate"><span class="pre">/etc/php.ini</span></code><ul>
-<li><code class="code docutils literal notranslate"><span class="pre">upload_max_filesize</span> <span class="pre">=</span> <span class="pre">20M</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">post_max_size</span> <span class="pre">=</span> <span class="pre">80M</span></code></li>
+<li><p>To increase the permissible file upload in mediawiki, change the following
+file <code class="code docutils literal notranslate"><span class="pre">/etc/php.ini</span></code></p>
+<ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">upload_max_filesize</span> <span class="pre">=</span> <span class="pre">20M</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">post_max_size</span> <span class="pre">=</span> <span class="pre">80M</span></code></p></li>
 </ul>
 </li>
-<li>Use <code class="code docutils literal notranslate"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></code> for inserting newline characters</li>
+<li><p>Use <code class="code docutils literal notranslate"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></code> for inserting newline characters</p></li>
 </ul>
 </div>
 
@@ -85,17 +85,15 @@ file <code class="code docutils literal notranslate"><span class="pre">/etc/php.
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -117,7 +115,7 @@ file <code class="code docutils literal notranslate"><span class="pre">/etc/php.
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>

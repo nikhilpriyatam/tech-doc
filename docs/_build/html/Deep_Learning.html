@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Deep Learning &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,19 +45,17 @@
 <div class="section" id="cuda-and-cudnn">
 <h2>CUDA and CuDNN<a class="headerlink" href="#cuda-and-cudnn" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">You need to install <cite>CUDA</cite> or <cite>CuDNN</cite> to impliment deep learning related stuff. You can indeed install these tools locally, without any root permissions. Please see this <a class="reference external" href="https://stackoverflow.com/a/47503155/5408791">link</a>. For this solution to work you need to have a proper driver installed.</p>
-</li>
-<li><p class="first">As of editing this page, the latest stable cuda version is 9.0.</p>
-</li>
-<li><p class="first">Add the following to your .bashrc (or any other appropriate file)</p>
+<li><p>You need to install <cite>CUDA</cite> or <cite>CuDNN</cite> to impliment deep learning related stuff. You can indeed install these tools locally, without any root permissions. Please see this <a class="reference external" href="https://stackoverflow.com/a/47503155/5408791">link</a>. For this solution to work you need to have a proper driver installed.</p></li>
+<li><p>As of editing this page, the latest stable cuda version is 9.0.</p></li>
+<li><p>Add the following to your .bashrc (or any other appropriate file)</p>
 <ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">CUDA_VISIBLE_DEVICES=0,1,2</span> <span class="pre">#</span> <span class="pre">If</span> <span class="pre">3</span> <span class="pre">GPUs</span> <span class="pre">are</span> <span class="pre">housed</span> <span class="pre">on</span> <span class="pre">that</span> <span class="pre">machine.</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">CUDA_HOME=&quot;/home/nikhil.pattisapu/cuda-9.0/&quot;</span> <span class="pre">#</span> <span class="pre">Give</span> <span class="pre">appropriate</span> <span class="pre">path</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64/</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH_SCREEN=$LD_LIBRARY_PATH</span></code></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">CUDA_VISIBLE_DEVICES=0,1,2</span> <span class="pre">#</span> <span class="pre">If</span> <span class="pre">3</span> <span class="pre">GPUs</span> <span class="pre">are</span> <span class="pre">housed</span> <span class="pre">on</span> <span class="pre">that</span> <span class="pre">machine.</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">CUDA_HOME=&quot;/home/nikhil.pattisapu/cuda-9.0/&quot;</span> <span class="pre">#</span> <span class="pre">Give</span> <span class="pre">appropriate</span> <span class="pre">path</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64/</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH_SCREEN=$LD_LIBRARY_PATH</span></code></p></li>
 </ul>
 </li>
-<li><p class="first">If you do not want PyTorch / TensorFlow to see all the GPUs available. Use the following snippet in your python code.</p>
+<li><p>If you do not want PyTorch / TensorFlow to see all the GPUs available. Use the following snippet in your python code.</p>
 <p><code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">os</span></code>
 <code class="code docutils literal notranslate"><span class="pre">os.environ['CUDA_VISIBLE_DEVICES']=1</span> <span class="pre">#</span> <span class="pre">If</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">it</span> <span class="pre">to</span> <span class="pre">see</span> <span class="pre">only</span> <span class="pre">GPU</span> <span class="pre">ID</span> <span class="pre">1</span></code>
 <code class="code docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES=2</span> <span class="pre">python</span> <span class="pre">&lt;file&gt;</span> <span class="pre">#</span> <span class="pre">If</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">it</span> <span class="pre">to</span> <span class="pre">see</span> <span class="pre">only</span> <span class="pre">GPU</span> <span class="pre">ID</span> <span class="pre">2</span></code></p>
@@ -69,17 +65,15 @@
 <div class="section" id="tensorflow-and-tensorflow-hub">
 <h2>Tensorflow and Tensorflow Hub<a class="headerlink" href="#tensorflow-and-tensorflow-hub" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Tensorflow installation has two options, depending on whether you have a GPU or CPU.</p>
+<li><p>Tensorflow installation has two options, depending on whether you have a GPU or CPU.</p>
 <ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow-gpu</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow</span></code></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow-gpu</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow</span></code></p></li>
 </ul>
 </li>
-<li><p class="first">The default CPU only tensorflow binary (installed through pip) is not compiled to use AVX AVX2 (libraries for faster computation). You will see a warning of the following type <code class="code docutils literal notranslate"><span class="pre">Your</span> <span class="pre">CPU</span> <span class="pre">supports</span> <span class="pre">instructions</span> <span class="pre">that</span> <span class="pre">this</span> <span class="pre">TensorFlow</span> <span class="pre">binary</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">compiled</span> <span class="pre">to</span> <span class="pre">use:</span> <span class="pre">AVX</span> <span class="pre">AVX2</span></code>. To avoid this you have to compile tensorflow from the source (which is a pain). An easier alternative is to use pre-compiled binaries with <cite>AVX</cite> and <cite>AVX2</cite> support. Check <a class="reference external" href="https://github.com/lakshayg/tensorflow-build.git">this repo</a></p>
-</li>
-<li><p class="first">Tensorflow uses lazy computation. In short it means that, it creates a computation graph and executes it when necessary. The ideal way to code is to ensure that you create a single graph and use it (or execute it) several times using <code class="code docutils literal notranslate"><span class="pre">tf.placeholder()</span></code>. You can even have <code class="code docutils literal notranslate"><span class="pre">tf.string</span></code> type placeholder. This is especially useful for obtaining text representations using pretrained models</p>
-</li>
-<li><p class="first">You can create and use a tensorflow graph manually in the program in the following way</p>
+<li><p>The default CPU only tensorflow binary (installed through pip) is not compiled to use AVX AVX2 (libraries for faster computation). You will see a warning of the following type <code class="code docutils literal notranslate"><span class="pre">Your</span> <span class="pre">CPU</span> <span class="pre">supports</span> <span class="pre">instructions</span> <span class="pre">that</span> <span class="pre">this</span> <span class="pre">TensorFlow</span> <span class="pre">binary</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">compiled</span> <span class="pre">to</span> <span class="pre">use:</span> <span class="pre">AVX</span> <span class="pre">AVX2</span></code>. To avoid this you have to compile tensorflow from the source (which is a pain). An easier alternative is to use pre-compiled binaries with <cite>AVX</cite> and <cite>AVX2</cite> support. Check <a class="reference external" href="https://github.com/lakshayg/tensorflow-build.git">this repo</a></p></li>
+<li><p>Tensorflow uses lazy computation. In short it means that, it creates a computation graph and executes it when necessary. The ideal way to code is to ensure that you create a single graph and use it (or execute it) several times using <code class="code docutils literal notranslate"><span class="pre">tf.placeholder()</span></code>. You can even have <code class="code docutils literal notranslate"><span class="pre">tf.string</span></code> type placeholder. This is especially useful for obtaining text representations using pretrained models</p></li>
+<li><p>You can create and use a tensorflow graph manually in the program in the following way</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="n">graph_1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span> <span class="c1"># Creating a graph. Method 1</span>
 <span class="k">with</span> <span class="n">graph_1</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
@@ -92,21 +86,15 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Even if you do not create a graph explicitly, tensorflow will create a default graph and session objects in the program will use them. If your program creates a large number of unconnected subgraphs, it may be more efficient to use a different <code class="code docutils literal notranslate"><span class="pre">tf.Graph</span></code> to build each subgraph, so that unrelated state can be garbage collected.</p>
-</li>
-<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">tf.Sesssion().run()</span></code> is a costly operation. Use it sparingly. It might be also a little slow when you call it for the first time.</p>
-</li>
-<li><p class="first">Several latest pre-trained models are released as <code class="code docutils literal notranslate"><span class="pre">tensorflow-hub</span></code> modules which can be called easily. Find the instructions below.</p>
+<li><p>Even if you do not create a graph explicitly, tensorflow will create a default graph and session objects in the program will use them. If your program creates a large number of unconnected subgraphs, it may be more efficient to use a different <code class="code docutils literal notranslate"><span class="pre">tf.Graph</span></code> to build each subgraph, so that unrelated state can be garbage collected.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">tf.Sesssion().run()</span></code> is a costly operation. Use it sparingly. It might be also a little slow when you call it for the first time.</p></li>
+<li><p>Several latest pre-trained models are released as <code class="code docutils literal notranslate"><span class="pre">tensorflow-hub</span></code> modules which can be called easily. Find the instructions below.</p>
 <ul>
-<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow-hub</span></code></p>
-</li>
-<li><p class="first">Create a directory to store all the downloaded tensorflow models. Say <cite>tfhub_modules</cite>.</p>
-</li>
-<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">TFHUB_CACHE_DIR=~/tfhub_modules/</span></code></p>
-</li>
-<li><dl class="first docutils">
-<dt>Refer the sample code below for obtaining sentence representations using <cite>Universal Sentence Encoder</cite>. You can lookup for other models <a class="reference external" href="https://www.tensorflow.org/hub">here</a></dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<li><p><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow-hub</span></code></p></li>
+<li><p>Create a directory to store all the downloaded tensorflow models. Say <cite>tfhub_modules</cite>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">TFHUB_CACHE_DIR=~/tfhub_modules/</span></code></p></li>
+<li><dl>
+<dt>Refer the sample code below for obtaining sentence representations using <cite>Universal Sentence Encoder</cite>. You can lookup for other models <a class="reference external" href="https://www.tensorflow.org/hub">here</a></dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
 
@@ -139,8 +127,8 @@
 <div class="section" id="pytorch">
 <h2>PyTorch<a class="headerlink" href="#pytorch" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Instead of moving a tensor to a GPU, one can instead create a tensor on GPU</li>
-<li>If you use <cite>ReLU</cite> activation functions in the last layers, you are more likely to see <cite>NaN</cite> values while computing loss. Instead prefer <cite>tanh</cite></li>
+<li><p>Instead of moving a tensor to a GPU, one can instead create a tensor on GPU</p></li>
+<li><p>If you use <cite>ReLU</cite> activation functions in the last layers, you are more likely to see <cite>NaN</cite> values while computing loss. Instead prefer <cite>tanh</cite></p></li>
 </ul>
 </div>
 </div>
@@ -175,17 +163,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -207,7 +193,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>

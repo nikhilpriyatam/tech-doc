@@ -1,24 +1,22 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Best Coding Practices &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="BRAT Annotation Framework" href="Brat.html" />
+    <link rel="next" title="Databases" href="DB-and-SQL.html" />
     <link rel="prev" title="Apache server + python for building an application" href="Apache-Server.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,7 +26,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Brat.html" title="BRAT Annotation Framework"
+          <a href="DB-and-SQL.html" title="Databases"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="Apache-Server.html" title="Apache server + python for building an application"
@@ -48,27 +46,27 @@
 <div class="section" id="loops">
 <h2>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">When using a <cite>for loop</cite> use enumerate function instead of incrementing a counter:</p>
+<li><p>When using a <cite>for loop</cite> use enumerate function instead of incrementing a counter:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
     <span class="c1"># ix represents index. It acts as a counter</span>
     <span class="c1"># item contains the value.</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">When traversing through multiple lists of same size use <cite>zip</cite> function</p>
+<li><p>When traversing through multiple lists of same size use <cite>zip</cite> function</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">itm_a</span><span class="p">,</span> <span class="n">itm_b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list_a</span><span class="p">,</span> <span class="n">list_b</span><span class="p">):</span>
     <span class="c1"># itm_a contains the value of list_a</span>
     <span class="c1"># itm_b contains the value of list_b</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If you want to loop backwards, use <cite>reversed</cite> function:</p>
+<li><p>If you want to loop backwards, use <cite>reversed</cite> function:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Suppose you want to use a <cite>for loop</cite> with <cite>break</cite> statement. You could check whether the loop ran completely by using an else statement:</p>
+<li><p>Suppose you want to use a <cite>for loop</cite> with <cite>break</cite> statement. You could check whether the loop ran completely by using an else statement:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="s1">&#39;something&#39;</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Item found&quot;</span><span class="p">)</span>
@@ -85,13 +83,13 @@
 <div class="section" id="dictionaries">
 <h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Suppose you wanted to obtain the value corresponding to a key in a dictionary, use:</p>
+<li><p>Suppose you wanted to obtain the value corresponding to a key in a dictionary, use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># No error even if the key is not present in the dictionary.</span>
 <span class="n">my_val</span> <span class="o">=</span> <span class="n">my_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;my_key&#39;</span><span class="p">,</span> <span class="s1">&#39;my_default_val&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">You could contruct a dictionary from pairs using <cite>zip</cite> and <cite>dict</cite> constructor:</p>
+<li><p>You could contruct a dictionary from pairs using <cite>zip</cite> and <cite>dict</cite> constructor:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nikhil&#39;</span><span class="p">,</span> <span class="s1">&#39;aparnna&#39;</span><span class="p">]</span>
 <span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;29&#39;</span><span class="p">,</span> <span class="s1">&#39;24&#39;</span><span class="p">]</span>
 
@@ -99,7 +97,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Counting with dictionary. Suppose you had a list with repeating items and you had to count the number of occurrences of each item. The simplest way is to use the following:</p>
+<li><p>Counting with dictionary. Suppose you had a list with repeating items and you had to count the number of occurrences of each item. The simplest way is to use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
 <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
@@ -107,8 +105,8 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">We could use <cite>defaultdict</cite> instead of plain <cite>dict</cite> from python if we know the type of values being stored. Suppose I know that my values are integers, like the code above, I could write the following code:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<li><p>We could use <cite>defaultdict</cite> instead of plain <cite>dict</cite> from python if we know the type of values being stored. Suppose I know that my values are integers, like the code above, I could write the following code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># default value of int is 0</span>
 <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
@@ -118,8 +116,8 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">You can also group a set of items in a list using a defaultdict. For instance:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<li><p>You can also group a set of items in a list using a defaultdict. For instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nikhil&#39;</span><span class="p">,</span> <span class="s1">&#39;aparnna&#39;</span><span class="p">,</span> <span class="s1">&#39;kameswari&#39;</span><span class="p">,</span> <span class="s1">&#39;vamsi&#39;</span><span class="p">,</span> <span class="s1">&#39;prasad&#39;</span><span class="p">,</span> <span class="s1">&#39;p.p.rao&#39;</span><span class="p">]</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="c1"># The default value is an empty list</span>
 
@@ -134,13 +132,13 @@
 <div class="section" id="miscellaneous">
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">To exchange the values of two variables, do not use a third temporary variable. Instead use:</p>
+<li><p>To exchange the values of two variables, do not use a third temporary variable. Instead use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is clean and easy to understand</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">You can use an <cite>else</cite> statement even with <cite>try</cite> and <cite>except</cite> to execute statements there were no exceptions. Similarly, you can use <cite>finally</cite> to execute statements regardless of whether an exception occurred or not:</p>
+<li><p>You can use an <cite>else</cite> statement even with <cite>try</cite> and <cite>except</cite> to execute statements there were no exceptions. Similarly, you can use <cite>finally</cite> to execute statements regardless of whether an exception occurred or not:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
 <span class="k">except</span><span class="p">:</span>
@@ -156,7 +154,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">You can also use only <cite>try</cite> and <cite>finally</cite> as follows:</p>
+<li><p>You can also use only <cite>try</cite> and <cite>finally</cite> as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_file.txt&#39;</span><span class="p">)</span>
     <span class="c1"># Contains the clean up code which needs to be executed even if an exception occurred.</span>
@@ -165,14 +163,14 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">While reading a text file we can use <cite>with</cite> statement with context, without having to close it manually:</p>
+<li><p>While reading a text file we can use <cite>with</cite> statement with context, without having to close it manually:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_file.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Always clarify function calls with keyword arguments:</p>
+<li><p>Always clarify function calls with keyword arguments:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bad way</span>
 <span class="n">twitter_search</span><span class="p">(</span><span class="s1">&#39;@obama&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
@@ -181,21 +179,20 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Always, return <cite>NamedTuple</cite> instead of plain <cite>Tuple</cite> as it is more informative:</p>
+<li><p>Always, return <cite>NamedTuple</cite> instead of plain <cite>Tuple</cite> as it is more informative:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bad way</span>
 <span class="k">def</span> <span class="nf">get_body_stats</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 
 <span class="c1"># Good way</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="k">def</span> <span class="nf">get_body_stats</span><span class="p">():</span>
     <span class="n">BodyStats</span> <span class="o">=</span> <span class="n">namedTuple</span><span class="p">(</span><span class="s1">&#39;BodyStats&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">BodyStats</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">For generating documentation from your python code see the <a href="#id1"><span class="problematic" id="id2">`sphinx for python documentation blog&lt;https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html&gt;`_</span></a>.</p>
-</li>
+<li><p>For generating documentation from your python code see the <a href="#id1"><span class="problematic" id="id2">`sphinx for python documentation blog&lt;https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html&gt;`_</span></a>.</p></li>
 </ul>
 </div>
 </div>
@@ -220,8 +217,8 @@
   <p class="topless"><a href="Apache-Server.html"
                         title="previous chapter">Apache server + python for building an application</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Brat.html"
-                        title="next chapter">BRAT Annotation Framework</a></p>
+  <p class="topless"><a href="DB-and-SQL.html"
+                        title="next chapter">Databases</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -230,17 +227,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -252,7 +247,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Brat.html" title="BRAT Annotation Framework"
+          <a href="DB-and-SQL.html" title="Databases"
              >next</a> |</li>
         <li class="right" >
           <a href="Apache-Server.html" title="Apache server + python for building an application"
@@ -262,7 +257,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>

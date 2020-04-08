@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Python &#8212; Technical Documentation  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,6 +42,77 @@
             
   <div class="section" id="python">
 <h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="steps-while-creating-a-new-python-project">
+<h2>Steps while creating a new python project<a class="headerlink" href="#steps-while-creating-a-new-python-project" title="Permalink to this headline">¶</a></h2>
+<p>Whenever you create a new python project, make sure they have the following components.</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">README.rst</span></code> - Describes the project name, purpose, installation procedure, relevant publications, acknowledge contributors.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">LICENSE</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It allows others to reuse your code in a hassle free way. <a class="reference external" href="https://choosealicense.com/">Coose a license.</a></p></li>
+<li><p>MIT License is the most simple and permissive, Other options are GNU GPL v3 or Apache License Version 2.</p></li>
+<li><p>It is a good idea to have a copy of these license files in <code class="file docutils literal notranslate"><span class="pre">~/.vim/</span></code> folder and define custom mappings as shown below.</p></li>
+<li><p>It is very convenient to have a VIM mapping such as <code class="code docutils literal notranslate"><span class="pre">map</span> <span class="pre">:mit</span> <span class="pre">:0r</span> <span class="pre">path_to_mit_license_file</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">setup.py</span></code> - Useful for building, packaging and distributing your code.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">setuptools</span></code></p></li>
+<li><p>Follow setuptools documentation for creating this file.</p></li>
+<li><p>Look at the sample project’s <a class="reference external" href="https://github.com/pypa/sampleproject/blob/master/setup.py">setup.py.</a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">requirements.txt</span></code> - Describes the exact dependencies required by your project.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This file can be generated automatically for which there exist multiple methods.</p></li>
+<li><p>First method, use <strong>virtualenv</strong> to create a new virtual environment. Switch to this environment. Do fresh pip installs and <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code></p></li>
+<li><p>Second method, use <strong>pipenv</strong> to create a new virtual environment using <code class="code docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">install</span></code>, activate it using <code class="code docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">shell</span></code> and do regular pip installs pipenv will automatically add the package to the pipenv file that’s called <code class="file docutils literal notranslate"><span class="pre">Pipfile</span></code></p></li>
+<li><p>Third (recommended) method, install <strong>pipreqs</strong> and execute <cite>pipreqs /home/project/location</cite>. It will create a <code class="file docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the specified location.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">your_package_folder/__init__.py</span></code> - An empty file which tells python to treat the folder as package.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">your_package_folder/your_modules.py</span></code> - python modules in your package.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">docs/conf.py</span></code> - <cite>docs</cite> represents document folder. The <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code> indicates configuration file for Sphinx document builder.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">docs/index.rst</span></code> - The index file which contains the reference for other document files.</p>
+<blockquote>
+<div><ul>
+<li><p>Create a folder <code class="file docutils literal notranslate"><span class="pre">docs</span></code> in the repository root. Execute <code class="code docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code>.</p></li>
+<li><p>Follow steps given <a class="reference external" href="https://developer.ridgerun.com/wiki/index.php/How_to_generate_sphinx_documentation_for_python_code_running_in_an_embedded_system">here</a></p></li>
+<li><p>Edit the <code class="file docutils literal notranslate"><span class="pre">docs/conf.py</span></code> so that it contains the following lines (along with other lines).</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">autodoc_member_order</span> <span class="o">=</span> <span class="s1">&#39;groupwise&#39;</span>
+<span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add modules to <code class="file docutils literal notranslate"><span class="pre">index.rst</span></code></p></li>
+<li><p>Run the command <code class="code docutils literal notranslate"><span class="pre">sphinx-apidoc</span> <span class="pre">-o</span> <span class="pre">your_project_docs_folder_path</span> <span class="pre">your_project_path</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">tests/</span></code> - This folder contains seperate testing code.</p></li>
+</ul>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Always follow proper <a class="reference external" href="https://realpython.com/documenting-python-code/">documentation guidelines</a> .</p></li>
+<li><p>Use this <a class="reference external" href="https://thomas-cokelaer.info/tutorials/sphinx/docstring_python.html">reStructuredText based python documentation example</a></p></li>
+<li><p>Always follow <a class="reference external" href="https://pep8.org/">PEP 8</a> guidelines while writing python code. It really helps in the long run.</p></li>
+<li><p>Although there are several Docstring formats. I prefer reStructuredText. It is short, simple and to the point.</p></li>
+<li><p>For generating documentation from your python code, along with the discussion, follow <a class="reference external" href="https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html">sphinx for python documentation blog</a>.</p></li>
+</ul>
+</div>
 <div class="section" id="use-ipython-inside-a-python-program">
 <h2>Use Ipython inside a Python Program<a class="headerlink" href="#use-ipython-inside-a-python-program" title="Permalink to this headline">¶</a></h2>
 <p>To inspect variables in a python script (which takes long to run), you can insert the following lines in your code to start an ipython kernel.</p>
@@ -53,47 +122,48 @@
 <div class="section" id="anaconda-or-pip">
 <h2>Anaconda or Pip<a class="headerlink" href="#anaconda-or-pip" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Always use python provided by Anaconda (Do not use the default python provided
+<li><p>Always use python provided by Anaconda (Do not use the default python provided
 by ubuntu). The difference between pip and <code class="code docutils literal notranslate"><span class="pre">conda</span></code> is given
-<a class="reference external" href="https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">here</a></li>
-<li>Always try to install packages using conda.<ul>
-<li>In <code class="code docutils literal notranslate"><span class="pre">Anaconda</span></code>, you can create multiple environments. The python version and
-package installations in those environments are mutually exclusive.</li>
-<li>Environment creation - <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">snakes</span> <span class="pre">python=3</span></code><ul>
-<li>Environment activation - <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">snakes</span></code></li>
-<li>Environment deactivation - <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">deactivate</span> <span class="pre">snakes</span></code></li>
-<li>I have 3 environments on my Mac.
+<a class="reference external" href="https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">here</a></p></li>
+<li><p>Always try to install packages using conda.</p>
+<ul>
+<li><p>In <code class="code docutils literal notranslate"><span class="pre">Anaconda</span></code>, you can create multiple environments. The python version and
+package installations in those environments are mutually exclusive.</p></li>
+<li><p>Environment creation - <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">snakes</span> <span class="pre">python=3</span></code></p>
+<ul>
+<li><p>Environment activation - <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">snakes</span></code></p></li>
+<li><p>Environment deactivation - <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">deactivate</span> <span class="pre">snakes</span></code></p></li>
+<li><p>I have 3 environments on my Mac.
 * One for default (Python2)
 * One for python3
-* One for Magenta</li>
-<li>To install a specific python version in an environment use <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">python=2.6</span></code></li>
-<li>You can also search for various versions of a package using <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">packageName</span></code></li>
-<li>You can list the existing conda environments using <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code></li>
+* One for Magenta</p></li>
+<li><p>To install a specific python version in an environment use <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">python=2.6</span></code></p></li>
+<li><p>You can also search for various versions of a package using <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">packageName</span></code></p></li>
+<li><p>You can list the existing conda environments using <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>To install packages through pip use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_name</span></code>. To</li>
-<li>To upgrade installed packages <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_name</span> <span class="pre">--upgrade</span></code></li>
-<li>Recently, I encountered the issue. Upon upgrading to python 3.6 in miniconda,
+<li><p>To install packages through pip use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_name</span></code>. To</p></li>
+<li><p>To upgrade installed packages <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_name</span> <span class="pre">--upgrade</span></code></p></li>
+<li><p>Recently, I encountered the issue. Upon upgrading to python 3.6 in miniconda,
 * I was getting the following errors with pip installs - <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">failing</span> <span class="pre">due</span> <span class="pre">to</span> <span class="pre">ssl</span> <span class="pre">module</span> <span class="pre">not</span> <span class="pre">available.</span></code>. I fixed it using the following commands.
 * <code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">snakes</span></code> (My python 3.6.2 virtual environment)
-* <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">openssl</span></code>.</li>
+* <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">openssl</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="multiprocessing">
 <h2>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Multiprocessing is a highly convenient option for parallel processing in
+<li><p>Multiprocessing is a highly convenient option for parallel processing in
 python. The following is a sample script that takes a string list as input
-and modifies the strings in a parallel fashion.</p>
-</li>
-<li><p class="first">There are scenarios, where data needs to be shared between multiple threads
+and modifies the strings in a parallel fashion.</p></li>
+<li><p>There are scenarios, where data needs to be shared between multiple threads
 (e.g. increment or decrement global variables).
 * If it is a counter, always try to pass counter values as additional inputs rather than sharing them between processes.</p>
-<ul>
-<li><p class="first"><strong>Note</strong> - Global variables are not shared between processes. We need
-special kinds of variables</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Note</strong> - Global variables are not shared between processes. We need special kinds of variables</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span><span class="p">,</span> <span class="n">Value</span><span class="p">,</span> <span class="n">Manager</span><span class="p">,</span> <span class="n">Lock</span>
 <span class="n">counter</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Globally accessible, defined in __main__ function. &#39;i&#39; represents integer</span>
@@ -122,40 +192,24 @@ special kinds of variables</p>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first"><strong>Note</strong>: The <code class="code docutils literal notranslate"><span class="pre">manager.dict()</span></code> are dummy dictionaries. You cannot dump
-them as simple pickle objects and expect to work like normal python
-dictionaries when you pickle-load them again!! Therefore, write a
-converter script to convert them into normal python dictionaries and
-then pickle-dump them.</p>
-</li>
+<li><p><strong>Note</strong>: The <code class="code docutils literal notranslate"><span class="pre">manager.dict()</span></code> are dummy dictionaries. You cannot dump them as simple pickle objects and expect to work like normal python dictionaries when you pickle-load them again!! Therefore, write aconverter script to convert them into normal python dictionaries and then pickle-dump them.</p></li>
 </ul>
+</div></blockquote>
 </li>
-<li><p class="first">I have personally encountered <strong>some issues</strong> while using
+<li><p>I have personally encountered <strong>some issues</strong> while using
 <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> with <code class="code docutils literal notranslate"><span class="pre">nltk</span></code> on my mac. However, the same code
 with the same <code class="code docutils literal notranslate"><span class="pre">nltk</span></code> version runs on ubuntu. There are many others who
 have expressed similar concerns (incompatability of <code class="code docutils literal notranslate"><span class="pre">nltk</span></code> and
-<code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code>)</p>
-</li>
-</ul>
-</div>
-<div class="section" id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Always follow proper <a class="reference external" href="https://realpython.com/documenting-python-code/">documentation guidelines</a> .</li>
-<li>Use this <a href="#id1"><span class="problematic" id="id2">`reStructuredText based python documentation example&lt;https://thomas-cokelaer.info/tutorials/sphinx/docstring_python.html&gt;`_</span></a></li>
-<li>Always follow <cite>PEP 8M&lt;https://pep8.org/&gt;</cite> guidelines while writing python code. It really helps in the long run.</li>
-<li>Although there are several Docstring formats. I prefer reStructuredText. It is short, simple and to the point.</li>
-<li>The above link also mentions about how to maintain you python project - Folder structure, content, documentation, etc.</li>
-<li>For generating documentation from your python code see the <a class="reference external" href="https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html">sphinx for python documentation blog</a>.</li>
+<code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code>)</p></li>
 </ul>
 </div>
 <div class="section" id="numpy">
 <h2>Numpy<a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">You can check if a numpy array contains <code class="code docutils literal notranslate"><span class="pre">nan</span></code> or <code class="code docutils literal notranslate"><span class="pre">inf</span></code> values.
+<li><p>You can check if a numpy array contains <code class="code docutils literal notranslate"><span class="pre">nan</span></code> or <code class="code docutils literal notranslate"><span class="pre">inf</span></code> values.
 Usually, such arrays are problematic</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">aa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 <span class="n">bb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">cc</span> <span class="o">=</span> <span class="n">aa</span> <span class="o">/</span> <span class="n">bb</span> <span class="c1"># Raises divide by zero encountered exception</span>
@@ -170,7 +224,7 @@ Usually, such arrays are problematic</p>
 <div class="section" id="python-http-requests">
 <h2>Python HTTP requests<a class="headerlink" href="#python-http-requests" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">I have used HTTP Post request to run the DBpedia spotlight</p>
+<li><p>I have used HTTP Post request to run the DBpedia spotlight</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib3</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -185,52 +239,44 @@ Usually, such arrays are problematic</p>
 <span class="o">&lt;/</span><span class="n">surfaceForm</span><span class="o">&gt;&lt;</span><span class="n">surfaceForm</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Osteomalacia&quot;</span>
 <span class="n">offset</span><span class="o">=</span><span class="s2">&quot;174&quot;</span><span class="o">&gt;&lt;/</span><span class="n">surfaceForm</span><span class="o">&gt;&lt;/</span><span class="n">annotation</span><span class="o">&gt;</span><span class="s1">&#39;}</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Note: For calling <code class="code docutils literal notranslate"><span class="pre">GET</span></code> requests use <code class="code docutils literal notranslate"><span class="pre">requests.get</span></code> function.
+<li><p>Note: For calling <code class="code docutils literal notranslate"><span class="pre">GET</span></code> requests use <code class="code docutils literal notranslate"><span class="pre">requests.get</span></code> function.
 While calling <code class="code docutils literal notranslate"><span class="pre">GET</span></code> function, make sure to change the header key to
-<code class="code docutils literal notranslate"><span class="pre">Content-Type</span></code> instead of <code class="code docutils literal notranslate"><span class="pre">Accept</span></code>.</p>
-</li>
+<code class="code docutils literal notranslate"><span class="pre">Content-Type</span></code> instead of <code class="code docutils literal notranslate"><span class="pre">Accept</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="sacred">
 <h2>Sacred<a class="headerlink" href="#sacred" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">Sacred</span></code> is a useful tool in python for parameter sweeping experiments.</li>
-<li><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sacred</span></code></li>
-<li>It stores all the information about an experiment run in a MongoDB. For that
+<li><p><code class="code docutils literal notranslate"><span class="pre">Sacred</span></code> is a useful tool in python for parameter sweeping experiments.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sacred</span></code></p></li>
+<li><p>It stores all the information about an experiment run in a MongoDB. For that
 you need to setup MongoDB on your system and also have <cite>pymongo</cite> installed.
-More help is available <a class="reference external" href="http://sacred.readthedocs.io/en/latest/quickstart.html">here</a></li>
+More help is available <a class="reference external" href="http://sacred.readthedocs.io/en/latest/quickstart.html">here</a></p></li>
 </ul>
-</div>
 <div class="section" id="other-packages">
-<h2>Other Packages<a class="headerlink" href="#other-packages" title="Permalink to this headline">¶</a></h2>
+<h3>Other Packages<a class="headerlink" href="#other-packages" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">One of the useful aspects of python is <code class="code docutils literal notranslate"><span class="pre">pickle</span></code>. I had pickled huge word vectors file and loading it back took less than 10 seconds.</p>
-</li>
-<li><p class="first">One useful package for printing python output in multiple colors is
+<li><p>One of the useful aspects of python is <code class="code docutils literal notranslate"><span class="pre">pickle</span></code>. I had pickled huge word vectors file and loading it back took less than 10 seconds.</p></li>
+<li><p>A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won’t work: they have no individual names.</p></li>
+<li><p>One useful package for printing python output in multiple colors is
 <code class="code docutils literal notranslate"><span class="pre">termcolor</span></code>
 <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">omnia</span> <span class="pre">termcolor</span></code></p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">There is this cool plugin in ipython notebooks called <a class="reference external" href="https://ipython.org/ipython-doc/3/config/extensions/storemagic.html">storemagic</a> to
-persist python objects which are <strong>picklable</strong>.</p>
-</li>
+<li><p>There is this cool plugin in ipython notebooks called <a class="reference external" href="https://ipython.org/ipython-doc/3/config/extensions/storemagic.html">storemagic</a> to
+persist python objects which are <strong>picklable</strong>.</p></li>
 </ul>
 </div>
-<div class="section" id="pickling-in-python">
-<h2>Pickling in Python<a class="headerlink" href="#pickling-in-python" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won’t work: they have no individual names.</li>
-</ul>
 </div>
 </div>
 
@@ -243,15 +289,17 @@ persist python objects which are <strong>picklable</strong>.</p>
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Python</a><ul>
+<li><a class="reference internal" href="#steps-while-creating-a-new-python-project">Steps while creating a new python project</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#use-ipython-inside-a-python-program">Use Ipython inside a Python Program</a></li>
 <li><a class="reference internal" href="#anaconda-or-pip">Anaconda or Pip</a></li>
 <li><a class="reference internal" href="#multiprocessing">Multiprocessing</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#numpy">Numpy</a></li>
 <li><a class="reference internal" href="#python-http-requests">Python HTTP requests</a></li>
-<li><a class="reference internal" href="#sacred">Sacred</a></li>
+<li><a class="reference internal" href="#sacred">Sacred</a><ul>
 <li><a class="reference internal" href="#other-packages">Other Packages</a></li>
-<li><a class="reference internal" href="#pickling-in-python">Pickling in Python</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -270,17 +318,15 @@ persist python objects which are <strong>picklable</strong>.</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -302,7 +348,7 @@ persist python objects which are <strong>picklable</strong>.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Nikhil Pattisapu.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>

@@ -1,8 +1,68 @@
+======
 Python
 ======
 
+Steps while creating a new python project
+=========================================
+
+Whenever you create a new python project, make sure they have the following components.
+
+* :file:`README.rst` - Describes the project name, purpose, installation procedure, relevant publications, acknowledge contributors.
+* :file:`LICENSE`
+
+   * It allows others to reuse your code in a hassle free way. `Coose a license. <https://choosealicense.com/>`__
+   * MIT License is the most simple and permissive, Other options are GNU GPL v3 or Apache License Version 2.
+   * It is a good idea to have a copy of these license files in :file:`~/.vim/` folder and define custom mappings as shown below.
+   * It is very convenient to have a VIM mapping such as :code:`map :mit :0r path_to_mit_license_file`
+
+* :file:`setup.py` - Useful for building, packaging and distributing your code.
+
+   * :code:`pip install --upgrade setuptools`
+   * Follow setuptools documentation for creating this file.
+   * Look at the sample project's `setup.py. <https://github.com/pypa/sampleproject/blob/master/setup.py>`__
+
+* :file:`requirements.txt` - Describes the exact dependencies required by your project.
+
+   * This file can be generated automatically for which there exist multiple methods.
+   * First method, use **virtualenv** to create a new virtual environment. Switch to this environment. Do fresh pip installs and :code:`pip freeze > requirements.txt`
+   * Second method, use **pipenv** to create a new virtual environment using :code:`pipenv install`, activate it using :code:`pipenv shell` and do regular pip installs pipenv will automatically add the package to the pipenv file that’s called :file:`Pipfile`
+   * Third (recommended) method, install **pipreqs** and execute `pipreqs /home/project/location`. It will create a :file:`requirements.txt` in the specified location.
+
+* :file:`your_package_folder/__init__.py` - An empty file which tells python to treat the folder as package.
+* :file:`your_package_folder/your_modules.py` - python modules in your package.
+* :file:`docs/conf.py` - `docs` represents document folder. The :file:`conf.py` indicates configuration file for Sphinx document builder.
+* :file:`docs/index.rst` - The index file which contains the reference for other document files.
+
+   * Create a folder :file:`docs` in the repository root. Execute :code:`sphinx-quickstart`.
+   * Follow steps given `here <https://developer.ridgerun.com/wiki/index.php/How_to_generate_sphinx_documentation_for_python_code_running_in_an_embedded_system>`__
+   * Edit the :file:`docs/conf.py` so that it contains the following lines (along with other lines).
+
+      .. code-block:: python
+         
+         import os
+         import sys
+         sys.path.insert(0, os.path.abspath('..'))
+         autodoc_member_order = 'groupwise'
+         extensions = ['sphinx.ext.autodoc']
+   
+   * Add modules to :file:`index.rst`
+   * Run the command :code:`sphinx-apidoc -o your_project_docs_folder_path your_project_path`
+
+* :file:`tests/` - This folder contains seperate testing code.
+
+Documentation
+=============
+
+* Always follow proper `documentation guidelines <https://realpython.com/documenting-python-code/>`__ .
+* Use this `reStructuredText based python documentation example <https://thomas-cokelaer.info/tutorials/sphinx/docstring_python.html>`__
+* Always follow `PEP 8 <https://pep8.org/>`__ guidelines while writing python code. It really helps in the long run.
+* Although there are several Docstring formats. I prefer reStructuredText. It is short, simple and to the point.
+* For generating documentation from your python code, along with the discussion, follow `sphinx for python documentation blog <https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html>`__.
+
+
+
 Use Ipython inside a Python Program
------------------------------------
+===================================
 
 To inspect variables in a python script (which takes long to run), you can insert the following lines in your code to start an ipython kernel.
 
@@ -10,7 +70,7 @@ To inspect variables in a python script (which takes long to run), you can inser
 `embed() # Place this line somewhere in your program`
 
 Anaconda or Pip
----------------
+===============
 * Always use python provided by Anaconda (Do not use the default python provided
   by ubuntu). The difference between pip and :code:`conda` is given
   `here
@@ -44,7 +104,8 @@ Anaconda or Pip
 
 
 Multiprocessing
----------------
+===============
+
 * Multiprocessing is a highly convenient option for parallel processing in
   python. The following is a sample script that takes a string list as input
   and modifies the strings in a parallel fashion.
@@ -53,40 +114,35 @@ Multiprocessing
   (e.g. increment or decrement global variables).
   * If it is a counter, always try to pass counter values as additional inputs rather than sharing them between processes.
 
-  * **Note** - Global variables are not shared between processes. We need
-    special kinds of variables
+   * **Note** - Global variables are not shared between processes. We need special kinds of variables
 
       .. code-block:: python
 
-        from multiprocessing import Pool, Value, Manager, Lock
-        counter = Value('i', 0) # Globally accessible, defined in __main__ function. 'i' represents integer
+         from multiprocessing import Pool, Value, Manager, Lock
+         counter = Value('i', 0) # Globally accessible, defined in __main__ function. 'i' represents integer
 
-        # Dictionary Initializations
-        manager = Manager()
-        word_dict = manager.dict()
-        lemma_dict = manager.dict()
-        pos_dict = manager.dict()
+         # Dictionary Initializations
+         manager = Manager()
+         word_dict = manager.dict()
+         lemma_dict = manager.dict()
+         pos_dict = manager.dict()
 
-        # Locks Initializations
-        l1 = Lock()
-        l2 = Lock()
+         # Locks Initializations
+         l1 = Lock()
+         l2 = Lock()
 
-        # In the function which is going to be called by multiple processes
-        l1.acquire()
-        counter.value += 1
-        l1.release()
+         # In the function which is going to be called by multiple processes
+         l1.acquire()
+         counter.value += 1
+         l1.release()
 
-        l2.acquire()
-        word_dict[word] = len(word_dict) + 1
-        lemma_dict[lemma] = len(lemma_dict) + 1
-        pos_dict[word] = len(pos_dict) + 1
-        l2.release()
+         l2.acquire()
+         word_dict[word] = len(word_dict) + 1
+         lemma_dict[lemma] = len(lemma_dict) + 1
+         pos_dict[word] = len(pos_dict) + 1
+         l2.release()
 
-  * **Note**: The :code:`manager.dict()` are dummy dictionaries. You cannot dump
-    them as simple pickle objects and expect to work like normal python
-    dictionaries when you pickle-load them again!! Therefore, write a
-    converter script to convert them into normal python dictionaries and
-    then pickle-dump them.
+   * **Note**: The :code:`manager.dict()` are dummy dictionaries. You cannot dump them as simple pickle objects and expect to work like normal python dictionaries when you pickle-load them again!! Therefore, write aconverter script to convert them into normal python dictionaries and then pickle-dump them.
 
 * I have personally encountered **some issues** while using
   :code:`multiprocessing` with :code:`nltk` on my mac. However, the same code
@@ -95,19 +151,8 @@ Multiprocessing
   :code:`multiprocessing`)
 
 
-Documentation
--------------
-
-* Always follow proper `documentation guidelines <https://realpython.com/documenting-python-code/>`_ .
-* Use this `reStructuredText based python documentation example<https://thomas-cokelaer.info/tutorials/sphinx/docstring_python.html>`_
-* Always follow `PEP 8M<https://pep8.org/>` guidelines while writing python code. It really helps in the long run.
-* Although there are several Docstring formats. I prefer reStructuredText. It is short, simple and to the point.
-* The above link also mentions about how to maintain you python project - Folder structure, content, documentation, etc.
-* For generating documentation from your python code see the `sphinx for python documentation blog <https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html>`_.
-
-
 Numpy
------
+=====
 
 * You can check if a numpy array contains :code:`nan` or :code:`inf` values.
   Usually, such arrays are problematic
@@ -123,7 +168,7 @@ Numpy
 
 
 Python HTTP requests
---------------------
+====================
 
 * I have used HTTP Post request to run the DBpedia spotlight
 
@@ -150,7 +195,7 @@ Python HTTP requests
 
 
 Sacred
-------
+======
 
 * :code:`Sacred` is a useful tool in python for parameter sweeping experiments.
 * :code:`pip install sacred`
@@ -163,6 +208,7 @@ Other Packages
 --------------
 
 * One of the useful aspects of python is :code:`pickle`. I had pickled huge word vectors file and loading it back took less than 10 seconds.
+* A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won't work: they have no individual names.
 * One useful package for printing python output in multiple colors is
   :code:`termcolor`
   :code:`conda install -c omnia termcolor`
@@ -175,9 +221,3 @@ Other Packages
 * There is this cool plugin in ipython notebooks called `storemagic
   <https://ipython.org/ipython-doc/3/config/extensions/storemagic.html>`_ to
   persist python objects which are **picklable**.
-
-
-Pickling in Python
-------------------
-
-* A super awesome feature in python is the ability to pickle objects. However, you cannot pickle lambda functions or objects that depend on lambda function. The reason for this is that functions are pickled by name, not by code. Unpickling will only work if a function with the same name is present in in the same module. This is why pickling a lambda won't work: they have no individual names.
