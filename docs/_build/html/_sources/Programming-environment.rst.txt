@@ -32,16 +32,18 @@ Setup zshrc
 
   * With sudo:
     .. code-block:: bash
+
        sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
   * Without sudo:
     * First switch to zsh
     .. code-block:: bash
+
        curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | \
        sed -e 's/grep\ \/zsh\$\ \/etc\/shells/which zsh/g' | zsh`
 
 * Most useful plugins are git, fasd, zsh-autosuggestions, zsh-syntax-highlighting, zsh-completions, z
 * Use `spaceship theme <https://github.com/denysdovhan/spaceship-prompt>`__
-* Download the `zshrc file <.config_files/sample.zshrc>`_ ans place it in $HOME.
+* Download the `zshrc file <config_files/sample.zshrc>`_ ans place it in $HOME.
 
 
 Setup Editor
@@ -59,7 +61,7 @@ Setup Editor
 
   * Install vim-plug plugin manager from https://github.com/junegunn/vim-plug
   * Make sure that the following structure exists in your machine :code:`$HOME/.config/nvim/init.vim`
-  * Download `Init Vim file <./config_files/sample_init.vim>`_ and place it in the above described path.
+  * Download :download:`Init Vim file <./config_files/sample_init.vim>` and place it in the above described path.
   * :code:`pip install pynvim jedi`
 
 * Plugins
