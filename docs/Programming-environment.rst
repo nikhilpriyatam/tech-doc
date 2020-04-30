@@ -43,7 +43,7 @@ Setup zshrc
 
 * Most useful plugins are git, fasd, zsh-autosuggestions, zsh-syntax-highlighting, zsh-completions, z
 * Use `spaceship theme <https://github.com/denysdovhan/spaceship-prompt>`__
-* Download the `zshrc file <config_files/sample.zshrc>`_ ans place it in $HOME.
+* Download the :download:`zshrc file <./config_files/sample.zshrc>` ans place it in $HOME.
 
 
 Setup Editor
@@ -91,7 +91,7 @@ Setup TMUX
   * To install without sudo access, try :code:`export DESTDIR=<local_dir_path> make install`
   * Other alternative is given here https://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
-* Download `Tmux config file <./config_files/sample_tmux.conf>`_ and place it in :code:`$HOME`.
+* Download :download:`Tmux config file <./config_files/sample_tmux.conf>` and place it in :code:`$HOME`.
 * Read the config file for explanations regarding multple options.
 
 
