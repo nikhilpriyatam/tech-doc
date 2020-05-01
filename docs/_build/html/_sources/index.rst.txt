@@ -28,6 +28,7 @@ Topics
    Operating-Systems.rst
    Python.rst
    Solr.rst
+   Jinja.rst
    wishlist.rst
 
 
